@@ -1,0 +1,292 @@
+# Comprehensive Agent OS Integration
+
+## Overview
+This rule provides complete integration with all .agent-os features, tools, and capabilities. It serves as the master reference for leveraging the entire Agent OS ecosystem during development.
+
+## 🎯 Mandatory Integration Points
+
+### 1. **Feature Scoring Framework (CRITICAL)**
+**ALWAYS** score features before development using the 4-dimension framework:
+
+```bash
+# Score feature using 4-dimension framework
+node .agent-os/tools/feature-scoring/feature-scorer.js
+
+# Required dimensions:
+# - Business Impact (1-10): Agent-OS effectiveness improvement
+# - Developer Productivity (1-10): Coding speed improvement  
+# - Implementation Complexity (1-10): Build/maintain difficulty
+# - Adoption Likelihood (1-10): Developer usage probability
+```
+
+**Phase Classification:**
+- **Phase 1**: Developer Productivity ≥ 8/10 OR Combined Score ≥ 32/40
+- **Phase 2**: Developer Productivity ≥ 7/10 OR Combined Score ≥ 28/40
+- **Phase 3+**: All other features requiring executive approval
+
+### 2. **Technology Stack Validation (MANDATORY)**
+**ALWAYS** validate against Context7 before implementation:
+
+```bash
+# Validate technology choices against Context7
+# Reference: .agent-os/standards/tech-stack.md
+
+# Required stack:
+# - Backend: Spring Boot 3.3+ (Java 21 LTS)
+# - Frontend: React 19 + TypeScript 5 + TailwindCSS 3.x (STABLE)
+# - Database: PostgreSQL 17 + pgvector
+# - AI: OpenAI GPT-4o + LangChain 0.3
+# - Container: Docker 24 multi-stage builds
+```
+
+### 3. **Compliance & Enforcement (MANDATORY)**
+**ALWAYS** run compliance check after any changes:
+
+```bash
+# Primary compliance check
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Required compliance score: ≥85%
+# Run after every subtask completion
+# Fix violations immediately before proceeding
+```
+
+## 🔧 Complete Tool Integration
+
+### **Primary Development Tools**
+```bash
+# Compliance & Validation
+node .agent-os/tools/compliance-checker.js --detailed
+node .agent-os/tools/validation-suite.js
+node .agent-os/tools/refactoring-validator.js
+
+# Monitoring & Analytics
+node .agent-os/tools/real-time-monitor.js
+node .agent-os/tools/enhanced-dashboard.js
+node .agent-os/tools/statistical-analysis.js
+
+# Database & Performance
+node .agent-os/tools/database-optimizer.js
+node .agent-os/tools/agent-os-monitor.js
+```
+
+### **Setup & Automation Scripts**
+```bash
+# Interactive setup
+node .agent-os/scripts/setup.js
+
+# Quick initialization
+node .agent-os/scripts/quick-start.js
+
+# Compliance automation
+node .agent-os/scripts/compliance-automation.js
+
+# Production deployment
+node .agent-os/scripts/production-deployment.js
+```
+
+### **Cursor Integration Tools**
+```bash
+# Generate cursor rules
+node .agent-os/tools/cursor/cursor-init.js
+
+# Analyze cursor usage
+node .agent-os/tools/cursor/cursor-analytics.js
+
+# Optimize cursor rules
+node .agent-os/tools/cursor/cursor-rule-optimizer.js
+```
+
+## 📚 Standards & Patterns Integration
+
+### **Core Standards Reference**
+**ALWAYS** reference before making changes:
+- **Technology Stack**: `.agent-os/standards/tech-stack.md`
+- **Code Style**: `.agent-os/standards/code-style.md`
+- **Best Practices**: `.agent-os/standards/best-practices.md`
+- **Security & Compliance**: `.agent-os/standards/security-compliance.md`
+- **Testing Strategy**: `.agent-os/standards/testing-strategy.md`
+- **Enforcement**: `.agent-os/standards/enforcement.md`
+- **Feature Scoring**: `.agent-os/standards/feature-scoring.md`
+- **Development Patterns**: `.agent-os/standards/consolidated-development-patterns.md`
+
+### **Lessons Learned Integration**
+**ALWAYS** reference and update:
+- **Main Repository**: `.agent-os/lessons-learned/README.md`
+- **Categories**: `.agent-os/lessons-learned/categories/`
+- **Integration Lessons**: `.agent-os/lessons-learned/integration/`
+- **Process Lessons**: `.agent-os/lessons-learned/process/`
+
+### **Pattern & Error Management**
+- **Common Errors**: `.agent-os/patterns/common-errors.yml`
+- **Development Patterns**: `.agent-os/standards/consolidated-development-patterns.md`
+- **Quality Gates**: `.agent-os/quality-assurance/agent-os-quality-gates.md`
+
+## 🚀 Development Workflow Integration
+
+### **Pre-Development Phase**
+1. **Feature Scoring**: Use 4-dimension framework
+2. **Technology Validation**: Check against Context7
+3. **Compliance Check**: Run `compliance-checker.js --detailed`
+4. **Standards Review**: Reference relevant standards files
+
+### **During Development**
+1. **Follow Patterns**: Controller → Service → Repository
+2. **Immediate Updates**: Update tasks.md after each subtask
+3. **Compliance Checks**: Run after every change
+4. **Pattern Application**: Use consolidated development patterns
+
+### **Post-Development**
+1. **Final Compliance**: Run comprehensive compliance check
+2. **Lessons Capture**: Use lessons-learned-template.md
+3. **Quality Gates**: Verify against quality thresholds
+4. **Documentation**: Update relevant standards and patterns
+
+## 📊 Quality & Performance Standards
+
+### **Code Quality Requirements**
+- **Coverage**: ≥85% branch coverage
+- **TODO Items**: ≤5 per service
+- **Architecture**: Controller → Service → Repository pattern
+- **Security**: 0 vulnerabilities, 100% compliance
+
+### **Performance Standards**
+- **Frontend**: TTI ≤1.8s, CSS >10KB (not 0 bytes)
+- **Backend**: P95 ≤200ms response time
+- **Database**: Optimized queries, proper indexing
+- **Container**: Multi-stage builds, optimized images
+
+### **Security Requirements**
+- **Zero hardcoded secrets**
+- **100% encryption coverage**
+- **OWASP Top-10 compliance**
+- **Vulnerability scanning mandatory**
+
+## 🔄 Continuous Improvement Cycle
+
+### **Weekly Activities**
+- Run comprehensive compliance checks
+- Review real-time metrics
+- Update lessons learned
+
+### **Bi-weekly Activities**
+- Review and update lessons learned
+- Analyze statistical metrics
+- Optimize cursor rules
+
+### **Monthly Activities**
+- Deep statistical analysis
+- Database optimization
+- Performance review
+
+### **Quarterly Activities**
+- Feature scoring review
+- Phase progression analysis
+- Standards update review
+
+### **Annual Activities**
+- Comprehensive standards review
+- Technology stack validation
+- Framework optimization
+
+## 📋 Templates & Documentation
+
+### **Required Templates**
+- **Feature Scoring**: `.agent-os/templates/feature-scoring-template.md`
+- **Lessons Learned**: `.agent-os/templates/lessons-learned-template.md`
+- **Task Management**: `.agent-os/templates/task-list-template.md`
+- **Compliance**: `.agent-os/templates/compliance-checklist-template.md`
+
+### **Configuration Templates**
+- **TypeScript**: `.agent-os/templates/tsconfig.agent-os.json`
+- **ESLint**: `.agent-os/templates/eslintrc.strict.json`
+- **Vitest**: `.agent-os/templates/vitest.config.template.ts`
+- **Tool Template**: `.agent-os/templates/tool-template.js`
+
+## 🎯 Success Metrics & KPIs
+
+### **Compliance Metrics**
+- **Compliance Score**: ≥85% (target: 95%+)
+- **Standards Adherence**: 100%
+- **Security Violations**: 0
+- **Quality Gate Pass Rate**: 100%
+
+### **Development Metrics**
+- **Feature Scoring Compliance**: 100%
+- **Lessons Learned Capture**: ≥90%
+- **Pattern Application**: ≥95%
+- **Code Quality Score**: ≥90%
+
+### **Performance Metrics**
+- **Frontend TTI**: ≤1.8s
+- **Backend P95**: ≤200ms
+- **Test Coverage**: ≥85%
+- **Build Success Rate**: ≥98%
+
+## 🚨 Critical Failure Points
+
+### **Immediate Action Required**
+- **Compliance Score < 85%**: Fix violations immediately
+- **Security Vulnerabilities**: Stop development, fix immediately
+- **Build Failures**: Resolve before next development session
+- **Test Coverage < 85%**: Add tests before proceeding
+
+### **Development Blockers**
+- **Unscored Features**: Score before development
+- **Unvalidated Technology**: Validate against Context7
+- **Missing Standards**: Reference required standards
+- **Pattern Violations**: Apply correct patterns
+
+## 🔗 Quick Reference Commands
+
+```bash
+# Daily Development
+node .agent-os/scripts/setup.js validate
+node .agent-os/tools/compliance-checker.js --detailed
+node .agent-os/tools/enhanced-dashboard.js
+
+# Feature Development
+node .agent-os/tools/feature-scoring/feature-scorer.js
+node .agent-os/tools/compliance-checker.js --detailed
+# ... develop ...
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Advanced Tools
+node .agent-os/tools/statistical-analysis.js
+node .agent-os/tools/database-optimizer.js
+node .agent-os/tools/cursor/cursor-rule-optimizer.js
+
+# Setup & Maintenance
+node .agent-os/scripts/setup.js
+node .agent-os/scripts/quick-start.js
+node .agent-os/tools/validation-suite.js
+```
+
+## 📖 Integration Checklist
+
+### **Before Development**
+- [ ] Feature scored using 4-dimension framework
+- [ ] Technology validated against Context7
+- [ ] Compliance check run and passed (≥85%)
+- [ ] Relevant standards reviewed
+- [ ] Development patterns identified
+
+### **During Development**
+- [ ] Controller → Service → Repository pattern followed
+- [ ] Tasks.md updated after each subtask
+- [ ] Compliance check run after each change
+- [ ] Lessons learned captured
+- [ ] Quality gates verified
+
+### **After Development**
+- [ ] Final compliance check passed
+- [ ] Lessons learned documented
+- [ ] Quality gates passed
+- [ ] Documentation updated
+- [ ] Next phase planned
+
+This comprehensive integration ensures maximum leverage of all .agent-os features while maintaining strict compliance and quality standards.
+description:
+globs:
+alwaysApply: false
+---

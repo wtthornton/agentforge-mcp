@@ -1,0 +1,163 @@
+# Lessons Learned & Development Patterns - Agent OS Integration
+
+## 🚨 MANDATORY: Lessons Learned Integration
+**ALWAYS** reference and update lessons learned from `.agent-os/lessons-learned/README.md`:
+
+### 📚 Lessons Learned Categories
+- **Development**: `.agent-os/lessons-learned/categories/development/`
+- **Integration**: `.agent-os/lessons-learned/categories/integration/`
+- **Process**: `.agent-os/lessons-learned/categories/process/`
+- **Validation**: `.agent-os/lessons-learned/validation-implementation-lessons.md`
+- **Testing**: `.agent-os/lessons-learned/testing-analysis.md`
+- **Real-time Metrics**: `.agent-os/lessons-learned/real-time-metrics-maximum-impact-lessons.md`
+
+### 🔄 Lessons Learned Process
+1. **Before Development**: Review relevant lessons learned
+2. **During Development**: Apply patterns and avoid anti-patterns
+3. **After Completion**: Capture new lessons learned
+4. **Documentation**: Use `.agent-os/templates/lessons-learned-template.md`
+
+## 🏗️ Development Patterns Integration
+**ALWAYS** follow consolidated development patterns from `.agent-os/standards/consolidated-development-patterns.md`:
+
+### ⚡ Maximum Impact Patterns
+
+#### 1. Dependency Verification Pattern (Impact: 9/10)
+```javascript
+// MANDATORY: Every script must start with dependency verification
+class ProjectInitializer {
+  static verifyEnvironment() {
+    // Check Node.js version
+    const nodeVersion = process.version;
+    const major = parseInt(nodeVersion.slice(1).split('.')[0]);
+    if (major < 18) {
+      throw new Error(`Node.js ≥18 required, found ${nodeVersion}`);
+    }
+    
+    // Verify dependencies exist
+    const required = this.getRequiredDependencies();
+    const missing = required.filter(dep => {
+      try {
+        require.resolve(dep);
+        return false;
+      } catch (e) {
+        return true;
+      }
+    });
+    
+    if (missing.length > 0) {
+      console.error(`❌ Missing dependencies: ${missing.join(', ')}`);
+      console.log(`📦 Run: npm install`);
+      process.exit(1);
+    }
+    
+    return true;
+  }
+}
+```
+
+#### 2. Configuration Merge Pattern (Impact: 8/10)
+```javascript
+// MANDATORY: Always merge, never duplicate configuration keys
+class ConfigurationManager {
+  static mergeYamlConfig(filePath, newConfig) {
+    let existingConfig = {};
+    
+    if (fs.existsSync(filePath)) {
+      existingConfig = yaml.load(fs.readFileSync(filePath, 'utf8')) || {};
+    }
+    
+    // Deep merge instead of replace
+    const merged = this.deepMerge(existingConfig, newConfig);
+    
+    // Validate before writing
+    this.validateYamlStructure(merged);
+    
+    fs.writeFileSync(filePath, yaml.dump(merged, {
+      indent: 2,
+      lineWidth: 120,
+      noRefs: true
+    }));
+    
+    return merged;
+  }
+}
+```
+
+### 📊 Pattern Application Guidelines
+
+#### Critical Success Factors (from 200+ lessons learned)
+1. **Dependency Management** (40% of issues) - Missing deps, version conflicts
+2. **Configuration Merging** (25% of issues) - YAML duplicates, merge conflicts  
+3. **Testing Infrastructure** (20% of issues) - Mock setup, type mismatches
+4. **Platform Compatibility** (10% of issues) - Shell commands, path separators
+5. **Type Safety** (5% of issues) - Import/export mismatches, type errors
+
+## 🔧 Tools Integration
+
+### Lessons Management Tools
+- **Template**: `.agent-os/templates/lessons-learned-template.md`
+- **Schema**: `.agent-os/templates/lesson-schema.json`
+- **Tools**: `.agent-os/tools/lessons/`
+
+### Pattern Validation Tools
+- **Common Errors**: `.agent-os/patterns/common-errors.yml`
+- **Validation Suite**: `.agent-os/tools/validation-suite.js`
+- **Compliance Checker**: `.agent-os/tools/compliance-checker.js`
+
+## 📋 Implementation Checklist
+
+### Pre-Development
+- [ ] Relevant lessons learned reviewed
+- [ ] Development patterns identified
+- [ ] Anti-patterns documented and avoided
+- [ ] Pattern templates loaded
+
+### During Development
+- [ ] Patterns applied consistently
+- [ ] Anti-patterns avoided
+- [ ] Lessons learned referenced
+- [ ] Pattern validation run
+
+### Post-Development
+- [ ] New lessons learned captured
+- [ ] Pattern effectiveness documented
+- [ ] Anti-patterns identified and documented
+- [ ] Lessons learned template completed
+
+## 📈 Success Metrics
+- **Pattern Adoption**: 90%+ of applicable patterns used
+- **Anti-pattern Avoidance**: 95%+ of known anti-patterns avoided
+- **Lessons Captured**: 100% of significant tasks documented
+- **Pattern Validation**: All patterns validated before implementation
+
+## 🚫 Project Constraints
+- **NO AI suggestion features** - Static analyzer only
+- **Core focus**: logging, reporting, monitoring
+- **Performance**: P95 ≤200ms backend, TTI ≤1.8s frontend
+
+## ✅ Quality Gates
+- **Pattern Compliance**: All applicable patterns followed
+- **Anti-pattern Avoidance**: No known anti-patterns implemented
+- **Lessons Documentation**: Complete lessons learned captured
+- **Pattern Validation**: All patterns validated before use
+
+## 🔍 Validation Commands
+```bash
+# Validate patterns
+node .agent-os/tools/validation-suite.js --patterns
+
+# Check lessons learned
+node .agent-os/tools/lessons/lessons-validator.js
+
+# Compliance check
+node .agent-os/tools/compliance-checker.js --detailed
+```
+description:
+globs:
+alwaysApply: false
+---
+description:
+globs:
+alwaysApply: false
+---

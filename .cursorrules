@@ -1,0 +1,266 @@
+# AgentForge - Agent OS Integration Rules
+
+## 🎯 Project Overview
+AgentForge is a static analyzer and project setup/migration utility that follows Agent OS development standards.
+
+**CRITICAL**: This is a STATIC ANALYZER ONLY project. NO AI suggestion features, NO dynamic AI processing, NO AI-driven automation.
+
+## 📚 Mandatory Standards Reference
+**ALWAYS** reference these standards before making any code changes:
+
+### Core Standards
+- **Technology Stack**: `.agent-os/standards/tech-stack.md` - Mandatory technology choices
+- **Code Style**: `.agent-os/standards/code-style.md` - Coding conventions and patterns
+- **Best Practices**: `.agent-os/standards/best-practices.md` - Development principles
+- **Security & Compliance**: `.agent-os/standards/security-compliance.md` - Security requirements
+- **Testing Strategy**: `.agent-os/standards/testing-strategy.md` - Testing standards
+- **CI/CD Strategy**: `.agent-os/standards/ci-cd-strategy.md` - Deployment standards
+- **Enforcement**: `.agent-os/standards/enforcement.md` - Mandatory compliance rules
+- **Feature Scoring**: `.agent-os/standards/feature-scoring.md` - Feature evaluation framework
+- **Development Patterns**: `.agent-os/standards/consolidated-development-patterns.md` - Consolidated patterns
+- **Configuration Management**: `.agent-os/standards/configuration-management.md` - Config standards
+
+### Code Style Standards
+- **CSS/TailwindCSS**: `.agent-os/standards/code-style/css-style.md`
+- **HTML**: `.agent-os/standards/code-style/html-style.md`
+- **JavaScript/TypeScript**: `.agent-os/standards/code-style/javascript-style.md`
+- **Java/Spring**: `.agent-os/standards/code-style/java-style.md`
+
+## 🚫 Project Constraints (CRITICAL)
+- **NO AI suggestion features** - Keep AgentForge as static analyzer only
+- **NO dynamic AI processing** - No real-time AI analysis
+- **NO AI-driven automation** - No AI-controlled workflows
+- **NO machine learning features** - No ML model training or inference
+- **NO AI chat interfaces** - No conversational AI features
+- **Focus on core components**: logging, reporting, monitoring, project analysis
+- **Static analysis only** - Code quality, security, and style checking
+
+## 🏗️ Architecture Requirements
+- **Backend**: Spring Boot 3.3+ (Java 21 LTS) with Controller → Service → Repository pattern
+- **Frontend**: React 19 with TypeScript 5, functional components and hooks
+- **Database**: PostgreSQL 17 with pgvector extension
+- **Containerization**: Docker 24 with multi-stage builds
+
+## 🎯 AgentForge-Specific Requirements
+
+### Core Components Priority
+1. **Logging Service** - Centralized logging with Agent OS standards compliance
+2. **Monitoring Service** - System metrics, health checks, and performance monitoring
+3. **Reporting Service** - Compliance reports and project analysis summaries
+4. **Project Analysis Service** - Project structure analysis and technology stack detection
+
+### Database Schema Requirements
+- **User Management**: Authentication and authorization tables
+- **Project Storage**: Project metadata and analysis results
+- **Compliance Tracking**: Standards compliance and violation records
+- **Audit Logging**: Complete audit trail for all operations
+
+### Performance Targets
+- **Backend Response Time**: P95 ≤200ms
+- **Frontend Time to Interactive**: ≤1.8s
+- **Analysis Speed**: ≤30 seconds for 1000 LOC
+- **Memory Usage**: ≤512MB for large projects
+
+## ⚡ Mandatory Feature Scoring (CRITICAL)
+**ALWAYS** score all features before development using the 4-dimension framework:
+
+### Required Scoring Dimensions
+- **Business Impact (1-10)**: How much does this improve Agent-OS effectiveness?
+- **Developer Productivity (1-10)**: How much faster/better will developers code with this feature?
+- **Implementation Complexity (1-10)**: How difficult is this to build and maintain?
+- **Adoption Likelihood (1-10)**: How likely are developers to actively use this feature?
+
+### Phase Classification
+- **Phase 1**: Developer Productivity ≥ 8/10 OR Combined Score ≥ 32/40
+- **Phase 2**: Developer Productivity ≥ 7/10 OR Combined Score ≥ 28/40
+- **Phase 3+**: All other features requiring executive approval
+
+**ALWAYS** use `.agent-os/templates/feature-scoring-template.md` for documentation.
+
+## ✅ Mandatory Compliance & Enforcement
+**ALWAYS** run compliance check after any changes:
+```bash
+node .agent-os/tools/compliance-checker.js --detailed
+```
+
+**Required Compliance Score**: ≥85%
+
+### Enforcement Rules
+1. **Feature Scoring Framework** - MANDATORY for all features
+2. **Technology Stack Validation** - Validate against Context7 before implementation
+3. **Task Tracking Standards** - Update tasks.md immediately after each subtask
+4. **Lessons Learned Capture** - Use `.agent-os/templates/lessons-learned-template.md`
+5. **Automatic Compliance Checking** - Run after every subtask completion
+
+## 📋 Development Workflow
+1. **Before coding**: Check relevant standards files and run compliance checker
+2. **Feature Planning**: Score features using the 4-dimension framework
+3. **During development**: Follow established patterns and update tasks.md immediately
+4. **After changes**: Run compliance checker and capture lessons learned
+5. **Before submission**: Validate all standards compliance and quality gates
+
+## 🔧 Tools & Utilities Integration
+
+### Primary Development Tools
+- **Compliance Checker**: `.agent-os/tools/compliance-checker.js` - Primary compliance validation
+- **Agent OS CLI**: `.agent-os/tools/agent-os-cli.js` - Command-line interface
+- **Validation Suite**: `.agent-os/tools/validation-suite.js` - Comprehensive validation
+- **Refactoring Validator**: `.agent-os/tools/refactoring-validator.js` - Code quality validation
+- **Real-time Monitor**: `.agent-os/tools/real-time-monitor.js` - Live system monitoring
+- **Enhanced Dashboard**: `.agent-os/tools/enhanced-dashboard.js` - Visual metrics dashboard
+
+### Feature Scoring Tools
+- **Feature Scorer**: `.agent-os/tools/feature-scoring/` - 4-dimension scoring framework
+- **Phase Management**: `.agent-os/feature-scoring/phase-3-features-scoring.md` - Phase-based feature management
+
+### Lessons & Patterns Management
+- **Lessons Management**: `.agent-os/tools/lessons/` - Lessons learned capture and retrieval
+- **Pattern Analysis**: `.agent-os/patterns/common-errors.yml` - Common error patterns
+- **Development Patterns**: `.agent-os/standards/consolidated-development-patterns.md` - Best practices
+
+### Cursor Integration Tools
+- **Cursor Init**: `.agent-os/tools/cursor/cursor-init.js` - Cursor rules generation
+- **Cursor Analytics**: `.agent-os/tools/cursor/cursor-analytics.js` - Usage analytics
+- **Cursor Rule Optimizer**: `.agent-os/tools/cursor/cursor-rule-optimizer.js` - Rule optimization
+
+### Quality Assurance Tools
+- **Quality Gates**: `.agent-os/quality-assurance/agent-os-quality-gates.md` - Quality thresholds
+- **Statistical Analysis**: `.agent-os/tools/statistical-analysis.js` - Metrics analysis
+- **Database Optimizer**: `.agent-os/tools/database-optimizer.js` - Database performance
+
+### Scripts & Automation
+- **Setup Scripts**: `.agent-os/scripts/setup.js` - Interactive setup
+- **Quick Start**: `.agent-os/scripts/quick-start.js` - Rapid initialization
+- **Compliance Automation**: `.agent-os/scripts/compliance-automation.js` - Automated compliance
+- **Production Deployment**: `.agent-os/scripts/production-deployment.js` - Deployment automation
+
+## 📖 Lessons Learned & Patterns Integration
+**ALWAYS** reference and update:
+- **Lessons Learned**: `.agent-os/lessons-learned/README.md`
+- **Development Patterns**: `.agent-os/standards/consolidated-development-patterns.md`
+- **Common Errors**: `.agent-os/patterns/common-errors.yml`
+- **Templates**: `.agent-os/templates/` for all documentation
+
+## 🎨 UI/UX Standards
+- **Component Library**: shadcn/ui with TailwindCSS 3.x (STABLE)
+- **State Management**: TanStack Query 5 + Context API
+- **Build Tool**: Vite 5.x
+- **CSS Framework**: TailwindCSS 3.x (avoid 4.x until stable)
+
+## 🔒 Security Standards
+- **Zero hardcoded secrets**
+- **100% encryption coverage**
+- **OWASP Top-10 compliance**
+- **Vulnerability scanning mandatory**
+
+## 🧪 Testing Requirements
+- **Coverage**: ≥85% branch coverage
+- **Unit Tests**: Comprehensive for all services
+- **Integration Tests**: API endpoint validation
+- **Performance**: P95 ≤200ms response time
+
+## 📊 Quality Gates
+- **Code Quality**: ≤5 TODO items per service
+- **Performance**: TTI ≤1.8s frontend, P95 ≤150ms backend
+- **Security**: 0 vulnerabilities, 100% compliance
+- **Architecture**: Controller → Service → Repository pattern enforced
+
+## 🚀 Quick Start Commands
+
+### Initial Setup
+```bash
+# Interactive setup menu - Start here!
+node .agent-os/scripts/setup.js
+
+# Quick initialization of everything
+node .agent-os/scripts/quick-start.js
+
+# Validate current state
+node .agent-os/scripts/setup.js validate
+```
+
+### Daily Development
+```bash
+# Quick daily validation
+node .agent-os/scripts/setup.js validate
+
+# Compliance check
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Real-time monitoring
+node .agent-os/tools/real-time-monitor.js
+
+# Dashboard view
+node .agent-os/tools/enhanced-dashboard.js
+```
+
+### Feature Development
+```bash
+# 1. Score feature using 4-dimension framework
+node .agent-os/tools/feature-scoring/feature-scorer.js
+
+# 2. Check compliance before starting
+node .agent-os/tools/compliance-checker.js --detailed
+
+# 3. Develop following Controller → Service → Repository pattern
+
+# 4. Update tasks.md immediately after each subtask
+
+# 5. Run compliance check after each subtask
+node .agent-os/tools/compliance-checker.js --detailed
+
+# 6. Capture lessons learned
+# Use .agent-os/templates/lessons-learned-template.md
+```
+
+### Advanced Tools
+```bash
+# Statistical analysis
+node .agent-os/tools/statistical-analysis.js
+
+# Database optimization
+node .agent-os/tools/database-optimizer.js
+
+# Cursor rule optimization
+node .agent-os/tools/cursor/cursor-rule-optimizer.js
+
+# Validation suite
+node .agent-os/tools/validation-suite.js
+```
+
+## 📈 Success Metrics
+- **Zero Security Vulnerabilities**: No hardcoded secrets or security issues
+- **High Code Quality**: ≤5 TODO items per service, ≥85% test coverage
+- **Excellent Performance**: P95 ≤200ms response time
+- **Comprehensive Documentation**: All public APIs documented
+- **Systematic Refactoring**: Refactoring after each phase completion
+- **Feature Scoring Compliance**: 100% features scored before development
+
+## 🔄 Continuous Improvement
+- **Weekly**: Run comprehensive compliance checks
+- **Bi-weekly**: Review and update lessons learned
+- **Monthly**: Analyze statistical metrics and optimize
+- **Quarterly**: Review feature scoring and phase progression
+- **Annually**: Comprehensive standards review and update
+
+## 🎯 AgentForge Development Focus
+
+### Current Phase Priority
+1. **Database Integration** - PostgreSQL setup and entity models
+2. **Repository Layer** - Complete the Controller → Service → Repository pattern
+3. **API Integration** - Frontend-backend communication
+4. **Testing Coverage** - Unit and integration tests
+5. **Performance Optimization** - Meet performance targets
+
+### Forbidden Development Areas
+- **AI/ML Features**: No machine learning, AI suggestions, or dynamic AI processing
+- **Real-time AI Analysis**: No live AI-powered code analysis
+- **AI Chat Interfaces**: No conversational AI or AI assistants
+- **Automated AI Workflows**: No AI-controlled development processes
+
+### Required Development Areas
+- **Static Analysis**: Code quality, security, and style checking
+- **Project Setup**: Scaffolding, configuration, and migration tools
+- **Reporting**: Code quality metrics and compliance reporting
+- **Monitoring**: System health, performance, and resource usage
+- **Logging**: Comprehensive development and runtime logging

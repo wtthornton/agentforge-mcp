@@ -1,0 +1,462 @@
+# AgentForge CI/CD Pipeline
+# This workflow handles continuous integration and deployment
+
+name: AgentForge CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
+      - 'LICENSE'
+  pull_request:
+    branches: [ main, develop ]
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
+      - 'LICENSE'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+
+env:
+  JAVA_VERSION: '21'
+  NODE_VERSION: '18'
+  MAVEN_VERSION: '3.9.6'
+  DOCKER_BUILDKIT: 1
+
+jobs:
+  # Compliance Check Job
+  compliance-check:
+    name: .agent-os Compliance Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: .agent-os/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd .agent-os
+          npm ci
+
+      - name: Run compliance check
+        run: |
+          cd .agent-os
+          node tools/full-compliance-check.js
+
+      - name: Upload compliance report
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-report
+          path: .agent-os/reports/
+          retention-days: 30
+
+  # Frontend Testing Job
+  frontend-test:
+    name: Frontend Tests
+    runs-on: ubuntu-latest
+    needs: compliance-check
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Run frontend tests
+        run: |
+          cd frontend
+          npm run test:coverage
+
+      - name: Upload frontend test coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-coverage
+          path: frontend/coverage/
+          retention-days: 30
+
+      - name: Run frontend linting
+        run: |
+          cd frontend
+          npm run lint
+          npm run type-check
+
+  # Backend Testing Job
+  backend-test:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    needs: compliance-check
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: agentforge_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+      redis:
+        image: redis:7-alpine
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'maven'
+
+      - name: Setup Maven
+        uses: actions/setup-maven@v4
+        with:
+          maven-version: ${{ env.MAVEN_VERSION }}
+
+      - name: Cache Maven packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: Run backend tests
+        run: |
+          cd backend
+          mvn clean test -Dspring.profiles.active=test
+        env:
+          DB_HOST: localhost
+          DB_PORT: 5432
+          DB_NAME: agentforge_test
+          DB_USERNAME: postgres
+          DB_PASSWORD: postgres
+          REDIS_HOST: localhost
+          REDIS_PORT: 6379
+
+      - name: Upload backend test coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-coverage
+          path: backend/target/site/jacoco/
+          retention-days: 30
+
+      - name: Run backend linting
+        run: |
+          cd backend
+          mvn checkstyle:check
+
+  # Security Scan Job
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: [frontend-test, backend-test]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          format: 'sarif'
+          output: 'trivy-results.sarif'
+
+      - name: Upload Trivy scan results to GitHub Security tab
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: 'trivy-results.sarif'
+
+      - name: Run OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'AgentForge'
+          path: '.'
+          format: 'HTML'
+          out: 'reports'
+
+      - name: Upload OWASP report
+        uses: actions/upload-artifact@v4
+        with:
+          name: owasp-report
+          path: reports/
+          retention-days: 30
+
+  # Build Job
+  build:
+    name: Build Applications
+    runs-on: ubuntu-latest
+    needs: [frontend-test, backend-test, security-scan]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'maven'
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          npm ci
+          npm run build
+
+      - name: Build backend
+        run: |
+          cd backend
+          mvn clean package -DskipTests
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            frontend/dist/
+            backend/target/*.jar
+          retention-days: 30
+
+  # Docker Build Job
+  docker-build:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ghcr.io/${{ github.repository }}/frontend
+            ghcr.io/${{ github.repository }}/backend
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=sha,prefix={{branch}}-
+
+      - name: Build and push frontend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./frontend
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build and push backend image
+        uses: docker/build-push-action@v5
+        with:
+          context: ./backend
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  # Deploy to Staging Job
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: [docker-build, security-scan]
+    if: github.ref == 'refs/heads/develop' || github.event_name == 'workflow_dispatch'
+    environment: staging
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to staging environment
+        run: |
+          echo "Deploying to staging environment..."
+          # Add your staging deployment logic here
+          # This could be deploying to a staging server, Kubernetes cluster, etc.
+
+      - name: Run smoke tests
+        run: |
+          echo "Running smoke tests on staging..."
+          # Add your smoke test logic here
+
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "Staging deployment successful!"
+          # Add your notification logic here
+
+  # Deploy to Production Job
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [docker-build, security-scan]
+    if: github.ref == 'refs/heads/main' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'production')
+    environment: production
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy to production environment
+        run: |
+          echo "Deploying to production environment..."
+          # Add your production deployment logic here
+
+      - name: Run production tests
+        run: |
+          echo "Running production tests..."
+          # Add your production test logic here
+
+      - name: Notify deployment success
+        if: success()
+        run: |
+          echo "Production deployment successful!"
+          # Add your notification logic here
+
+  # Performance Testing Job
+  performance-test:
+    name: Performance Tests
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always() && (needs.deploy-staging.result == 'success' || needs.deploy-production.result == 'success')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Artillery
+        run: npm install -g artillery
+
+      - name: Run performance tests
+        run: |
+          cd infrastructure/performance-tests
+          artillery run load-test.yml
+
+      - name: Upload performance test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: performance-results
+          path: infrastructure/performance-tests/results/
+          retention-days: 30
+
+  # Documentation Update Job
+  update-docs:
+    name: Update Documentation
+    runs-on: ubuntu-latest
+    needs: [deploy-staging, deploy-production]
+    if: always() && (needs.deploy-staging.result == 'success' || needs.deploy-production.result == 'success')
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Generate API documentation
+        run: |
+          cd backend
+          mvn spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=docs" &
+          sleep 30
+          curl -o api-docs.json http://localhost:8080/v3/api-docs
+
+      - name: Update documentation
+        run: |
+          # Add your documentation update logic here
+          echo "Documentation updated successfully!"
+
+  # Final Status Check
+  final-status:
+    name: Final Status
+    runs-on: ubuntu-latest
+    needs: [compliance-check, frontend-test, backend-test, security-scan, build, docker-build, deploy-staging, deploy-production, performance-test, update-docs]
+    if: always()
+    steps:
+      - name: Check overall status
+        run: |
+          echo "Pipeline execution completed!"
+          echo "Compliance Check: ${{ needs.compliance-check.result }}"
+          echo "Frontend Tests: ${{ needs.frontend-test.result }}"
+          echo "Backend Tests: ${{ needs.backend-test.result }}"
+          echo "Security Scan: ${{ needs.security-scan.result }}"
+          echo "Build: ${{ needs.build.result }}"
+          echo "Docker Build: ${{ needs.docker-build.result }}"
+          echo "Staging Deploy: ${{ needs.deploy-staging.result }}"
+          echo "Production Deploy: ${{ needs.deploy-production.result }}"
+          echo "Performance Tests: ${{ needs.performance-test.result }}"
+          echo "Documentation Update: ${{ needs.update-docs.result }}"
+
+      - name: Notify completion
+        if: always()
+        run: |
+          # Add your completion notification logic here
+          echo "Pipeline execution completed with status: ${{ job.status }}"

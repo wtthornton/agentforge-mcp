@@ -1,0 +1,247 @@
+# Real-Time Monitoring & Dashboard Integration
+
+## Overview
+This rule provides comprehensive integration with .agent-os real-time monitoring, dashboard, and analytics tools for live development insights and performance tracking.
+
+## 🎯 Real-Time Monitoring Tools
+
+### **Primary Monitoring Dashboard**
+```bash
+# Launch enhanced dashboard with live metrics
+node .agent-os/tools/enhanced-dashboard.js
+
+# Features:
+# - Live compliance score tracking
+# - Real-time development metrics
+# - Performance indicators
+# - Quality gate status
+# - Interactive charts and graphs
+```
+
+### **Real-Time Monitor**
+```bash
+# Start real-time monitoring service
+node .agent-os/tools/real-time-monitor.js
+
+# Capabilities:
+# - Live system health monitoring
+# - Performance metrics tracking
+# - Compliance violation alerts
+# - Development progress updates
+# - Automated quality checks
+```
+
+### **Statistical Analysis**
+```bash
+# Run comprehensive statistical analysis
+node .agent-os/tools/statistical-analysis.js
+
+# Analysis includes:
+# - Development velocity metrics
+# - Code quality trends
+# - Compliance score history
+# - Performance benchmarks
+# - Pattern usage statistics
+```
+
+## 📊 Dashboard Metrics & KPIs
+
+### **Compliance Metrics (Live)**
+- **Current Compliance Score**: Real-time percentage
+- **Standards Adherence**: Live violation tracking
+- **Security Status**: Active vulnerability monitoring
+- **Quality Gate Status**: Pass/fail indicators
+
+### **Development Metrics (Live)**
+- **Feature Scoring Compliance**: % of features scored
+- **Task Completion Rate**: Real-time progress tracking
+- **Code Quality Score**: Live quality metrics
+- **Test Coverage**: Current coverage percentage
+
+### **Performance Metrics (Live)**
+- **Frontend Performance**: TTI, CSS size, build status
+- **Backend Performance**: Response times, throughput
+- **Database Performance**: Query times, connection status
+- **Container Performance**: Resource usage, health status
+
+## 🚀 Monitoring Workflow Integration
+
+### **Daily Development Monitoring**
+```bash
+# Morning check
+node .agent-os/tools/enhanced-dashboard.js
+
+# During development
+node .agent-os/tools/real-time-monitor.js
+
+# End of day review
+node .agent-os/tools/statistical-analysis.js
+```
+
+### **Continuous Monitoring Setup**
+```bash
+# Start background monitoring
+node .agent-os/tools/real-time-monitor.js &
+
+# Monitor specific metrics
+node .agent-os/tools/agent-os-monitor.js
+
+# Check compliance status
+node .agent-os/tools/compliance-checker.js --detailed
+```
+
+### **Alert & Notification Integration**
+```bash
+# Set up compliance alerts
+node .agent-os/tools/compliance-automation.js
+
+# Configure quality gate notifications
+# Monitor dashboard for real-time alerts
+# Set up automated compliance checks
+```
+
+## 📈 Performance Tracking
+
+### **Frontend Performance Monitoring**
+```bash
+# Monitor CSS build status
+# Check for 0-byte CSS files (critical issue)
+# Track TTI (Time to Interactive)
+# Monitor bundle sizes and optimization
+```
+
+### **Backend Performance Monitoring**
+```bash
+# Track API response times
+# Monitor database query performance
+# Check memory and CPU usage
+# Track error rates and exceptions
+```
+
+### **Database Performance Monitoring**
+```bash
+# Monitor query execution times
+# Track connection pool status
+# Check index usage and optimization
+# Monitor pgvector performance
+```
+
+## 🔍 Real-Time Debugging
+
+### **Live Issue Detection**
+```bash
+# Real-time compliance violations
+node .agent-os/tools/real-time-monitor.js
+
+# Immediate quality gate failures
+# Live performance degradation alerts
+# Real-time security vulnerability detection
+```
+
+### **Quick Diagnostics**
+```bash
+# Fast compliance check
+node .agent-os/tools/simple-compliance-check.js
+
+# Quick validation
+node .agent-os/tools/fast-checks.cjs
+
+# Doctor tool for system health
+node .agent-os/tools/doctor.js
+```
+
+## 📋 Monitoring Checklist
+
+### **Before Development Session**
+- [ ] Launch enhanced dashboard
+- [ ] Check current compliance score
+- [ ] Review quality gate status
+- [ ] Verify system health
+
+### **During Development**
+- [ ] Monitor real-time metrics
+- [ ] Watch for compliance alerts
+- [ ] Track performance indicators
+- [ ] Monitor quality gates
+
+### **After Development Session**
+- [ ] Review final metrics
+- [ ] Check compliance status
+- [ ] Analyze performance data
+- [ ] Update monitoring notes
+
+## 🎯 Success Metrics
+
+### **Monitoring Effectiveness**
+- **Real-Time Visibility**: 100% of critical metrics
+- **Alert Response Time**: <5 minutes for critical issues
+- **Dashboard Uptime**: >99% availability
+- **Metric Accuracy**: >95% precision
+
+### **Performance Improvements**
+- **Issue Detection Time**: Reduced by 80%
+- **Compliance Violation Response**: <10 minutes
+- **Performance Degradation Detection**: Real-time
+- **Quality Gate Monitoring**: Continuous
+
+## 🚨 Critical Monitoring Points
+
+### **Immediate Alerts**
+- **Compliance Score < 85%**: Stop development
+- **Security Vulnerabilities**: Immediate notification
+- **Build Failures**: Real-time alerts
+- **Performance Degradation**: Live monitoring
+
+### **Quality Gate Monitoring**
+- **Test Coverage < 85%**: Continuous tracking
+- **Code Quality Score < 90%**: Live monitoring
+- **Security Violations**: Real-time detection
+- **Architecture Violations**: Immediate alerts
+
+## 🔗 Quick Reference Commands
+
+```bash
+# Real-Time Monitoring
+node .agent-os/tools/enhanced-dashboard.js
+node .agent-os/tools/real-time-monitor.js
+node .agent-os/tools/agent-os-monitor.js
+
+# Statistical Analysis
+node .agent-os/tools/statistical-analysis.js
+node .agent-os/tools/simple-metrics-api.js
+
+# Quick Checks
+node .agent-os/tools/simple-compliance-check.js
+node .agent-os/tools/fast-checks.cjs
+node .agent-os/tools/doctor.js
+
+# Compliance & Quality
+node .agent-os/tools/compliance-checker.js --detailed
+node .agent-os/tools/validation-suite.js
+```
+
+## 📖 Integration with Other Tools
+
+### **Compliance Integration**
+- **Real-time compliance tracking**
+- **Live violation detection**
+- **Automated compliance checks**
+- **Quality gate monitoring**
+
+### **Development Integration**
+- **Live task progress tracking**
+- **Feature scoring monitoring**
+- **Pattern application tracking**
+- **Lessons learned integration**
+
+### **Performance Integration**
+- **Live performance metrics**
+- **Real-time optimization tracking**
+- **Database performance monitoring**
+- **Container health tracking**
+
+This rule ensures comprehensive real-time monitoring and dashboard integration for maximum development visibility and quality assurance.
+description:
+globs:
+alwaysApply: false
+---

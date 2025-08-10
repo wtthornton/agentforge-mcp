@@ -1,0 +1,129 @@
+# Enforcement & Compliance - Agent OS Integration
+
+## 🚨 MANDATORY: Standards Enforcement Rules
+**ALWAYS** follow these enforcement rules from `.agent-os/standards/enforcement.md`:
+
+### 1. Feature Scoring Framework (MANDATORY)
+**ALWAYS** score all features before development using the 4-dimension framework:
+- **Business Impact (1-10)**: How much does this improve Agent-OS effectiveness?
+- **Developer Productivity (1-10)**: How much faster/better will developers code with this feature?
+- **Implementation Complexity (1-10)**: How difficult is this to build and maintain?
+- **Adoption Likelihood (1-10)**: How likely are developers to actively use this feature?
+
+### 2. Technology Stack Validation (MANDATORY)
+**ALWAYS** validate technology choices against Context7 before implementation:
+- [ ] Technology choices validated against Context7 documentation
+- [ ] Current versions confirmed via Context7
+- [ ] Best practices verified via Context7
+- [ ] Compatibility checked across components
+
+### 3. Task Tracking Standards (MANDATORY)
+**ALWAYS** update tasks.md file immediately after completing any subtask:
+- **Immediate Updates**: Mark completed subtasks with `[x]` immediately after completion
+- **NEVER** wait until the end of a session to update task progress
+- **ALWAYS** add progress notes for completed sections
+- **ALWAYS** update completion percentages and overall progress
+- **ALWAYS** document session summaries with completed tasks and next priorities
+
+### 4. Lessons Learned Capture (MANDATORY)
+**ALWAYS** capture lessons learned for significant tasks:
+- **Required Structure**: Use `.agent-os/templates/lessons-learned-template.md`
+- **Capture Frequency**: After each major task completion
+- **Content Requirements**: Include patterns, anti-patterns, and implementation guidelines
+
+### 5. Automatic Compliance Checking (MANDATORY)
+**ALWAYS** run compliance check after every subtask completion:
+```bash
+# After completing any subtask:
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Expected output:
+# ✅ Compliance Score: 95%
+# ✅ Standards Adherence: 100%
+# ✅ Code Quality: Excellent
+# ✅ No new violations detected
+```
+
+## ✅ Compliance Requirements
+
+### Required Compliance Score: ≥85%
+
+### Compliance Check Integration
+```bash
+# Quick compliance check
+node .agent-os/tools/compliance-checker.js
+
+# Detailed compliance check
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Compliance validation
+node .agent-os/tools/validation-suite.js
+```
+
+### Compliance Failure Protocol
+- **If compliance score drops below 85%**: Fix violations immediately
+- **If new violations detected**: Address before next subtask
+- **If standards violations found**: Document and resolve as priority
+- **If quality issues identified**: Refactor code to meet standards
+
+## 🔧 Enforcement Tools
+
+### Primary Tools
+- **Compliance Checker**: `.agent-os/tools/compliance-checker.js`
+- **Validation Suite**: `.agent-os/tools/validation-suite.js`
+- **Refactoring Validator**: `.agent-os/tools/refactoring-validator.js`
+- **Agent OS CLI**: `.agent-os/tools/agent-os-cli.js`
+
+### Validation Tools
+- **Product Validator**: `.agent-os/tools/product-validator.js`
+- **Real-time Monitor**: `.agent-os/tools/real-time-monitor.js`
+- **Statistical Analysis**: `.agent-os/tools/statistical-analysis.js`
+
+## 📋 Enforcement Checklist
+
+### Pre-Development
+- [ ] Feature scored using 4-dimension framework
+- [ ] Technology stack validated against Context7
+- [ ] Compliance checker run (baseline established)
+- [ ] Relevant standards reviewed
+
+### During Development
+- [ ] Tasks.md updated immediately after each subtask
+- [ ] Compliance checker run after each subtask
+- [ ] Standards followed throughout development
+- [ ] Lessons learned captured for significant work
+
+### Post-Development
+- [ ] Final compliance check run
+- [ ] Compliance score ≥85% achieved
+- [ ] All violations addressed
+- [ ] Lessons learned documented
+- [ ] Quality gates passed
+
+## 🚫 Project Constraints
+- **NO AI suggestion features** - Static analyzer only
+- **Core focus**: logging, reporting, monitoring
+- **Performance**: P95 ≤200ms backend, TTI ≤1.8s frontend
+
+## 📊 Quality Gates
+- **Code Quality**: ≤5 TODO items per service
+- **Performance**: TTI ≤1.8s frontend, P95 ≤150ms backend
+- **Security**: 0 vulnerabilities, 100% compliance
+- **Architecture**: Controller → Service → Repository pattern enforced
+- **Compliance**: ≥85% compliance score maintained
+
+## 🔍 Compliance Verification
+**ALWAYS** run after changes:
+```bash
+node .agent-os/tools/compliance-checker.js --detailed
+```
+
+**Required Score**: ≥85%
+description:
+globs:
+alwaysApply: false
+---
+description:
+globs:
+alwaysApply: false
+---

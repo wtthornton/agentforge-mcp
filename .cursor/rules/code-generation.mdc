@@ -1,0 +1,254 @@
+# Code Generation - Agent OS Integration
+
+## 🚨 MANDATORY: Code Generation Standards
+**ALWAYS** follow these patterns when generating code:
+
+### 🏗️ Backend Code Generation (Spring Boot)
+
+#### Controller Pattern
+```java
+@RestController
+@RequestMapping("/api/v1/{resource}")
+@Validated
+@Slf4j
+public class {Resource}Controller {
+    
+    private final {Resource}Service {resource}Service;
+    
+    public {Resource}Controller({Resource}Service {resource}Service) {
+        this.{resource}Service = {resource}Service;
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<{Resource}Response> get{Resource}(@PathVariable Long id) {
+        log.info("Getting {} with id: {}", {Resource}.class.getSimpleName(), id);
+        {Resource}Response response = {resource}Service.get{Resource}(id);
+        return ResponseEntity.ok(response);
+    }
+    
+    @PostMapping
+    public ResponseEntity<{Resource}Response> create{Resource}(
+            @Valid @RequestBody Create{Resource}Request request) {
+        log.info("Creating new {}", {Resource}.class.getSimpleName());
+        {Resource}Response response = {resource}Service.create{Resource}(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+}
+```
+
+#### Service Pattern
+```java
+@Service
+@Transactional
+@Slf4j
+public class {Resource}Service {
+    
+    private final {Resource}Repository {resource}Repository;
+    private final {Resource}Mapper {resource}Mapper;
+    
+    public {Resource}Service({Resource}Repository {resource}Repository, 
+                           {Resource}Mapper {resource}Mapper) {
+        this.{resource}Repository = {resource}Repository;
+        this.{resource}Mapper = {resource}Mapper;
+    }
+    
+    public {Resource}Response get{Resource}(Long id) {
+        log.debug("Fetching {} with id: {}", {Resource}.class.getSimpleName(), id);
+        {Resource} {resource} = {resource}Repository.findById(id)
+            .orElseThrow(() -> new {Resource}NotFoundException(id));
+        return {resource}Mapper.toResponse({resource});
+    }
+}
+```
+
+#### Repository Pattern
+```java
+@Repository
+public interface {Resource}Repository extends JpaRepository<{Resource}, Long> {
+    
+    Optional<{Resource}> findBy{Field}(String {field});
+    
+    @Query("SELECT r FROM {Resource} r WHERE r.{field} = :{field}")
+    List<{Resource}> findAllBy{Field}(@Param("{field}") String {field});
+}
+```
+
+### 🎨 Frontend Code Generation (React + TypeScript)
+
+#### Component Pattern
+```typescript
+import React from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { {Resource}Service } from '@/services/{resource}Service';
+import { {Resource} } from '@/types/{resource}';
+
+interface {Resource}Props {
+  id: string;
+}
+
+export const {Resource}Component: React.FC<{Resource}Props> = ({ id }) => {
+  const { data: {resource}, isLoading, error } = useQuery({
+    queryKey: ['{resource}', id],
+    queryFn: () => {Resource}Service.get{Resource}(id),
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading {resource}</div>;
+  if (!{resource}) return <div>No {resource} found</div>;
+
+  return (
+    <div className="p-4">
+      <h2 className="text-xl font-bold">{resource}.name</h2>
+      {/* Component content */}
+    </div>
+  );
+};
+```
+
+#### Hook Pattern
+```typescript
+import { useState, useCallback } from 'react';
+import { {Resource}Service } from '@/services/{resource}Service';
+import { {Resource} } from '@/types/{resource}';
+
+export const use{Resource} = (id: string) => {
+  const [{resource}, set{Resource}] = useState<{Resource} | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const fetch{Resource} = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const data = await {Resource}Service.get{Resource}(id);
+      set{Resource}(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unknown error');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [id]);
+
+  return { {resource}, isLoading, error, fetch{Resource} };
+};
+```
+
+#### Service Pattern
+```typescript
+import { API_ENDPOINTS } from '@/config/api-endpoints';
+import { {Resource} } from '@/types/{resource}';
+import { Create{Resource}Request } from '@/types/requests';
+import { {Resource}Response } from '@/types/responses';
+
+export class {Resource}Service {
+  static async get{Resource}(id: string): Promise<{Resource}> {
+    const response = await fetch(API_ENDPOINTS.{resource}.{resource}(id));
+    if (!response.ok) {
+      throw new Error(`Failed to fetch {resource}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+
+  static async create{Resource}(request: Create{Resource}Request): Promise<{Resource}Response> {
+    const response = await fetch(API_ENDPOINTS.{resource}.create, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(request),
+    });
+    if (!response.ok) {
+      throw new Error(`Failed to create {resource}: ${response.statusText}`);
+    }
+    return response.json();
+  }
+}
+```
+
+### 🗄️ Database Code Generation
+
+#### Entity Pattern
+```java
+@Entity
+@Table(name = "{resource}s")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class {Resource} {
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false, length = 255)
+    private String name;
+    
+    @Column(length = 1000)
+    private String description;
+    
+    @CreatedDate
+    @Column(nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+    
+    @LastModifiedDate
+    @Column(nullable = false)
+    private LocalDateTime updatedAt;
+}
+```
+
+#### DTO Pattern
+```java
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class {Resource}Response {
+    private Long id;
+    private String name;
+    private String description;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+}
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class Create{Resource}Request {
+    @NotBlank(message = "Name is required")
+    @Size(max = 255, message = "Name must not exceed 255 characters")
+    private String name;
+    
+    @Size(max = 1000, message = "Description must not exceed 1000 characters")
+    private String description;
+}
+```
+
+## ✅ Code Quality Requirements
+
+### Naming Conventions
+- **Classes**: PascalCase (e.g., `UserService`)
+- **Methods**: camelCase (e.g., `getUserById`)
+- **Constants**: UPPER_SNAKE_CASE (e.g., `MAX_RETRY_ATTEMPTS`)
+- **Variables**: camelCase (e.g., `userRepository`)
+
+### Error Handling
+- **Always** use proper exception handling
+- **Always** log errors with context
+- **Always** return meaningful error messages
+- **Never** expose internal errors to users
+
+### Logging
+- **Always** use structured logging
+- **Always** include correlation IDs
+- **Always** log at appropriate levels (DEBUG, INFO, WARN, ERROR)
+- **Never** log sensitive information
+
+### Testing
+- **Always** write unit tests for services
+- **Always** write integration tests for controllers
+- **Always** mock external dependencies
+- **Always** test error scenarios
+description:
+globs:
+alwaysApply: false
+---

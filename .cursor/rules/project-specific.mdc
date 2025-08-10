@@ -1,0 +1,134 @@
+# Project Specific Rules - AgentForge
+
+## 🎯 Project Overview
+AgentForge is a **static analyzer and project setup/migration utility** that follows Agent OS development standards.
+
+## 🚫 CRITICAL: Project Constraints
+**NEVER** implement these features - they are explicitly forbidden:
+
+### ❌ Forbidden Features
+- **AI suggestion features** - No AI-powered code suggestions
+- **Dynamic AI processing** - No real-time AI analysis
+- **AI-driven automation** - No AI-controlled workflows
+- **Machine learning features** - No ML model training or inference
+- **AI chat interfaces** - No conversational AI features
+
+### ✅ Allowed Features
+- **Static code analysis** - Code quality, security, and style checking
+- **Project setup utilities** - Scaffolding, configuration, and migration tools
+- **Reporting and monitoring** - Code quality metrics and compliance reporting
+- **Logging and diagnostics** - Development and runtime logging
+- **Configuration management** - Environment and project configuration
+
+## 🏗️ Core Architecture
+
+### Static Analysis Engine
+- **Code Quality Analysis**: Style, complexity, and maintainability metrics
+- **Security Scanning**: Vulnerability detection and security compliance
+- **Performance Analysis**: Code performance and optimization recommendations
+- **Compliance Checking**: Standards enforcement and policy validation
+
+### Project Setup Utilities
+- **Project Scaffolding**: Generate project structure and boilerplate
+- **Configuration Management**: Environment setup and dependency management
+- **Migration Tools**: Project upgrade and migration assistance
+- **Template Generation**: Code templates and project patterns
+
+### Monitoring and Reporting
+- **Quality Metrics**: Code quality scores and trend analysis
+- **Compliance Reports**: Standards adherence and violation reporting
+- **Performance Monitoring**: Build and runtime performance tracking
+- **Audit Logging**: Change tracking and compliance history
+
+## 🔧 Technology Implementation
+
+### Backend Services
+- **Analysis Service**: Static code analysis and quality assessment
+- **Project Service**: Project management and configuration
+- **Reporting Service**: Metrics collection and report generation
+- **Monitoring Service**: System health and performance monitoring
+
+### Frontend Components
+- **Dashboard**: Quality metrics and compliance overview
+- **Project Manager**: Project setup and configuration interface
+- **Analysis Viewer**: Code analysis results and recommendations
+- **Reports**: Detailed compliance and quality reports
+
+### Data Models
+- **Project**: Project configuration and metadata
+- **Analysis**: Code analysis results and metrics
+- **Report**: Generated reports and compliance data
+- **Metric**: Performance and quality measurements
+
+## 📊 Quality Standards
+
+### Code Analysis Metrics
+- **Complexity**: Cyclomatic complexity ≤10 per method
+- **Maintainability**: Maintainability index ≥65
+- **Test Coverage**: ≥85% branch coverage
+- **Documentation**: 100% public API documentation
+
+### Performance Requirements
+- **Analysis Speed**: ≤30 seconds for 1000 LOC
+- **Memory Usage**: ≤512MB for large projects
+- **Response Time**: P95 ≤200ms for API endpoints
+- **Throughput**: ≥100 projects analyzed per hour
+
+### Security Requirements
+- **Vulnerability Detection**: 100% coverage of OWASP Top-10
+- **Secret Detection**: 0 false negatives for hardcoded secrets
+- **Access Control**: Role-based access control (RBAC)
+- **Audit Logging**: Complete audit trail for all operations
+
+## 🚨 Implementation Rules
+
+### Static Analysis Implementation
+- **Use established tools**: ESLint, Checkstyle, SonarQube
+- **Custom rules**: Implement project-specific analysis rules
+- **Performance optimization**: Efficient algorithms for large codebases
+- **Extensible architecture**: Plugin system for custom analyzers
+
+### Project Setup Implementation
+- **Template-based generation**: Use predefined project templates
+- **Configuration validation**: Validate all generated configurations
+- **Dependency management**: Automatic dependency resolution
+- **Migration safety**: Rollback capabilities for failed migrations
+
+### Reporting Implementation
+- **Real-time metrics**: Live quality and compliance data
+- **Historical trends**: Performance and quality over time
+- **Export capabilities**: Multiple format support (PDF, CSV, JSON)
+- **Custom dashboards**: Configurable reporting views
+
+## 🔍 Validation Requirements
+
+### Before Implementation
+- **Feature scoring**: Use Agent OS feature scoring framework
+- **Standards compliance**: Check all relevant standards
+- **Architecture review**: Validate against established patterns
+- **Security review**: Security implications assessment
+
+### During Implementation
+- **Incremental development**: Small, testable features
+- **Continuous testing**: Run tests after each change
+- **Compliance checking**: Regular compliance validation
+- **Documentation updates**: Keep documentation current
+
+### After Implementation
+- **Comprehensive testing**: Full test suite execution
+- **Performance validation**: Performance requirements verification
+- **Security validation**: Security testing and vulnerability scanning
+- **User acceptance**: Stakeholder validation and feedback
+
+## 📚 Reference Standards
+**ALWAYS** reference these standards for implementation:
+- **Technology Stack**: `.agent-os/standards/tech-stack.md`
+- **Code Style**: `.agent-os/standards/code-style.md`
+- **Best Practices**: `.agent-os/standards/best-practices.md`
+- **Security**: `.agent-os/standards/security-compliance.md`
+- **Testing**: `.agent-os/standards/testing-strategy.md`
+- **Enforcement**: `.agent-os/standards/enforcement.md`
+description:
+globs:
+alwaysApply: false
+---

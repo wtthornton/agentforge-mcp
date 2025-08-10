@@ -1,0 +1,125 @@
+# Standards Compliance - Agent OS Integration
+
+## 🚨 MANDATORY: Standards First Approach
+**ALWAYS** check these standards before making any code changes:
+
+### 📚 Core Standards Reference
+- **Technology Stack**: `.agent-os/standards/tech-stack.md`
+- **Code Style**: `.agent-os/standards/code-style.md`
+- **Best Practices**: `.agent-os/standards/best-practices.md`
+- **Security & Compliance**: `.agent-os/standards/security-compliance.md`
+- **Testing Strategy**: `.agent-os/standards/testing-strategy.md`
+- **CI/CD Strategy**: `.agent-os/standards/ci-cd-strategy.md`
+- **Enforcement**: `.agent-os/standards/enforcement.md`
+- **Feature Scoring**: `.agent-os/standards/feature-scoring.md`
+- **Development Patterns**: `.agent-os/standards/consolidated-development-patterns.md`
+- **Configuration Management**: `.agent-os/standards/configuration-management.md`
+
+### 🎨 Code Style Standards
+- **CSS/TailwindCSS**: `.agent-os/standards/code-style/css-style.md`
+- **HTML**: `.agent-os/standards/code-style/html-style.md`
+- **JavaScript/TypeScript**: `.agent-os/standards/code-style/javascript-style.md`
+- **Java/Spring**: `.agent-os/standards/code-style/java-style.md`
+
+## ⚡ Mandatory Feature Scoring (CRITICAL)
+**ALWAYS** score all features before development using the 4-dimension framework:
+
+### Required Scoring Dimensions
+- **Business Impact (1-10)**: How much does this improve Agent-OS effectiveness?
+- **Developer Productivity (1-10)**: How much faster/better will developers code with this feature?
+- **Implementation Complexity (1-10)**: How difficult is this to build and maintain?
+- **Adoption Likelihood (1-10)**: How likely are developers to actively use this feature?
+
+### Phase Classification
+- **Phase 1**: Developer Productivity ≥ 8/10 OR Combined Score ≥ 32/40
+- **Phase 2**: Developer Productivity ≥ 7/10 OR Combined Score ≥ 28/40
+- **Phase 3+**: All other features requiring executive approval
+
+**ALWAYS** use `.agent-os/templates/feature-scoring-template.md` for documentation.
+
+## ✅ Validation Checklist
+Before any code submission, validate:
+
+1. **Feature Scoring Compliance** - Feature scored using 4-dimension framework
+2. **Technology Stack Compliance** (`tech-stack.md`)
+3. **Code Style Compliance** (`code-style.md` + subdirectories)
+4. **Best Practices Compliance** (`best-practices.md`)
+5. **Security Standards Compliance** (`security-compliance.md`)
+6. **CI/CD Strategy Compliance** (`ci-cd-strategy.md`)
+7. **Testing Strategy Compliance** (`testing-strategy.md`)
+8. **Enforcement Rules Compliance** (`enforcement.md`)
+9. **Lessons Learned Integration** (`.agent-os/lessons-learned/README.md`)
+10. **Development Patterns Compliance** (`consolidated-development-patterns.md`)
+
+## 🔧 Implementation Standards
+
+### Backend (Spring Boot)
+- **Pattern**: Controller → Service → Repository
+- **Java Version**: 21 LTS
+- **Spring Boot**: 3.3+
+- **Testing**: JUnit 5 + Mockito
+- **Documentation**: OpenAPI 3.0
+
+### Frontend (React)
+- **Pattern**: Functional components + hooks
+- **TypeScript**: 5.x
+- **State Management**: TanStack Query 5 + Context API
+- **Styling**: TailwindCSS 3.x (STABLE)
+- **Testing**: Vitest + React Testing Library
+
+### Database
+- **Primary**: PostgreSQL 17 with pgvector
+- **ORM**: JPA/Hibernate (backend), Prisma (frontend)
+- **Migrations**: Flyway or Liquibase
+
+## 🚫 Project Constraints
+- **NO AI suggestion features** - Static analyzer only
+- **Core focus**: logging, reporting, monitoring
+- **Performance**: P95 ≤200ms backend, TTI ≤1.8s frontend
+
+## 📊 Quality Gates
+- **Coverage**: ≥85% branch coverage
+- **Code Quality**: ≤5 TODO items per service
+- **Security**: 0 vulnerabilities, 100% compliance
+- **Performance**: Meets performance targets
+- **Feature Scoring**: 100% features scored before development
+
+## 🔍 Compliance Verification
+**ALWAYS** run after changes:
+```bash
+# Quick compliance check
+node .agent-os/tools/compliance-checker.js
+
+# Detailed compliance check
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Feature scoring validation
+node .agent-os/tools/feature-scoring/feature-scorer.js
+
+# Pattern validation
+node .agent-os/tools/validation-suite.js --patterns
+```
+
+**Required Score**: ≥85%
+
+## 🚀 Quick Start Commands
+```bash
+# Initialize Agent OS
+node .agent-os/scripts/setup.js
+
+# Quick validation
+node .agent-os/scripts/setup.js validate
+
+# Compliance check
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Feature scoring
+node .agent-os/tools/feature-scoring/feature-scorer.js
+
+# Cursor integration
+node .agent-os/tools/cursor/cursor-init.js
+```
+description:
+globs:
+alwaysApply: false
+---

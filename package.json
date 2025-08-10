@@ -1,0 +1,52 @@
+{
+  "name": "agentforge",
+  "version": "1.0.0",
+  "description": "AgentForge - AI-Powered Development Platform with Agent-OS Integration",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend",
+    "infrastructure"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && mvn spring-boot:run",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && mvn clean package",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "cd frontend && npm run test",
+    "test:backend": "cd backend && mvn test",
+    "lint": "npm run lint:frontend && npm run lint:backend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "lint:backend": "cd backend && mvn checkstyle:check",
+    "start": "docker-compose -f infrastructure/docker-compose.yml up -d",
+    "stop": "docker-compose -f infrastructure/docker-compose.yml down",
+    "logs": "docker-compose -f infrastructure/docker-compose.yml logs -f",
+    "compliance": "node .agent-os/tools/full-compliance-check.js",
+    "validate": "npm run compliance && npm run test && npm run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agent-os/agentforge.git"
+  },
+  "keywords": [
+    "agent-os",
+    "ai-development",
+    "spring-boot",
+    "react",
+    "typescript",
+    "postgresql",
+    "observability"
+  ],
+  "author": "Agent-OS Team",
+  "license": "MIT"
+}

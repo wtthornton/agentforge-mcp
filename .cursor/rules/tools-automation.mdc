@@ -1,0 +1,213 @@
+# Tools & Automation - Agent OS Integration
+
+## 🚨 MANDATORY: Tools Integration
+**ALWAYS** leverage Agent OS tools for development, validation, and compliance:
+
+### 🔧 Primary Development Tools
+
+#### 1. Compliance & Validation
+- **Compliance Checker**: `.agent-os/tools/compliance-checker.js` - Primary compliance validation
+- **Validation Suite**: `.agent-os/tools/validation-suite.js` - Comprehensive validation
+- **Refactoring Validator**: `.agent-os/tools/refactoring-validator.js` - Phase-based refactoring validation
+- **Product Validator**: `.agent-os/tools/product-validator.js` - Product standards validation
+
+#### 2. Monitoring & Analytics
+- **Real-time Monitor**: `.agent-os/tools/real-time-monitor.js` - Live project monitoring
+- **Statistical Analysis**: `.agent-os/tools/statistical-analysis.js` - Data analysis and insights
+- **Agent OS Monitor**: `.agent-os/tools/agent-os-monitor.js` - System health monitoring
+- **Enhanced Dashboard**: `.agent-os/tools/enhanced-dashboard.js` - Visual project insights
+
+#### 3. Development Automation
+- **Agent OS CLI**: `.agent-os/tools/agent-os-cli.js` - Primary command interface
+- **Project Initializer**: `.agent-os/tools/project-initialization.js` - Project setup automation
+- **Database Optimizer**: `.agent-os/tools/database-optimizer.js` - Database performance optimization
+- **Cursor Integration**: `.agent-os/tools/cursor/cursor-init.js` - IDE integration
+
+### 📊 Quick Start Commands
+
+#### New Developer Setup
+```bash
+# Interactive setup menu - Start here!
+node .agent-os/scripts/setup.js
+
+# Quick initialization of everything
+node .agent-os/scripts/quick-start.js
+
+# Validate current state
+node .agent-os/scripts/setup.js validate
+```
+
+#### Daily Development
+```bash
+# Quick daily validation
+node .agent-os/scripts/setup.js validate
+
+# Compliance check
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Real-time monitoring
+node .agent-os/tools/real-time-monitor.js
+
+# Dashboard view
+node .agent-os/tools/enhanced-dashboard.js
+```
+
+#### Phase Management
+```bash
+# Validate refactoring for Phase 1
+node .agent-os/tools/refactoring-validator.js --phase=1 --validate
+
+# Check phase completion
+node .agent-os/tools/refactoring-validator.js --phase=1 --check
+
+# Phase transition validation
+node .agent-os/tools/refactoring-validator.js --transition=1-2
+```
+
+## 🎯 Tool-Specific Guidelines
+
+### Compliance Checker Usage
+**ALWAYS** run after any changes:
+```bash
+# Quick check
+node .agent-os/tools/compliance-checker.js
+
+# Detailed analysis
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Specific validation
+node .agent-os/tools/compliance-checker.js --standards=security,code-quality
+
+# Export results
+node .agent-os/tools/compliance-checker.js --export=report.json
+```
+
+### Validation Suite Integration
+```bash
+# Full validation
+node .agent-os/tools/validation-suite.js
+
+# Pattern validation
+node .agent-os/tools/validation-suite.js --patterns
+
+# Standards validation
+node .agent-os/tools/validation-suite.js --standards
+
+# Performance validation
+node .agent-os/tools/validation-suite.js --performance
+```
+
+### Real-time Monitoring
+```bash
+# Start monitoring
+node .agent-os/tools/real-time-monitor.js
+
+# Monitor specific metrics
+node .agent-os/tools/real-time-monitor.js --metrics=compliance,quality,performance
+
+# Export monitoring data
+node .agent-os/tools/real-time-monitor.js --export=metrics.json
+```
+
+## 📋 Tool Integration Checklist
+
+### Pre-Development
+- [ ] Agent OS tools installed and configured
+- [ ] Compliance checker run (baseline established)
+- [ ] Relevant tools identified for task
+- [ ] Tool dependencies verified
+
+### During Development
+- [ ] Tools used consistently throughout development
+- [ ] Real-time monitoring active
+- [ ] Validation run at checkpoints
+- [ ] Tool outputs documented
+
+### Post-Development
+- [ ] Final compliance check run
+- [ ] All tool outputs reviewed
+- [ ] Tool effectiveness documented
+- [ ] Tool improvements identified
+
+## 🔍 Tool Validation
+
+### Tool Health Check
+```bash
+# Check tool health
+node .agent-os/tools/doctor.js
+
+# Validate tool dependencies
+node .agent-os/tools/doctor.cjs
+
+# Tool configuration validation
+node .agent-os/tools/doctor.js --config
+```
+
+### Tool Performance Metrics
+- **Response Time**: Tools respond within 5 seconds
+- **Accuracy**: 95%+ validation accuracy
+- **Coverage**: 100% of relevant standards covered
+- **Reliability**: 99%+ uptime for critical tools
+
+## 📈 Success Metrics
+- **Tool Adoption**: 90%+ of applicable tools used
+- **Tool Effectiveness**: 95%+ of issues detected by tools
+- **Automation Coverage**: 80%+ of repetitive tasks automated
+- **Tool Integration**: 100% of tools properly integrated
+
+## 🚫 Project Constraints
+- **NO AI suggestion features** - Static analyzer only
+- **Core focus**: logging, reporting, monitoring
+- **Performance**: P95 ≤200ms backend, TTI ≤1.8s frontend
+
+## ✅ Quality Gates
+- **Tool Usage**: All applicable tools used appropriately
+- **Tool Validation**: All tools validated before use
+- **Tool Integration**: Tools properly integrated into workflow
+- **Tool Documentation**: Complete tool usage documented
+
+## 🔧 Advanced Tool Features
+
+### Statistical Analysis
+```bash
+# Run statistical analysis
+node .agent-os/tools/statistical-analysis.js
+
+# Analyze specific metrics
+node .agent-os/tools/statistical-analysis.js --metrics=compliance,quality
+
+# Generate insights report
+node .agent-os/tools/statistical-analysis.js --report=insights.md
+```
+
+### Database Optimization
+```bash
+# Optimize database
+node .agent-os/tools/database-optimizer.js
+
+# Performance analysis
+node .agent-os/tools/database-optimizer.js --analyze
+
+# Optimization recommendations
+node .agent-os/tools/database-optimizer.js --recommendations
+```
+
+### Cursor Integration
+```bash
+# Initialize cursor integration
+node .agent-os/tools/cursor/cursor-init.js
+
+# Optimize cursor rules
+node .agent-os/tools/cursor/cursor-rule-optimizer.js
+
+# Cursor analytics
+node .agent-os/tools/cursor/cursor-analytics.js
+```
+description:
+globs:
+alwaysApply: false
+---
+description:
+globs:
+alwaysApply: false
+---

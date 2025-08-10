@@ -1,0 +1,129 @@
+# Development Workflow - Agent OS Integration
+
+## 🚨 MANDATORY: Structured Development Process
+**ALWAYS** follow this workflow for any development task:
+
+### 📋 Pre-Development Checklist
+1. **Feature Scoring** - Score feature using 4-dimension framework (MANDATORY)
+2. **Load Context** - Load relevant spec, tasks.md, and standards
+3. **Check Compliance** - Run compliance checker before starting
+4. **Review Standards** - Check relevant standards files
+5. **Review Lessons Learned** - Check relevant lessons learned
+6. **Plan Implementation** - Break down into small, testable features
+
+### 🔄 Development Workflow
+1. **Execute Tasks** - Follow Controller → Service → Repository pattern
+2. **Update Progress** - Immediately update tasks.md after each subtask
+3. **Run Tests** - Ensure all tests pass before proceeding
+4. **Validate Compliance** - Run compliance checker after completion
+5. **Capture Lessons Learned** - Use `.agent-os/templates/lessons-learned-template.md`
+6. **Apply Patterns** - Follow consolidated development patterns
+
+### ✅ Post-Development Validation
+1. **Compliance Check** - Run `node .agent-os/tools/compliance-checker.js --detailed`
+2. **Test Coverage** - Ensure ≥85% coverage maintained
+3. **Code Quality** - Verify no new violations
+4. **Documentation** - Update relevant documentation
+5. **Lessons Learned** - Document insights and patterns
+
+## ⚡ Feature Scoring Integration (CRITICAL)
+
+### Required Scoring Before Development
+**ALWAYS** score features using the 4-dimension framework:
+- **Business Impact (1-10)**: How much does this improve Agent-OS effectiveness?
+- **Developer Productivity (1-10)**: How much faster/better will developers code with this feature?
+- **Implementation Complexity (1-10)**: How difficult is this to build and maintain?
+- **Adoption Likelihood (1-10)**: How likely are developers to actively use this feature?
+
+### Phase Classification
+- **Phase 1**: Developer Productivity ≥ 8/10 OR Combined Score ≥ 32/40
+- **Phase 2**: Developer Productivity ≥ 7/10 OR Combined Score ≥ 28/40
+- **Phase 3+**: All other features requiring executive approval
+
+**ALWAYS** use `.agent-os/templates/feature-scoring-template.md` for documentation.
+
+## 🏗️ Architecture Patterns
+
+### Backend Development
+- **Controller Layer**: Handle HTTP requests, validation, response formatting
+- **Service Layer**: Business logic, orchestration, transaction management
+- **Repository Layer**: Data access, persistence, caching
+- **Exception Handling**: Global exception handler with proper error codes
+- **Logging**: Structured logging with correlation IDs
+
+### Frontend Development
+- **Component Structure**: Atomic design principles
+- **State Management**: TanStack Query for server state, Context for UI state
+- **Error Boundaries**: Graceful error handling and user feedback
+- **Performance**: Lazy loading, code splitting, memoization
+- **Accessibility**: WCAG 2.1 AA compliance
+
+## 📝 Task Tracking Standards
+**ALWAYS** update tasks.md file immediately after completing any subtask:
+
+- **Immediate Updates**: Mark completed subtasks with `[x]` immediately
+- **Progress Notes**: Add detailed notes explaining what was accomplished
+- **Compliance Status**: Document compliance status in progress notes
+- **Next Steps**: Clearly define next priorities
+- **Lessons Learned**: Document insights and patterns discovered
+
+## 🧪 Testing Requirements
+- **Unit Tests**: Comprehensive coverage for all services
+- **Integration Tests**: API endpoint validation
+- **E2E Tests**: Critical user journey validation
+- **Performance Tests**: Load testing for critical endpoints
+- **Security Tests**: Vulnerability scanning and penetration testing
+
+## 🔒 Security Implementation
+- **Authentication**: JWT with refresh token rotation
+- **Authorization**: Role-based access control (RBAC)
+- **Input Validation**: Comprehensive input sanitization
+- **Output Encoding**: Prevent XSS and injection attacks
+- **Secret Management**: Environment variables, no hardcoded secrets
+
+## 📊 Quality Metrics
+- **Code Coverage**: ≥85% branch coverage
+- **Performance**: P95 ≤200ms backend, TTI ≤1.8s frontend
+- **Security**: 0 vulnerabilities, 100% compliance
+- **Maintainability**: ≤5 TODO items per service
+- **Documentation**: 100% API documentation coverage
+- **Feature Scoring**: 100% features scored before development
+
+## 🚫 Project Constraints
+- **NO AI suggestion features** - Keep AgentForge as static analyzer only
+- **Focus on core components**: logging, reporting, monitoring
+- **Static analysis only** - No dynamic AI features
+
+## 🔧 Tools Integration
+
+### Development Tools
+- **Compliance Checker**: `.agent-os/tools/compliance-checker.js`
+- **Validation Suite**: `.agent-os/tools/validation-suite.js`
+- **Refactoring Validator**: `.agent-os/tools/refactoring-validator.js`
+- **Real-time Monitor**: `.agent-os/tools/real-time-monitor.js`
+
+### Quick Commands
+```bash
+# Compliance check
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Feature scoring
+node .agent-os/tools/feature-scoring/feature-scorer.js
+
+# Pattern validation
+node .agent-os/tools/validation-suite.js --patterns
+
+# Real-time monitoring
+node .agent-os/tools/real-time-monitor.js
+```
+
+## 📈 Success Metrics
+- **Feature Scoring Compliance**: 100% features scored before development
+- **Phase Classification Accuracy**: 90%+ features implemented in correct phase
+- **Compliance Score**: ≥85% maintained throughout development
+- **Lessons Learned Capture**: 100% significant tasks documented
+- **Pattern Adoption**: 90%+ of applicable patterns used
+description:
+globs:
+alwaysApply: false
+---

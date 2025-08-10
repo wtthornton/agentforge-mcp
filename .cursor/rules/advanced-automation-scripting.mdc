@@ -1,0 +1,289 @@
+# Advanced Automation & Scripting
+
+## Overview
+This rule provides comprehensive integration with .agent-os advanced automation, scripting, and production deployment tools for enterprise-grade development workflows.
+
+## 🎯 Advanced Automation Tools
+
+### **Production Deployment Automation**
+```bash
+# Automated production deployment
+node .agent-os/scripts/production-deployment.js
+
+# Features:
+# - Multi-environment deployment
+# - Automated testing and validation
+# - Rollback capabilities
+# - Health check integration
+# - Performance monitoring
+```
+
+### **Compliance Automation**
+```bash
+# Automated compliance management
+node .agent-os/scripts/compliance-automation.js
+
+# Capabilities:
+# - Automated compliance checks
+# - Scheduled validation runs
+# - Violation notification system
+# - Compliance reporting
+# - Quality gate automation
+```
+
+### **Contract & Dependency Validation**
+```bash
+# Validate contracts and dependencies
+node .agent-os/scripts/validate-contracts.ts
+node .agent-os/scripts/validate-dependencies.ts
+
+# Validation includes:
+# - API contract validation
+# - Dependency compatibility
+# - Version conflict detection
+# - Security vulnerability scanning
+# - License compliance
+```
+
+## 🚀 Advanced Scripting Capabilities
+
+### **Setup & Initialization Scripts**
+```bash
+# Interactive setup with menu system
+node .agent-os/scripts/setup.js
+
+# Quick start automation
+node .agent-os/scripts/quick-start.js
+
+# Real-time integration setup
+node .agent-os/scripts/start-real-time-integration.js
+
+# Mock validation and testing
+node .agent-os/scripts/validate-mocks.ts
+```
+
+### **Deployment & Validation Scripts**
+```bash
+# Deployment validation
+node .agent-os/scripts/validate-deployment.sh
+
+# Multi-platform compatibility
+# Shell command validation
+# Path separator handling
+# Environment-specific configurations
+```
+
+## 🔧 Enterprise Automation Features
+
+### **Multi-Environment Management**
+```bash
+# Environment-specific configurations
+# Automated environment switching
+# Configuration validation per environment
+# Environment-specific compliance rules
+# Automated testing per environment
+```
+
+### **Continuous Integration Automation**
+```bash
+# Automated build validation
+# Test execution automation
+# Quality gate automation
+# Compliance check automation
+# Performance testing automation
+```
+
+### **Monitoring & Alerting Automation**
+```bash
+# Automated health checks
+# Performance monitoring automation
+# Alert generation and routing
+# Escalation procedures
+# Incident response automation
+```
+
+## 📊 Advanced Analytics & Reporting
+
+### **Statistical Analysis Engine**
+```bash
+# Comprehensive statistical analysis
+node .agent-os/tools/statistical-analysis.js
+
+# Analysis capabilities:
+# - Development velocity metrics
+# - Code quality trends
+# - Performance benchmarks
+# - Compliance score history
+# - Pattern usage statistics
+# - Error rate analysis
+```
+
+### **Database Optimization Automation**
+```bash
+# Automated database optimization
+node .agent-os/tools/database-optimizer.js
+
+# Optimization features:
+# - Query performance analysis
+# - Index optimization
+# - Connection pool tuning
+# - Performance monitoring
+# - Automated optimization suggestions
+```
+
+### **Advanced Metrics API**
+```bash
+# Simple metrics API
+node .agent-os/tools/simple-metrics-api.js
+
+# API capabilities:
+# - Real-time metrics collection
+# - Custom metric definitions
+# - Performance benchmarking
+# - Trend analysis
+# - Export capabilities
+```
+
+## 🔒 Security & Compliance Automation
+
+### **Automated Security Scanning**
+```bash
+# Vulnerability scanning automation
+# Security compliance checking
+# License compliance validation
+# Dependency security analysis
+# Automated security reporting
+```
+
+### **Compliance Automation Workflows**
+```bash
+# Automated compliance checks
+# Quality gate automation
+# Standards validation automation
+# Policy enforcement automation
+# Compliance reporting automation
+```
+
+## 🎯 Production Deployment Features
+
+### **Deployment Validation**
+```bash
+# Pre-deployment validation
+# Health check automation
+# Performance validation
+# Security validation
+# Rollback automation
+```
+
+### **Environment Management**
+```bash
+# Environment provisioning
+# Configuration management
+# Secret management
+# Environment-specific testing
+# Automated environment cleanup
+```
+
+## 📋 Automation Checklist
+
+### **Before Automation Setup**
+- [ ] Define automation requirements
+- [ ] Identify manual processes to automate
+- [ ] Set up monitoring and alerting
+- [ ] Configure rollback procedures
+- [ ] Test automation in staging
+
+### **During Automation Development**
+- [ ] Follow automation best practices
+- [ ] Implement proper error handling
+- [ ] Add comprehensive logging
+- [ ] Include validation steps
+- [ ] Test automation thoroughly
+
+### **After Automation Deployment**
+- [ ] Monitor automation performance
+- [ ] Validate automation results
+- [ ] Update documentation
+- [ ] Train team on automation
+- [ ] Plan next automation phase
+
+## 🚨 Critical Automation Points
+
+### **Automation Safety**
+- **Rollback Procedures**: Always available
+- **Validation Steps**: Multiple validation points
+- **Error Handling**: Comprehensive error management
+- **Monitoring**: Real-time automation monitoring
+
+### **Quality Assurance**
+- **Testing**: Thorough automation testing
+- **Validation**: Multiple validation layers
+- **Documentation**: Complete automation documentation
+- **Training**: Team automation training
+
+## 🔗 Quick Reference Commands
+
+```bash
+# Production Deployment
+node .agent-os/scripts/production-deployment.js
+node .agent-os/scripts/validate-deployment.sh
+
+# Compliance Automation
+node .agent-os/scripts/compliance-automation.js
+node .agent-os/tools/compliance-checker.js --detailed
+
+# Validation & Testing
+node .agent-os/scripts/validate-contracts.ts
+node .agent-os/scripts/validate-dependencies.ts
+node .agent-os/scripts/validate-mocks.ts
+
+# Setup & Initialization
+node .agent-os/scripts/setup.js
+node .agent-os/scripts/quick-start.js
+node .agent-os/scripts/start-real-time-integration.js
+
+# Advanced Analytics
+node .agent-os/tools/statistical-analysis.js
+node .agent-os/tools/simple-metrics-api.js
+node .agent-os/tools/database-optimizer.js
+```
+
+## 📖 Integration with Other Tools
+
+### **Compliance Integration**
+- **Automated compliance checking**
+- **Quality gate automation**
+- **Violation notification**
+- **Compliance reporting**
+
+### **Monitoring Integration**
+- **Real-time monitoring**
+- **Performance tracking**
+- **Health check automation**
+- **Alert generation**
+
+### **Development Integration**
+- **Automated testing**
+- **Build validation**
+- **Deployment automation**
+- **Quality assurance**
+
+## 🎯 Success Metrics
+
+### **Automation Effectiveness**
+- **Process Automation**: >80% of manual processes
+- **Error Reduction**: >90% reduction in manual errors
+- **Deployment Speed**: >3x faster deployments
+- **Compliance Automation**: 100% automated checks
+
+### **Quality Improvements**
+- **Deployment Success Rate**: >99%
+- **Automation Reliability**: >99.5%
+- **Error Detection Time**: <5 minutes
+- **Recovery Time**: <10 minutes
+
+This rule ensures comprehensive automation and scripting integration for enterprise-grade development workflows and production deployments.
+description:
+globs:
+alwaysApply: false
+---
