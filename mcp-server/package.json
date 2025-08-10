@@ -1,0 +1,57 @@
+{
+  "name": "agentforge-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP Server for AgentForge static analysis and project setup",
+  "main": "dist/server.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "clean": "rimraf dist logs/*.log",
+    "setup": "npm run clean && npm run build",
+    "db:init": "ts-node src/database/init.ts",
+    "db:validate": "ts-node src/database/init.ts validate",
+    "db:reset": "npm run clean && npm run db:init"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "agentforge",
+    "static-analysis",
+    "project-setup"
+  ],
+  "author": "AgentForge Team",
+  "license": "MIT",
+  "dependencies": {
+    "@types/pg": "^8.15.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "pg": "^8.16.3",
+    "winston": "^3.17.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jest": "^30.0.0",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.0",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.4.1",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  }
+}
