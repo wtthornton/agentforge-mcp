@@ -1,4 +1,20 @@
-# AgentForge - Agent OS Integration Rules
+# AgentForge Development Rules
+
+## 🚨 **CRITICAL: Quick Context Gathering (MANDATORY)**
+
+**BEFORE** starting any development work, you **MUST** run:
+```bash
+node .agent-os/tools/quick-context-gatherer.js
+```
+
+This tool provides **full project context in <100ms** and is **REQUIRED** for:
+- Understanding current implementation status
+- Identifying missing components
+- Compliance status overview
+- Project structure analysis
+- Recent changes tracking
+
+**VIOLATION**: Any development without running this tool first will result in immediate compliance failure.
 
 ## 🎯 Project Overview
 AgentForge is a static analyzer and project setup/migration utility that follows Agent OS development standards.
@@ -24,12 +40,6 @@ AgentForge is a static analyzer and project setup/migration utility that follows
 - **Context7 Rules**: `.cursor/rules/context7-integration.mdc` - **MANDATORY** for all technology validation
 - **Context7 Priority**: **ALWAYS** use Context7 first for library documentation and best practices
 - **Context7 Fallback**: Only use Agent OS standards when Context7 doesn't cover specific requirements
-
-### Code Style Standards
-- **CSS/TailwindCSS**: `.agent-os/standards/code-style/css-style.md`
-- **HTML**: `.agent-os/standards/code-style/html-style.md`
-- **JavaScript/TypeScript**: `.agent-os/standards/code-style/javascript-style.md`
-- **Java/Spring**: `.agent-os/standards/code-style/java-style.md`
 
 ## 🚫 Project Constraints (CRITICAL)
 - **NO AI suggestion features** - Keep AgentForge as static analyzer only
@@ -97,9 +107,10 @@ node .agent-os/tools/compliance-checker.js --detailed
 4. **Lessons Learned Capture** - Use `.agent-os/templates/lessons-learned-template.md`
 5. **Automatic Compliance Checking** - Run after every subtask completion
 6. **Context7 Compliance** - **MANDATORY** - All implementations must follow Context7 best practices
+7. **Quick Context Gathering** - **MANDATORY** - Always start with full project context
 
 ## 📋 Development Workflow
-1. **Before coding**: Check relevant standards files, **validate against Context7**, and run compliance checker
+1. **Before coding**: Run quick context gatherer, check relevant standards files, **validate against Context7**, and run compliance checker
 2. **Feature Planning**: Score features using the 4-dimension framework, **research Context7 best practices**
 3. **During development**: Follow established patterns, **reference Context7 documentation**, and update tasks.md immediately
 4. **After changes**: Run compliance checker, **verify Context7 compliance**, and capture lessons learned
@@ -108,6 +119,7 @@ node .agent-os/tools/compliance-checker.js --detailed
 ## 🔧 Tools & Utilities Integration
 
 ### Primary Development Tools
+- **Quick Context Gatherer**: `.agent-os/tools/quick-context-gatherer.js` - **MANDATORY** for full project context
 - **Compliance Checker**: `.agent-os/tools/compliance-checker.js` - Primary compliance validation
 - **Agent OS CLI**: `.agent-os/tools/agent-os-cli.js` - Command-line interface
 - **Validation Suite**: `.agent-os/tools/validation-suite.js` - Comprehensive validation
@@ -176,6 +188,7 @@ node .agent-os/tools/compliance-checker.js --detailed
 - **Security**: 0 vulnerabilities, 100% compliance
 - **Architecture**: Controller → Service → Repository pattern enforced
 - **Context7 Compliance**: **100%** - All technology choices validated against Context7, all implementations follow Context7 best practices
+- **Quick Context Compliance**: **100%** - All development sessions start with full project context
 
 ## 🚀 Quick Start Commands
 
@@ -191,22 +204,15 @@ node .agent-os/scripts/quick-start.js
 node .agent-os/scripts/setup.js validate
 ```
 
-### Daily Development
+### Daily Development (MANDATORY WORKFLOW)
 ```bash
-# Quick daily validation
-node .agent-os/scripts/setup.js validate
+# 1. ALWAYS start here (MANDATORY)
+node .agent-os/tools/quick-context-gatherer.js
 
-# Context7 validation (MANDATORY)
-# Use mcp_Context7_resolve-library-id and mcp_Context7_get-library-docs for technology validation
+# 2. Check compliance if needed
+node .agent-os/tools/compliance-checker.js --summary
 
-# Compliance check
-node .agent-os/tools/compliance-checker.js --detailed
-
-# Real-time monitoring
-node .agent-os/tools/real-time-monitor.js
-
-# Dashboard view
-node .agent-os/tools/enhanced-dashboard.js
+# 3. Ready to develop with full context!
 ```
 
 ### Feature Development
@@ -257,6 +263,7 @@ node .agent-os/tools/validation-suite.js
 - **Comprehensive Documentation**: All public APIs documented
 - **Systematic Refactoring**: Refactoring after each phase completion
 - **Feature Scoring Compliance**: 100% features scored before development
+- **Quick Context Compliance**: 100% development sessions start with full context
 
 ## 🔄 Continuous Improvement
 - **Weekly**: Run comprehensive compliance checks
@@ -286,3 +293,11 @@ node .agent-os/tools/validation-suite.js
 - **Reporting**: Code quality metrics and compliance reporting
 - **Monitoring**: System health, performance, and resource usage
 - **Logging**: Comprehensive development and runtime logging
+
+---
+
+**CRITICAL REMINDER**: **ALWAYS** start with `node .agent-os/tools/quick-context-gatherer.js` for full project context in <100ms!
+description:
+globs:
+alwaysApply: false
+---

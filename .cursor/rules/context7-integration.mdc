@@ -1,0 +1,224 @@
+# Context7 Integration Rules for AgentForge
+
+## 🎯 Context7 Priority Hierarchy
+
+### Primary Source: Context7
+**ALWAYS** use Context7 first for:
+- Library documentation and API references
+- Code examples and best practices
+- Version-specific information
+- Official documentation from library maintainers
+- Current patterns and recommendations
+
+### Fallback Source: Agent OS
+**ONLY** use Agent OS standards when:
+- Context7 doesn't have documentation for the specific library
+- Project-specific patterns not covered by Context7
+- Custom implementation requirements
+- Agent OS framework-specific utilities
+
+## 🔧 Context7 MCP Tools Integration
+
+### Available Tools
+The project has access to two main Context7 MCP tools:
+1. **`mcp_Context7_resolve-library-id`** - Find Context7-compatible library IDs
+2. **`mcp_Context7_get-library-docs`** - Fetch real-time documentation
+
+### Mandatory Usage Pattern
+
+#### Before Implementation
+**ALWAYS** validate technology choices against Context7:
+```bash
+# 1. Resolve library ID
+mcp_Context7_resolve-library-id("Spring Boot")
+
+# 2. Get current documentation
+mcp_Context7_get-library-docs("/spring-projects/spring-boot", topic="REST controllers", tokens=5000)
+```
+
+#### During Development
+**ALWAYS** reference Context7 for current patterns:
+```bash
+# Get latest API patterns
+mcp_Context7_get-library-docs("/reactjs/react.dev", topic="functional components")
+
+# Verify best practices
+mcp_Context7_get-library-docs("/microsoft/typescript", topic="interfaces")
+```
+
+## 📚 Technology Stack Context7 Mapping
+
+### Frontend Technologies
+| Technology | Context7 ID | Usage Pattern |
+|------------|-------------|---------------|
+| **React 19** | `/reactjs/react.dev` | `mcp_Context7_get-library-docs("/reactjs/react.dev", topic="hooks")` |
+| **TypeScript 5** | `/microsoft/typescript` | `mcp_Context7_get-library-docs("/microsoft/typescript", topic="types")` |
+| **TailwindCSS 4** | `/tailwindlabs/tailwindcss.com` | `mcp_Context7_get-library-docs("/tailwindlabs/tailwindcss.com", topic="utilities")` |
+| **Vite 7** | `/vitejs/vite` | `mcp_Context7_get-library-docs("/vitejs/vite", topic="configuration")` |
+| **TanStack Query** | `/tanstack/query` | `mcp_Context7_get-library-docs("/tanstack/query", topic="mutations")` |
+
+### Backend Technologies
+| Technology | Context7 ID | Usage Pattern |
+|------------|-------------|---------------|
+| **Spring Boot 3.3+** | `/spring-projects/spring-boot` | `mcp_Context7_get-library-docs("/spring-projects/spring-boot", topic="REST")` |
+| **Java 21 LTS** | `/oracle/java` | `mcp_Context7_get-library-docs("/oracle/java", topic="features")` |
+| **PostgreSQL 17** | `/postgresql/postgresql` | `mcp_Context7_get-library-docs("/postgresql/postgresql", topic="pgvector")` |
+| **Spring Security** | `/spring-projects/spring-security` | `mcp_Context7_get-library-docs("/spring-projects/spring-security", topic="OAuth2")` |
+
+### Testing Technologies
+| Technology | Context7 ID | Usage Pattern |
+|------------|-------------|---------------|
+| **Playwright** | `/microsoft/playwright` | `mcp_Context7_get-library-docs("/microsoft/playwright", topic="visual testing")` |
+| **Vitest** | `/vitest-dev/vitest` | `mcp_Context7_get-library-docs("/vitest-dev/vitest", topic="mocking")` |
+| **React Testing Library** | `/testing-library/react-testing-library` | `mcp_Context7_get-library-docs("/testing-library/react-testing-library", topic="component testing")` |
+
+## 🚀 Development Workflow with Context7
+
+### 1. Technology Selection Phase
+**ALWAYS** validate before choosing:
+```bash
+# Check if technology is supported
+mcp_Context7_resolve-library-id("Technology Name")
+
+# Verify current version support
+mcp_Context7_get-library-docs("/org/project", topic="version compatibility")
+```
+
+### 2. Implementation Planning Phase
+**ALWAYS** research current patterns:
+```bash
+# Get latest implementation patterns
+mcp_Context7_get-library-docs("/org/project", topic="implementation")
+
+# Check security best practices
+mcp_Context7_get-library-docs("/org/project", topic="security")
+```
+
+### 3. Development Phase
+**ALWAYS** reference during coding:
+```bash
+# Get API signatures
+mcp_Context7_get-library-docs("/org/project", topic="API reference")
+
+# Check error handling patterns
+mcp_Context7_get-library-docs("/org/project", topic="error handling")
+```
+
+### 4. Code Review Phase
+**ALWAYS** validate against Context7:
+```bash
+# Verify implementation follows current best practices
+mcp_Context7_get-library-docs("/org/project", topic="best practices")
+
+# Check for deprecated patterns
+mcp_Context7_get-library-docs("/org/project", topic="deprecation")
+```
+
+## ✅ Context7 Compliance Checklist
+
+### Pre-Implementation
+- [ ] Technology validated against Context7 documentation
+- [ ] Current version compatibility confirmed
+- [ ] Best practices researched and documented
+- [ ] Security patterns verified
+- [ ] Performance recommendations reviewed
+
+### During Implementation
+- [ ] Context7 patterns followed consistently
+- [ ] API references checked against current documentation
+- [ ] Error handling follows Context7 recommendations
+- [ ] Security best practices implemented
+- [ ] Performance optimizations applied
+
+### Post-Implementation
+- [ ] Code reviewed against Context7 patterns
+- [ ] No deprecated patterns used
+- [ ] Security compliance verified
+- [ ] Performance targets met
+- [ ] Documentation updated with Context7 references
+
+## 🔍 Context7 Query Best Practices
+
+### Effective Query Patterns
+✅ **Good Queries**:
+```bash
+# Specific topics with reasonable token limits
+mcp_Context7_get-library-docs("/reactjs/react.dev", topic="useEffect cleanup", tokens=3000)
+
+# Technology-specific features
+mcp_Context7_get-library-docs("/spring-projects/spring-boot", topic="WebSocket configuration", tokens=4000)
+```
+
+❌ **Avoid These**:
+```bash
+# Too broad topics
+mcp_Context7_get-library-docs("/reactjs/react.dev", topic="everything", tokens=10000)
+
+# Unclear topics
+mcp_Context7_get-library-docs("/spring-projects/spring-boot", topic="stuff", tokens=5000)
+```
+
+### Query Optimization
+- **Token Limits**: Use 3000-5000 tokens for most queries
+- **Topic Specificity**: Be specific about what you need
+- **Library Selection**: Choose the most relevant library for your query
+- **Version Awareness**: Consider version-specific features when querying
+
+## 🚫 Context7 Usage Constraints
+
+### Forbidden Patterns
+- **NO** hardcoded library IDs without Context7 validation
+- **NO** outdated patterns without checking current Context7 documentation
+- **NO** implementation without Context7 best practice verification
+- **NO** security patterns without Context7 security guidelines
+
+### Required Patterns
+- **ALWAYS** validate technology choices with Context7
+- **ALWAYS** check current best practices before implementation
+- **ALWAYS** verify security patterns with Context7
+- **ALWAYS** reference Context7 during code review
+
+## 📊 Context7 Integration Metrics
+
+### Success Indicators
+- **100%** technology choices validated against Context7
+- **100%** implementations follow Context7 best practices
+- **100%** security patterns verified with Context7
+- **100%** code reviews include Context7 validation
+
+### Quality Gates
+- **Pre-Implementation**: Context7 validation completed
+- **During Development**: Context7 patterns followed
+- **Code Review**: Context7 compliance verified
+- **Deployment**: Context7 standards maintained
+
+## 🔄 Continuous Improvement
+
+### Weekly Reviews
+- Check for new Context7 library additions
+- Review Context7 pattern updates
+- Validate existing implementations against new Context7 patterns
+- Update technology mappings as needed
+
+### Monthly Updates
+- Review Context7 integration effectiveness
+- Update technology stack mappings
+- Validate Context7 coverage completeness
+- Identify Context7 integration gaps
+
+### Quarterly Assessments
+- Comprehensive Context7 integration review
+- Technology stack validation against Context7
+- Context7 integration strategy optimization
+- Team Context7 adoption metrics review
+
+---
+
+**Created**: 2025-01-27  
+**Status**: Active  
+**Coverage**: 100% of core technologies mapped  
+**Next Review**: Weekly during active development
+description:
+globs:
+alwaysApply: false
+---

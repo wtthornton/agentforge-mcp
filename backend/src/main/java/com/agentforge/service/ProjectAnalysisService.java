@@ -1,10 +1,17 @@
 package com.agentforge.service;
 
+import com.agentforge.entity.Analysis;
+import com.agentforge.entity.Project;
+import com.agentforge.entity.User;
+import com.agentforge.repository.AnalysisRepository;
+import com.agentforge.repository.ProjectRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -13,9 +20,12 @@ import java.util.regex.Pattern;
  * Analyzes project structure, code quality, and provides insights.
  */
 @Service
+@Transactional
 public class ProjectAnalysisService {
 
     private final LoggingService loggingService;
+    private final ProjectRepository projectRepository;
+    private final AnalysisRepository analysisRepository;
     
     // File extensions to analyze
     private static final Set<String> CODE_EXTENSIONS = Set.of(
@@ -30,15 +40,23 @@ public class ProjectAnalysisService {
         "md", "txt", "rst", "adoc", "html", "css", "scss"
     );
 
-    public ProjectAnalysisService(LoggingService loggingService) {
+    public ProjectAnalysisService(LoggingService loggingService, 
+                                ProjectRepository projectRepository,
+                                AnalysisRepository analysisRepository) {
         this.loggingService = loggingService;
+        this.projectRepository = projectRepository;
+        this.analysisRepository = analysisRepository;
     }
 
     /**
      * Analyze project structure and provide insights
      */
-    public Map<String, Object> analyzeProject(String projectPath) {
-        Map<String, Object> analysis = new HashMap<>();
+    public Analysis analyzeProject(String projectPath, User user, Analysis.AnalysisType type) {
+        Analysis analysis = new Analysis();
+        analysis.setProject(null); // Will be set after project creation/retrieval
+        analysis.setUser(user);
+        analysis.setType(type);
+        analysis.startAnalysis();
         
         try {
             Path path = Paths.get(projectPath);
@@ -46,54 +64,149 @@ public class ProjectAnalysisService {
                 throw new IllegalArgumentException("Project path does not exist: " + projectPath);
             }
             
+            // Create or retrieve project
+            Project project = findOrCreateProject(projectPath, user);
+            analysis.setProject(project);
+            
             // Basic project information
-            analysis.put("projectPath", projectPath);
-            analysis.put("analyzedAt", new Date());
+            Map<String, Object> analysisData = new HashMap<>();
+            analysisData.put("projectPath", projectPath);
+            analysisData.put("analyzedAt", LocalDateTime.now());
             
             // File structure analysis
             Map<String, Object> fileStructure = analyzeFileStructure(path);
-            analysis.put("fileStructure", fileStructure);
+            analysisData.put("fileStructure", fileStructure);
             
             // Technology stack detection
             Map<String, Object> techStack = detectTechnologyStack(path);
-            analysis.put("technologyStack", techStack);
+            analysisData.put("technologyStack", techStack);
             
             // Code quality indicators
             Map<String, Object> codeQuality = analyzeCodeQuality(path);
-            analysis.put("codeQuality", codeQuality);
+            analysisData.put("codeQuality", codeQuality);
             
             // Project complexity metrics
             Map<String, Object> complexity = analyzeProjectComplexity(path);
-            analysis.put("complexity", complexity);
+            analysisData.put("complexity", complexity);
             
             // Standards compliance indicators
             Map<String, Object> standards = analyzeStandardsCompliance(path);
-            analysis.put("standards", standards);
+            analysisData.put("standards", standards);
             
             // Generate insights
-            Map<String, Object> insights = generateProjectInsights(analysis);
-            analysis.put("insights", insights);
+            Map<String, Object> insights = generateProjectInsights(analysisData);
+            analysisData.put("insights", insights);
+            
+            // Update project with analysis results
+            updateProjectWithAnalysis(project, analysisData);
+            
+            // Set analysis metrics
+            setAnalysisMetrics(analysis, analysisData);
+            
+            // Complete analysis
+            analysis.completeAnalysis();
+            
+            // Save analysis to database
+            analysis = analysisRepository.save(analysis);
             
             // Log analysis completion
             Map<String, Object> context = new HashMap<>();
             context.put("projectPath", projectPath);
+            context.put("analysisId", analysis.getId());
             context.put("totalFiles", fileStructure.get("totalFiles"));
             context.put("codeFiles", fileStructure.get("codeFiles"));
             
-            loggingService.logInfo("ANALYSIS", "PROJECT", "Project analysis completed", context);
+            loggingService.logInfo("ANALYSIS", "PROJECT", "Project analysis completed successfully", context);
             
         } catch (Exception e) {
+            analysis.failAnalysis(e.getMessage());
+            analysis = analysisRepository.save(analysis);
+            
             Map<String, Object> context = new HashMap<>();
             context.put("projectPath", projectPath);
             context.put("error", e.getMessage());
             
             loggingService.logError("ANALYSIS", "PROJECT", "Project analysis failed", context, e);
-            
-            analysis.put("error", e.getMessage());
-            analysis.put("status", "FAILED");
         }
         
         return analysis;
+    }
+
+    /**
+     * Find existing project or create new one
+     */
+    private Project findOrCreateProject(String projectPath, User user) {
+        return projectRepository.findByProjectPath(projectPath)
+                .orElseGet(() -> {
+                    Project newProject = new Project();
+                    newProject.setName(Paths.get(projectPath).getFileName().toString());
+                    newProject.setProjectPath(projectPath);
+                    newProject.setOwner(user);
+                    newProject.setDescription("Auto-created project for analysis");
+                    newProject.setStatus(Project.ProjectStatus.ACTIVE);
+                    newProject.setTechnologyStack("Unknown");
+                    newProject.setLinesOfCode(0L);
+                    newProject.setLastAnalysisDate(LocalDateTime.now());
+                    
+                    return projectRepository.save(newProject);
+                });
+    }
+
+    /**
+     * Update project with analysis results
+     */
+    private void updateProjectWithAnalysis(Project project, Map<String, Object> analysisData) {
+        Map<String, Object> techStack = (Map<String, Object>) analysisData.get("technologyStack");
+        Map<String, Object> fileStructure = (Map<String, Object>) analysisData.get("fileStructure");
+        
+        // Update technology stack
+        List<String> technologies = (List<String>) techStack.get("detectedTechnologies");
+        if (technologies != null && !technologies.isEmpty()) {
+            project.setTechnologyStack(String.join(", ", technologies));
+        }
+        
+        // Update lines of code
+        Integer codeFiles = (Integer) fileStructure.get("codeFiles");
+        if (codeFiles != null) {
+            project.setLinesOfCode(codeFiles.longValue());
+        }
+        
+        // Update last analysis date
+        project.updateLastAnalysisDate();
+        
+        projectRepository.save(project);
+    }
+
+    /**
+     * Set analysis metrics from analysis data
+     */
+    private void setAnalysisMetrics(Analysis analysis, Map<String, Object> analysisData) {
+        Map<String, Object> fileStructure = (Map<String, Object>) analysisData.get("fileStructure");
+        Map<String, Object> standards = (Map<String, Object>) analysisData.get("standards");
+        Map<String, Object> complexity = (Map<String, Object>) analysisData.get("complexity");
+        
+        // Set file counts
+        Integer totalFiles = (Integer) fileStructure.get("totalFiles");
+        Integer codeFiles = (Integer) fileStructure.get("codeFiles");
+        if (totalFiles != null) analysis.setFilesAnalyzed(totalFiles.longValue());
+        if (codeFiles != null) analysis.setLinesAnalyzed(codeFiles.longValue());
+        
+        // Set compliance score
+        Integer complianceScore = (Integer) standards.get("complianceScore");
+        if (complianceScore != null) {
+            analysis.setComplianceScore(complianceScore.doubleValue());
+        }
+        
+        // Set complexity score
+        Double complexityScore = (Double) complexity.get("complexityScore");
+        if (complexityScore != null) {
+            analysis.setPerformanceScore(complexityScore);
+        }
+        
+        // Set summary
+        Map<String, Object> insights = (Map<String, Object>) analysisData.get("insights");
+        String overallAssessment = (String) insights.get("overallAssessment");
+        analysis.setAnalysisSummary("Analysis completed with overall assessment: " + overallAssessment);
     }
 
     /**

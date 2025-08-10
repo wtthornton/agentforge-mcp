@@ -91,7 +91,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     Optional<Project> findByRepositoryUrl(String repositoryUrl);
 
     /**
-     * Find projects by project path
+     * Find project by project path
      */
     Optional<Project> findByProjectPath(String projectPath);
 

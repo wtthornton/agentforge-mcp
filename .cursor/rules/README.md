@@ -83,6 +83,13 @@ This directory contains comprehensive cursor rules that fully leverage all Agent
 - **Technology requirements** - Spring Boot, React, PostgreSQL, Docker
 - **Quality standards** - Performance, security, and compliance requirements
 
+### 13. **Context7 Integration** (`context7-integration.mdc`) - **NEW & MANDATORY**
+- **Context7 priority hierarchy** - Always use Context7 first for documentation and best practices
+- **MCP tools integration** - `mcp_Context7_resolve-library-id` and `mcp_Context7_get-library-docs`
+- **Technology validation** - Mandatory validation against Context7 before implementation
+- **Development workflow** - Context7 integration in all development phases
+- **Compliance requirements** - 100% Context7 compliance for all implementations
+
 ## 🚀 Getting Started
 
 ### 1. **Initialize Agent OS**
@@ -162,6 +169,16 @@ node .agent-os/tools/compliance-checker.js --detailed
 - **AI**: OpenAI GPT-4o + LangChain 0.3
 - **Container**: Docker 24 multi-stage builds
 
+### **Context7 Integration (MANDATORY)**
+**ALWAYS** use Context7 MCP tools for technology validation:
+```bash
+# Validate technology choices
+mcp_Context7_resolve-library-id("Spring Boot")
+
+# Get current best practices
+mcp_Context7_get-library-docs("/spring-projects/spring-boot", topic="REST controllers", tokens=5000)
+```
+
 ## 🔧 Complete Tool Integration
 
 ### **Primary Development Tools**
@@ -184,6 +201,11 @@ node .agent-os/tools/compliance-checker.js --detailed
 - **Cursor Analytics**: `.agent-os/tools/cursor/cursor-analytics.js` - Usage analytics
 - **Cursor Rule Optimizer**: `.agent-os/tools/cursor/cursor-rule-optimizer.js` - Rule optimization
 
+### **Context7 Integration Tools**
+- **Context7 Rules**: `.cursor/rules/context7-integration.mdc` - **MANDATORY** Context7 integration rules
+- **Context7 MCP Tools**: `mcp_Context7_resolve-library-id` and `mcp_Context7_get-library-docs` - Real-time documentation access
+- **Context7 Validation**: Technology stack validation against current best practices
+
 ## 📖 Standards & Patterns Integration
 
 ### **Core Standards Reference**
@@ -196,6 +218,7 @@ node .agent-os/tools/compliance-checker.js --detailed
 - **Enforcement**: `.agent-os/standards/enforcement.md`
 - **Feature Scoring**: `.agent-os/standards/feature-scoring.md`
 - **Development Patterns**: `.agent-os/standards/consolidated-development-patterns.md`
+- **Context7 Integration**: `.cursor/rules/context7-integration.mdc` - **MANDATORY** for all technology validation
 
 ### **Lessons Learned Integration**
 **ALWAYS** reference and update:
@@ -216,6 +239,7 @@ node .agent-os/tools/compliance-checker.js --detailed
 - **Standards Adherence**: 100%
 - **Security Violations**: 0
 - **Quality Gate Pass Rate**: 100%
+- **Context7 Compliance**: **100%** - All technology choices validated, all implementations follow Context7 best practices
 
 ### **Development Metrics**
 - **Feature Scoring Compliance**: 100%
