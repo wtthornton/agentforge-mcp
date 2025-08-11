@@ -1,0 +1,154 @@
+{
+  "environment": "production",
+  "checkInterval": 30000,
+  "alertCooldown": 300000,
+  "incidentThreshold": 3,
+  "endpoints": [
+    {
+      "name": "Frontend",
+      "url": "https://agentforge.com",
+      "timeout": 5000,
+      "critical": true
+    },
+    {
+      "name": "API Health",
+      "url": "https://agentforge.com/api/actuator/health",
+      "timeout": 10000,
+      "critical": true
+    },
+    {
+      "name": "Backend Metrics",
+      "url": "https://agentforge.com/api/actuator/prometheus",
+      "timeout": 15000,
+      "critical": false
+    },
+    {
+      "name": "MCP Server Health",
+      "url": "https://agentforge.com/mcp/health",
+      "timeout": 10000,
+      "critical": true
+    },
+    {
+      "name": "Database Health",
+      "url": "https://agentforge.com/health",
+      "timeout": 10000,
+      "critical": true
+    }
+  ],
+  "alertChannels": {
+    "email": {
+      "enabled": true,
+      "recipients": [
+        "ops@agentforge.com",
+        "alerts@agentforge.com"
+      ],
+      "smtp": {
+        "host": "smtp.gmail.com",
+        "port": 587,
+        "secure": false
+      }
+    },
+    "slack": {
+      "enabled": true,
+      "webhook": "${SLACK_WEBHOOK_URL}",
+      "channel": "#ops-alerts",
+      "username": "AgentForge Monitor"
+    },
+    "pagerduty": {
+      "enabled": true,
+      "routingKey": "${PAGERDUTY_ROUTING_KEY}",
+      "severity": "critical"
+    },
+    "teams": {
+      "enabled": false,
+      "webhook": "${TEAMS_WEBHOOK_URL}"
+    }
+  },
+  "thresholds": {
+    "responseTime": {
+      "warning": 2000,
+      "critical": 5000
+    },
+    "errorRate": {
+      "warning": 0.05,
+      "critical": 0.1
+    },
+    "availability": {
+      "warning": 99.5,
+      "critical": 99.0
+    },
+    "diskSpace": {
+      "warning": 80,
+      "critical": 90
+    },
+    "memory": {
+      "warning": 85,
+      "critical": 95
+    },
+    "cpu": {
+      "warning": 80,
+      "critical": 90
+    }
+  },
+  "autoRemediation": {
+    "enabled": true,
+    "actions": {
+      "restartService": true,
+      "scaleUp": true,
+      "clearCache": true,
+      "failover": true,
+      "rollback": false
+    },
+    "maxAttempts": 3,
+    "cooldownPeriod": 600000
+  },
+  "reporting": {
+    "statusReportInterval": 300000,
+    "dailySummaryTime": "06:00",
+    "weeklyReportDay": "monday",
+    "retentionDays": 30,
+    "formats": ["json", "html", "pdf"]
+  },
+  "security": {
+    "enabledChecks": [
+      "ssl_expiry",
+      "certificate_validation",
+      "security_headers",
+      "vulnerability_scan"
+    ],
+    "sslExpiryWarning": 7,
+    "sslExpiryCritical": 1,
+    "securityScanInterval": 86400000
+  },
+  "performance": {
+    "benchmarks": {
+      "frontend_load_time": 2000,
+      "api_response_time": 1000,
+      "database_query_time": 500,
+      "cache_hit_rate": 0.8
+    },
+    "loadTesting": {
+      "enabled": false,
+      "schedule": "0 2 * * 0",
+      "targetRps": 100,
+      "duration": 300
+    }
+  },
+  "compliance": {
+    "enabledFrameworks": ["OWASP", "NIST", "SOC2"],
+    "scanSchedule": "0 3 * * *",
+    "reportingEnabled": true,
+    "alertOnViolations": true
+  },
+  "backup": {
+    "monitoring": {
+      "enabled": true,
+      "schedule": "0 4 * * *",
+      "retention": 30
+    },
+    "verification": {
+      "enabled": true,
+      "testRestoreSchedule": "0 5 * * 0"
+    }
+  }
+}
