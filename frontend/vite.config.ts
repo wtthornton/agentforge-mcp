@@ -14,7 +14,10 @@ export default defineConfig({
       '@utils': resolve(__dirname, './src/utils'),
       '@types': resolve(__dirname, './src/types'),
       '@services': resolve(__dirname, './src/services'),
-      '@styles': resolve(__dirname, './src/styles')
+      '@styles': resolve(__dirname, './src/styles'),
+      '@lib': resolve(__dirname, './src/lib'),
+      '@constants': resolve(__dirname, './src/constants'),
+      '@contexts': resolve(__dirname, './src/contexts')
     }
   },
   server: {
@@ -41,6 +44,13 @@ export default defineConfig({
         }
       }
     }
+  },
+  // Add these for better Claude Code assistance:
+  define: {
+    __DEV__: JSON.stringify(process.env.NODE_ENV === 'development')
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'react-router-dom']
   },
   test: {
     globals: true,

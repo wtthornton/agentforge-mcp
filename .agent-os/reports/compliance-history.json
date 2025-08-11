@@ -1,137 +1,5 @@
 [
   {
-    "timestamp": "2025-08-08T17:44:10.019Z",
-    "complianceScore": 100,
-    "criticalViolations": 0,
-    "warnings": 0,
-    "totalFilesProcessed": 152,
-    "averageProcessingTime": 150,
-    "uptime": 1470403,
-    "totalRequests": 12,
-    "fileTypes": [
-      "java",
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "xml",
-      "json",
-      "yml",
-      "yaml"
-    ],
-    "complianceTrend": {
-      "direction": "stable",
-      "change": 0,
-      "confidence": 0.5,
-      "message": "Compliance is stable"
-    },
-    "processingEfficiency": 85,
-    "memoryUsage": 45,
-    "cpuUsage": 30,
-    "compliancePrediction": 100,
-    "complianceConfidence": 0.8999999999999999,
-    "performance": {
-      "averageProcessingTime": 150,
-      "totalFilesProcessed": 152,
-      "processingEfficiency": 85,
-      "memoryUsage": 45,
-      "cpuUsage": 30
-    },
-    "realTimeUpdates": {
-      "lastUpdate": "2025-08-08T17:44:10.026Z",
-      "updateFrequency": "real-time",
-      "nextUpdate": "2025-08-08T17:44:40.026Z",
-      "isLive": true
-    },
-    "visualIndicators": {
-      "ringColor": "#4CAF50",
-      "animationState": "stable",
-      "pulseIntensity": 0.5,
-      "glowEffect": 0.8
-    },
-    "trendAnalysis": {
-      "shortTerm": {
-        "direction": "stable",
-        "magnitude": 0
-      },
-      "mediumTerm": {
-        "direction": "stable",
-        "magnitude": 0
-      },
-      "longTerm": {
-        "direction": "stable",
-        "magnitude": 0
-      },
-      "volatility": 0
-    }
-  },
-  {
-    "timestamp": "2025-08-08T17:44:40.023Z",
-    "complianceScore": 100,
-    "criticalViolations": 0,
-    "warnings": 0,
-    "totalFilesProcessed": 152,
-    "averageProcessingTime": 150,
-    "uptime": 1500406,
-    "totalRequests": 12,
-    "fileTypes": [
-      "java",
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "xml",
-      "json",
-      "yml",
-      "yaml"
-    ],
-    "complianceTrend": {
-      "direction": "stable",
-      "change": 0,
-      "confidence": 0.5,
-      "message": "Compliance is stable"
-    },
-    "processingEfficiency": 85,
-    "memoryUsage": 45,
-    "cpuUsage": 30,
-    "compliancePrediction": 100,
-    "complianceConfidence": 0.8999999999999999,
-    "performance": {
-      "averageProcessingTime": 150,
-      "totalFilesProcessed": 152,
-      "processingEfficiency": 85,
-      "memoryUsage": 45,
-      "cpuUsage": 30
-    },
-    "realTimeUpdates": {
-      "lastUpdate": "2025-08-08T17:44:40.028Z",
-      "updateFrequency": "real-time",
-      "nextUpdate": "2025-08-08T17:45:10.028Z",
-      "isLive": true
-    },
-    "visualIndicators": {
-      "ringColor": "#4CAF50",
-      "animationState": "stable",
-      "pulseIntensity": 0.5,
-      "glowEffect": 0.8
-    },
-    "trendAnalysis": {
-      "shortTerm": {
-        "direction": "stable",
-        "magnitude": 0
-      },
-      "mediumTerm": {
-        "direction": "stable",
-        "magnitude": 0
-      },
-      "longTerm": {
-        "direction": "stable",
-        "magnitude": 0
-      },
-      "volatility": 0
-    }
-  },
-  {
     "timestamp": "2025-08-08T17:45:10.038Z",
     "complianceScore": 100,
     "criticalViolations": 0,
@@ -1933,6 +1801,34 @@
       "checksum": "-639c4fa9",
       "version": "1.0",
       "validated": true
+    }
+  },
+  {
+    "timestamp": "2025-08-11T17:25:43.580Z",
+    "runId": "run_1754933143580_lo9xfq3wb",
+    "complianceScore": 44,
+    "totalChecks": 91,
+    "passedChecks": 40,
+    "violations": 1247,
+    "criticalViolations": 0,
+    "warnings": 1247,
+    "metrics": {
+      "executionTime": 2426,
+      "filesProcessed": 91
+    }
+  },
+  {
+    "timestamp": "2025-08-11T17:56:50.623Z",
+    "runId": "run_1754935010623_ai9it5m2y",
+    "complianceScore": 44,
+    "totalChecks": 103,
+    "passedChecks": 45,
+    "violations": 1269,
+    "criticalViolations": 0,
+    "warnings": 1269,
+    "metrics": {
+      "executionTime": 2152,
+      "filesProcessed": 103
     }
   }
 ]

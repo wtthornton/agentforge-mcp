@@ -1,0 +1,65 @@
+{
+  "projectPaths": {
+    "root": ".",
+    "cursorRules": ".cursor/rules/",
+    "agentOS": ".agent-os/",
+    "standards": ".agent-os/standards/",
+    "tools": ".agent-os/tools/",
+    "templates": ".agent-os/templates/",
+    "scripts": ".agent-os/scripts/",
+    "backend": "backend/",
+    "frontend": "frontend/",
+    "infrastructure": "infrastructure/"
+  },
+  "essentialFiles": {
+    "cursorRules": [
+      ".cursor/rules/agentforge-rules.mdc",
+      ".cursor/rules/context7-integration.mdc",
+      ".cursor/rules/standards-compliance.mdc",
+      ".cursor/rules/enforcement-compliance.mdc"
+    ],
+    "agentOSStandards": [
+      ".agent-os/standards/tech-stack.md",
+      ".agent-os/standards/code-style.md",
+      ".agent-os/standards/best-practices.md",
+      ".agent-os/standards/security-compliance.md",
+      ".agent-os/standards/testing-strategy.md",
+      ".agent-os/standards/ci-cd-strategy.md",
+      ".agent-os/standards/enforcement.md",
+      ".agent-os/standards/feature-scoring.md",
+      ".agent-os/standards/consolidated-development-patterns.md",
+      ".agent-os/standards/configuration-management.md"
+    ],
+    "templates": [
+      ".agent-os/templates/feature-scoring-template.md",
+      ".agent-os/templates/lessons-learned-template.md"
+    ],
+    "tools": [
+      ".agent-os/tools/compliance-checker.js",
+      ".agent-os/tools/feature-scoring/feature-scorer.js",
+      ".agent-os/tools/real-time-monitor.js",
+      ".agent-os/tools/enhanced-dashboard.js"
+    ]
+  },
+  "quickAccess": {
+    "complianceCheck": "node .agent-os/tools/compliance-checker.js --detailed",
+    "featureScoring": "node .agent-os/tools/feature-scoring/feature-scorer.js",
+    "setupValidation": "node .agent-os/scripts/setup.js validate",
+    "quickStart": "node .agent-os/scripts/quick-start.js",
+    "realTimeMonitor": "node .agent-os/tools/real-time-monitor.js",
+    "dashboard": "node .agent-os/tools/enhanced-dashboard.js"
+  },
+  "developmentPatterns": {
+    "backend": "Controller → Service → Repository",
+    "frontend": "React 19 + TypeScript 5 + Functional Components",
+    "database": "PostgreSQL 17 + pgvector",
+    "containerization": "Docker 24 + Multi-stage builds"
+  },
+  "qualityTargets": {
+    "complianceScore": 85,
+    "backendResponseTime": "P95 ≤200ms",
+    "frontendTTI": "≤1.8s",
+    "testCoverage": "≥85%",
+    "todoItemsPerService": "≤5"
+  }
+}

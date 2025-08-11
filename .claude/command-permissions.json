@@ -1,0 +1,109 @@
+{
+  "commandPermissions": {
+    "maven": {
+      "enabled": true,
+      "requireConfirmation": false,
+      "allowedCommands": [
+        "mvn test",
+        "mvn compile",
+        "mvn package",
+        "mvn install",
+        "mvn clean",
+        "mvn spring-boot:run",
+        "mvn dependency:tree",
+        "mvn dependency:resolve",
+        "mvn test -Dtest=*",
+        "mvn test -Dtest=DatabaseConnectionTest",
+        "mvn test -Dtest=DatabaseInitializationTest"
+      ]
+    },
+    "java": {
+      "enabled": true,
+      "requireConfirmation": false,
+      "allowedCommands": [
+        "java -version",
+        "java -jar",
+        "java -cp",
+        "java -classpath",
+        "javac",
+        "javadoc"
+      ]
+    },
+    "packageManagement": {
+      "enabled": true,
+      "requireConfirmation": false,
+      "allowedCommands": [
+        "apt list --installed",
+        "apt list --installed | grep -i openjdk",
+        "apt update",
+        "apt upgrade",
+        "apt install",
+        "apt-get update",
+        "apt-get upgrade",
+        "apt-get install",
+        "dpkg -l",
+        "dpkg -l | grep -i openjdk",
+        "snap list",
+        "brew list",
+        "choco list",
+        "winget list"
+      ]
+    },
+    "systemCommands": {
+      "enabled": true,
+      "requireConfirmation": false,
+      "allowedCommands": [
+        "which java",
+        "which mvn",
+        "which node",
+        "which npm",
+        "which git",
+        "which docker",
+        "env | grep JAVA",
+        "env | grep MAVEN",
+        "echo $JAVA_HOME",
+        "echo $MAVEN_HOME",
+        "pwd",
+        "ls -la",
+        "cd *",
+        "mkdir *",
+        "rm *",
+        "cp *",
+        "mv *"
+      ]
+    },
+    "developmentTools": {
+      "enabled": true,
+      "requireConfirmation": false,
+      "allowedCommands": [
+        "node *",
+        "npm *",
+        "yarn *",
+        "pnpm *",
+        "git *",
+        "docker *",
+        "docker-compose *"
+      ]
+    }
+  },
+  "autoExecution": {
+    "enabled": true,
+    "patterns": [
+      "mvn *",
+      "java *",
+      "apt *",
+      "apt-get *",
+      "dpkg *",
+      "which *",
+      "env *",
+      "echo *",
+      "cd *",
+      "ls *",
+      "pwd *",
+      "node *",
+      "npm *",
+      "git *",
+      "docker *"
+    ]
+  }
+}
