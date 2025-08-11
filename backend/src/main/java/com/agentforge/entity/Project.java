@@ -139,6 +139,51 @@ public class Project {
         task.setProject(null);
     }
     
+    // Additional fields and methods needed by services
+    @Column(name = "files_count")
+    private Long filesCount = 0L;
+    
+    @Column(name = "directories_count")
+    private Long directoriesCount = 0L;
+    
+    @Column(name = "technology_stack", length = 1000)
+    private String technologyStack;
+    
+    @Column(name = "last_analysis_date")
+    private LocalDateTime lastAnalysisDate;
+    
+    public Long getFilesCount() {
+        return filesCount;
+    }
+    
+    public void setFilesCount(Long filesCount) {
+        this.filesCount = filesCount;
+    }
+    
+    public Long getDirectoriesCount() {
+        return directoriesCount;
+    }
+    
+    public void setDirectoriesCount(Long directoriesCount) {
+        this.directoriesCount = directoriesCount;
+    }
+    
+    public String getTechnologyStack() {
+        return technologyStack;
+    }
+    
+    public void setTechnologyStack(String technologyStack) {
+        this.technologyStack = technologyStack;
+    }
+    
+    public LocalDateTime getLastAnalysisDate() {
+        return lastAnalysisDate;
+    }
+    
+    public void setLastAnalysisDate(LocalDateTime lastAnalysisDate) {
+        this.lastAnalysisDate = lastAnalysisDate;
+    }
+    
     @Override
     public String toString() {
         return "Project{" +

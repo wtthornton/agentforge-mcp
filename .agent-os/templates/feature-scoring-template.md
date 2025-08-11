@@ -6,6 +6,7 @@
 - **Phase**: [Phase 1/2/3+]
 - **Date**: [YYYY-MM-DD]
 - **Scored By**: [Team member names]
+- **Agent Used**: [@static-analyzer/@database-agent/@frontend-agent/@backend-agent/@infrastructure-agent]
 
 ## Mandatory Scoring (1-10 Scale)
 
@@ -95,6 +96,27 @@
 - [ ] PostgreSQL 17 with pgvector for database
 - [ ] OpenAI GPT-4o for AI capabilities
 - [ ] Docker 24 for containerization
+
+## Cursor Agent Management Validation
+
+### Agent Selection Validation
+- [ ] Appropriate agent type selected for feature development
+- [ ] Fresh conversation started for feature scoring and planning
+- [ ] Agent expertise matches feature requirements
+- [ ] Single, focused objective defined for the conversation
+
+### Agent Management Compliance
+- [ ] **@static-analyzer**: Used for code quality and compliance features
+- [ ] **@database-agent**: Used for database and data management features
+- [ ] **@frontend-agent**: Used for UI/UX and frontend features
+- [ ] **@backend-agent**: Used for backend and API features
+- [ ] **@infrastructure-agent**: Used for deployment and infrastructure features
+
+### Agent Rotation Benefits
+- [ ] Fresh context maintained for optimal feature analysis
+- [ ] Specialized expertise leveraged for accurate scoring
+- [ ] Conversation length limitations prevented
+- [ ] Context clarity maintained throughout scoring process
 
 ## Risk Assessment
 

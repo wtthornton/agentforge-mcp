@@ -6,6 +6,26 @@
 - **Time**: [HH:MM]
 - **Session Duration**: [X hours]
 - **Team Members**: [List participants]
+- **Agent Used**: [@static-analyzer/@database-agent/@frontend-agent/@backend-agent/@infrastructure-agent]
+
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All task updates require fresh AI agents for optimal tracking and validation.
+
+### Agent Assignment for Task Updates
+- **@static-analyzer**: Task progress analysis, standards compliance, quality metrics validation
+- **@backend-agent**: Backend task updates, service implementation tracking, API development progress
+- **@frontend-agent**: Frontend task updates, component development tracking, UI/UX progress
+- **@database-agent**: Database task updates, schema changes tracking, data migration progress
+- **@infrastructure-agent**: Infrastructure task updates, deployment tracking, monitoring setup progress
+
+### Task Update Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before task update work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for task domain
+4. **Update Progress**: Use agent expertise for accurate progress tracking
+5. **Validate Updates**: Verify task updates with agent assistance
+6. **Plan Next Steps**: Develop next actions with agent guidance
 
 ## ✅ Completed in This Session
 

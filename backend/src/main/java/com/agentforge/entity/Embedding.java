@@ -17,6 +17,34 @@ public class Embedding {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id", nullable = false)
+    private Project project;
+    
+    @NotBlank(message = "Embedding type is required")
+    @Column(nullable = false)
+    private String type;
+    
+    @NotBlank(message = "Content is required")
+    @Column(columnDefinition = "TEXT", nullable = false)
+    private String content;
+    
+    @Column(name = "content_length")
+    private Long contentLength;
+    
+    @NotBlank(message = "Model is required")
+    @Column(nullable = false)
+    private String model;
+    
+    @Column(name = "model_version")
+    private String modelVersion;
+    
+    @Column(nullable = false)
+    private Integer dimension;
+    
+    @Column(name = "similarity_score")
+    private Double similarityScore;
+    
     @NotBlank(message = "Content hash is required")
     @Column(name = "content_hash", nullable = false, unique = true)
     private String contentHash;
@@ -31,6 +59,9 @@ public class Embedding {
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
+    
+    @Column(name = "last_updated")
+    private LocalDateTime lastUpdated;
     
     @ElementCollection
     @CollectionTable(name = "embedding_tags", joinColumns = @JoinColumn(name = "embedding_id"))
@@ -53,6 +84,86 @@ public class Embedding {
     
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public Project getProject() {
+        return project;
+    }
+    
+    public void setProject(Project project) {
+        this.project = project;
+    }
+    
+    public String getType() {
+        return type;
+    }
+    
+    public void setType(String type) {
+        this.type = type;
+    }
+    
+    public String getContent() {
+        return content;
+    }
+    
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
+    public Long getContentLength() {
+        return contentLength;
+    }
+    
+    public void setContentLength(Long contentLength) {
+        this.contentLength = contentLength;
+    }
+    
+    public String getModel() {
+        return model;
+    }
+    
+    public void setModel(String model) {
+        this.model = model;
+    }
+    
+    public String getModelVersion() {
+        return modelVersion;
+    }
+    
+    public void setModelVersion(String modelVersion) {
+        this.modelVersion = modelVersion;
+    }
+    
+    public Integer getDimension() {
+        return dimension;
+    }
+    
+    public void setDimension(Integer dimension) {
+        this.dimension = dimension;
+    }
+    
+    public Double getSimilarityScore() {
+        return similarityScore;
+    }
+    
+    public void setSimilarityScore(Double similarityScore) {
+        this.similarityScore = similarityScore;
+    }
+    
+    public String getEmbeddingVector() {
+        return vectorData;
+    }
+    
+    public void setEmbeddingVector(String embeddingVector) {
+        this.vectorData = embeddingVector;
+    }
+    
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+    
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
     }
     
     public String getContentHash() {

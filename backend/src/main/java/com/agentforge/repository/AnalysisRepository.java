@@ -274,22 +274,22 @@ public interface AnalysisRepository extends JpaRepository<Analysis, Long> {
     /**
      * Find analyses that are currently in progress
      */
-    List<Analysis> findByStatus(Analysis.AnalysisStatus.IN_PROGRESS);
+    List<Analysis> findByStatusInProgress();
 
     /**
      * Find analyses that have failed
      */
-    List<Analysis> findByStatus(Analysis.AnalysisStatus.FAILED);
+    List<Analysis> findByStatusFailed();
 
     /**
      * Find analyses that are pending
      */
-    List<Analysis> findByStatus(Analysis.AnalysisStatus.PENDING);
+    List<Analysis> findByStatusPending();
 
     /**
      * Find analyses that have completed successfully
      */
-    List<Analysis> findByStatus(Analysis.AnalysisStatus.COMPLETED);
+    List<Analysis> findByStatusCompleted();
 
     /**
      * Find analyses by project with pagination and sorting
@@ -320,4 +320,14 @@ public interface AnalysisRepository extends JpaRepository<Analysis, Long> {
      * Find analyses by user and type with pagination and sorting
      */
     Page<Analysis> findByUserAndTypeOrderByCreatedAtDesc(User user, Analysis.AnalysisType type, Pageable pageable);
+
+    /**
+     * Count analyses by status
+     */
+    long countByStatus(Analysis.AnalysisStatus status);
+
+    /**
+     * Count analyses by type
+     */
+    long countByType(Analysis.AnalysisType type);
 }

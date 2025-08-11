@@ -4,6 +4,24 @@
  * Agent OS Tool Template
  * Self-contained tool following Agent OS standards
  * 
+ * MANDATORY: Cursor Agent Management
+ * CRITICAL: All tool development requires fresh AI agents for optimal design and validation.
+ * 
+ * Agent Assignment for Tool Development:
+ * - @static-analyzer: Tool architecture, standards compliance, code quality, utility design
+ * - @backend-agent: Backend tools, Java tools, Spring Boot tools, API tools
+ * - @frontend-agent: Frontend tools, React tools, TypeScript tools, UI/UX tools
+ * - @database-agent: Database tools, data tools, schema tools, query tools
+ * - @infrastructure-agent: Infrastructure tools, deployment tools, monitoring tools, CI/CD tools
+ * 
+ * Tool Development Workflow:
+ * 1. Clear Context: Press Ctrl+Shift+C before tool development
+ * 2. New Conversation: Press Ctrl+Shift+N for fresh agent
+ * 3. Select Agent: Choose appropriate agent type for tool domain
+ * 4. Design Tool: Use agent expertise for optimal tool architecture
+ * 5. Implement Tool: Build tool with agent guidance
+ * 6. Validate Tool: Verify tool functionality with agent assistance
+ * 
  * Usage: node tool-name.js [options]
  */
 

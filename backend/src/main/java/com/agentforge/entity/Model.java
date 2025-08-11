@@ -2,7 +2,6 @@ package com.agentforge.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -19,16 +18,16 @@ public class Model {
     private Long id;
     
     @NotBlank(message = "Model name is required")
-    @Size(min = 1, max = 255, message = "Model name must be between 1 and 255 characters")
+    @jakarta.validation.constraints.Size(min = 1, max = 255, message = "Model name must be between 1 and 255 characters")
     @Column(nullable = false)
     private String name;
     
     @NotBlank(message = "Model version is required")
-    @Size(min = 1, max = 100, message = "Model version must be between 1 and 100 characters")
+    @jakarta.validation.constraints.Size(min = 1, max = 100, message = "Model version must be between 1 and 100 characters")
     @Column(nullable = false)
     private String version;
     
-    @Size(max = 2000, message = "Configuration cannot exceed 2000 characters")
+    @jakarta.validation.constraints.Size(max = 2000, message = "Configuration cannot exceed 2000 characters")
     @Column(columnDefinition = "TEXT")
     private String configuration;
     
@@ -188,5 +187,26 @@ public class Model {
     @Override
     public int hashCode() {
         return getClass().hashCode();
+    }
+    
+    /**
+     * Model size enumeration
+     */
+    public enum Size {
+        TINY("Tiny"),
+        SMALL("Small"),
+        MEDIUM("Medium"),
+        LARGE("Large"),
+        HUGE("Huge");
+        
+        private final String displayName;
+        
+        Size(String displayName) {
+            this.displayName = displayName;
+        }
+        
+        public String getDisplayName() {
+            return displayName;
+        }
     }
 }

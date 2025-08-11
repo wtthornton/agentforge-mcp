@@ -71,12 +71,14 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
 
-        <!-- Spring AI -->
+        <!-- Spring AI - Commented out until stable version is available -->
+        <!--
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
             <version>${spring-ai.version}</version>
         </dependency>
+        -->
 
         <!-- Database -->
         <dependency>
@@ -84,11 +86,14 @@
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
         </dependency>
+        <!-- pgvector support - using native PostgreSQL with vector extension -->
+        <!--
         <dependency>
             <groupId>com.pgvector</groupId>
             <artifactId>pgvector-java</artifactId>
             <version>${pgvector.version}</version>
         </dependency>
+        -->
 
         <!-- Time Series Database -->
         <dependency>
@@ -97,7 +102,8 @@
             <version>${influxdb.version}</version>
         </dependency>
 
-        <!-- AI/ML Libraries -->
+        <!-- AI/ML Libraries - Commented out until stable versions are available -->
+        <!--
         <dependency>
             <groupId>com.theokanning.openai-gpt3-java</groupId>
             <artifactId>service</artifactId>
@@ -113,6 +119,7 @@
             <artifactId>langchain4j-open-ai</artifactId>
             <version>${langchain.version}</version>
         </dependency>
+        -->
 
         <!-- Observability -->
         <dependency>
@@ -125,6 +132,8 @@
             <artifactId>opentelemetry-api</artifactId>
             <version>${opentelemetry.version}</version>
         </dependency>
+        <!-- OpenTelemetry - Commented out until stable versions are available -->
+        <!--
         <dependency>
             <groupId>io.opentelemetry</groupId>
             <artifactId>opentelemetry-sdk</artifactId>
@@ -135,11 +144,22 @@
             <artifactId>opentelemetry-exporter-prometheus</artifactId>
             <version>${opentelemetry.version}</version>
         </dependency>
+        -->
 
         <!-- Utilities -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        
+        <!-- Spring Retry for database connection resilience -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -206,10 +226,12 @@
 
     <build>
         <plugins>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>com.agentforge.AgentForgeApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -233,7 +255,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.3</version>
                 <configuration>
                     <argLine>--enable-preview</argLine>
                 </configuration>
@@ -241,7 +263,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>3.2.3</version>
                 <configuration>
                     <argLine>--enable-preview</argLine>
                 </configuration>

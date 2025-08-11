@@ -3,6 +3,25 @@
 ## 🎯 Purpose
 This document defines proven development patterns and anti-patterns identified through real-world implementation experience with Agent OS tools.
 
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All development pattern work requires fresh AI agents for optimal analysis and validation.
+
+### Agent Assignment for Development Patterns
+- **@static-analyzer**: Pattern validation, anti-pattern detection, code quality analysis, standards compliance
+- **@backend-agent**: Backend patterns, service architecture, API design patterns, Java/Spring Boot patterns
+- **@frontend-agent**: Frontend patterns, component architecture, UI/UX patterns, React/TypeScript patterns
+- **@database-agent**: Database patterns, schema design, query optimization, data access patterns
+- **@infrastructure-agent**: Infrastructure patterns, deployment patterns, monitoring patterns, CI/CD patterns
+
+### Development Pattern Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before pattern work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for pattern domain
+4. **Pattern Analysis**: Use agent expertise for pattern validation and optimization
+5. **Implementation**: Apply patterns with agent guidance
+6. **Validation**: Verify pattern implementation with agent assistance
+
 ## ✅ Recommended Patterns
 
 ### 1. Dependency Management Pattern

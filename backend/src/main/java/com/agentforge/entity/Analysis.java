@@ -208,6 +208,26 @@ public class Analysis {
         this.errors.add(errorMessage);
     }
 
+    public void setErrorMessage(String errorMessage) {
+        this.errors.clear();
+        this.errors.add(errorMessage);
+    }
+
+    public void setSecurityViolations(int count) {
+        this.securityScore = count > 0 ? 100.0 - (count * 10.0) : 100.0;
+        if (this.securityScore < 0) this.securityScore = 0.0;
+    }
+
+    public void setPerformanceIssues(int count) {
+        this.performanceScore = count > 0 ? 100.0 - (count * 10.0) : 100.0;
+        if (this.performanceScore < 0) this.performanceScore = 0.0;
+    }
+
+    public void setComplianceViolations(int count) {
+        this.complianceScore = count > 0 ? 100.0 - (count * 10.0) : 100.0;
+        if (this.complianceScore < 0) this.complianceScore = 0.0;
+    }
+
     public Double getOverallScore() {
         if (complianceScore == null && qualityScore == null && securityScore == null && performanceScore == null) {
             return null;

@@ -7,11 +7,45 @@
 - **Status**: Active
 - **Next Review**: 2025-02-03
 - **Owner**: Agent OS Development Team
-- **Framework**: Agent OS Standards + Context7 Integration
+- **Framework**: Agent OS Standards + Context7 Integration + Cursor Agent Management
+
+## 🎯 **Cursor Agent Management Best Practices**
+
+### **Mandatory Agent Rotation Strategy**
+
+**CRITICAL**: Every development task requires a fresh AI agent to maintain optimal performance and avoid conversation length limitations.
+
+#### **Agent Types and Specializations**
+
+1. **@static-analyzer** - Code quality, compliance checking, standards validation
+   - **Use Cases**: Code review, compliance checking, architecture validation
+   - **Best Practices**: Always start fresh conversation, provide clear context, focus on single objective
+
+2. **@database-agent** - PostgreSQL 17, pgvector, schema management, performance optimization
+   - **Use Cases**: Database design, performance tuning, migration planning
+   - **Best Practices**: Include schema context, specify performance requirements, document changes
+
+3. **@frontend-agent** - React 19, TypeScript 5, UI/UX development, component architecture
+   - **Use Cases**: Component development, UI optimization, frontend testing
+   - **Best Practices**: Provide component context, specify accessibility requirements, include design constraints
+
+4. **@backend-agent** - Spring Boot 3.3, Java 21, API development, service architecture
+   - **Use Cases**: API development, service implementation, backend testing
+   - **Best Practices**: Include service context, specify API requirements, document error handling
+
+5. **@infrastructure-agent** - Docker, CI/CD, monitoring, deployment, infrastructure optimization
+   - **Use Cases**: Deployment configuration, monitoring setup, infrastructure optimization
+   - **Best Practices**: Include environment context, specify performance requirements, document dependencies
+
+#### **Implementation Requirements**
+
+- **Fresh Agent**: Use `Ctrl+Shift+N` for new conversation on each subtask
+- **Context Reset**: Clear previous context with `Ctrl+Shift+C` before new task
+- **Specialized Selection**: Choose appropriate agent type for each subtask
+- **Single Focus**: Define one clear objective per conversation
+- **Quick Closure**: End conversation after task completion
 
 ## 🏗️ **Architecture Patterns**
-
-### **Service Layer Orchestration Pattern**
 
 **Pattern**: Core service orchestrates multiple specialized services with clear separation of concerns
 

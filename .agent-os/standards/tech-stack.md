@@ -4,6 +4,24 @@
 
 **ALWAYS** validate technology choices against Context7 documentation before implementing.
 
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All technology stack decisions require fresh AI agents for optimal analysis and validation.
+
+### Agent Assignment for Tech Stack Validation
+- **@static-analyzer**: Technology compatibility analysis, standards compliance
+- **@infrastructure-agent**: Infrastructure technology validation (Docker, CI/CD, monitoring)
+- **@backend-agent**: Backend technology validation (Spring Boot, Java, Maven/Gradle)
+- **@frontend-agent**: Frontend technology validation (React, TypeScript, TailwindCSS)
+- **@database-agent**: Database technology validation (PostgreSQL, pgvector, InfluxDB)
+
+### Tech Stack Validation Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before technology evaluation
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for technology domain
+4. **Validate Technology**: Use Context7 + agent expertise for validation
+5. **Document Decision**: Record technology choice with validation details
+
 ### Frontend
 - React 19.x + TypeScript 5.x (validate via Context7)
 - **TailwindCSS 3.x (STABLE)** - AVOID TailwindCSS 4.x in production until fully stable

@@ -7,7 +7,26 @@
 - **Status**: Active
 - **Next Review**: 2025-02-03
 - **Owner**: Agent OS Development Team
-- **Framework**: Agent OS Standards + Context7 Integration
+- **Framework**: Agent OS Standards + Context7 Integration + Cursor Agent Management
+
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All code style and formatting tasks require fresh AI agents for optimal analysis and validation.
+
+### Agent Assignment for Code Style Tasks
+- **@static-analyzer**: Code style validation, formatting standards, linting rules, compliance checking
+- **@backend-agent**: Java/Spring Boot code style, backend formatting standards, API documentation style
+- **@frontend-agent**: React/TypeScript code style, component formatting, UI/UX code standards
+- **@database-agent**: SQL formatting, schema documentation style, database code standards
+- **@infrastructure-agent**: Configuration file formatting, deployment script style, infrastructure code standards
+
+### Code Style Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before code style work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for code style domain
+4. **Analyze Code**: Use agent expertise for style validation and formatting
+5. **Apply Standards**: Implement style improvements with agent guidance
+6. **Validate Result**: Verify style compliance with agent assistance
 
 ## 🎨 **General Code Style Rules**
 

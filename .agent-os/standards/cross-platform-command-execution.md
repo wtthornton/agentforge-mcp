@@ -9,6 +9,25 @@
 
 This document establishes mandatory standards for command execution across different operating systems and shells, ensuring consistent behavior in Agent OS environments.
 
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All cross-platform command execution work requires fresh AI agents for optimal analysis and validation.
+
+### Agent Assignment for Command Execution
+- **@infrastructure-agent**: Infrastructure commands, deployment commands, container commands, system commands
+- **@static-analyzer**: Command validation, standards compliance, security checking, best practices
+- **@backend-agent**: Backend commands, Java commands, Maven commands, Spring Boot commands
+- **@frontend-agent**: Frontend commands, npm commands, build commands, UI commands
+- **@database-agent**: Database commands, SQL commands, migration commands, data commands
+
+### Command Execution Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before command execution work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for command domain
+4. **Analyze Commands**: Use agent expertise for cross-platform compatibility
+5. **Execute Commands**: Run commands with agent guidance
+6. **Validate Results**: Verify command execution with agent assistance
+
 ## Critical PowerShell vs Unix Differences
 
 ### ❌ NEVER Use These Patterns

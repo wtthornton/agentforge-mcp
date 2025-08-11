@@ -4,6 +4,23 @@
  * This file is executed before all tests and sets up the testing environment
  * based on lessons learned from multiple projects.
  * 
+ * MANDATORY: Cursor Agent Management
+ * CRITICAL: All test setup work requires fresh AI agents for optimal configuration and validation.
+ * 
+ * Agent Assignment for Test Setup:
+ * - @static-analyzer: Test architecture, standards compliance, quality gates
+ * - @backend-agent: Backend testing, service mocking, API testing
+ * - @frontend-agent: Frontend testing, component mocking, UI testing
+ * - @database-agent: Database testing, data mocking, schema testing
+ * - @infrastructure-agent: Infrastructure testing, deployment testing, monitoring testing
+ * 
+ * Test Setup Workflow:
+ * 1. Clear Context: Press Ctrl+Shift+C before test setup work
+ * 2. New Conversation: Press Ctrl+Shift+N for fresh agent
+ * 3. Select Agent: Choose appropriate agent type for testing domain
+ * 4. Configure Tests: Use agent expertise for optimal test configuration
+ * 5. Validate Setup: Verify test configuration with agent assistance
+ * 
  * Key Features:
  * - Global mocks for browser APIs
  * - Singleton service mocking patterns

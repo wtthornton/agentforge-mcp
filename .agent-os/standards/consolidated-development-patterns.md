@@ -7,7 +7,7 @@
 
 ## 🎯 Mission Statement
 
-This document consolidates all Agent OS lessons learned into a unified framework that enables **one-pass code generation** with minimal iterations and maximum reliability.
+This document consolidates all Agent OS lessons learned into a unified framework that enables **one-pass code generation** with minimal iterations and maximum reliability, while maintaining optimal AI assistance through strategic agent rotation.
 
 ## 📊 Consolidated Lessons Analysis
 
@@ -17,10 +17,49 @@ This document consolidates all Agent OS lessons learned into a unified framework
 3. **Testing Infrastructure** (20% of issues) - Mock setup, type mismatches
 4. **Platform Compatibility** (10% of issues) - Shell commands, path separators
 5. **Type Safety** (5% of issues) - Import/export mismatches, type errors
+6. **Agent Management** (NEW) - Fresh context, specialized expertise, conversation clarity
 
 ## ⚡ Maximum Impact Patterns
 
-### 1. Dependency Verification Pattern (Impact: 9/10)
+### 1. Agent Rotation Pattern (Impact: 10/10)
+```javascript
+// MANDATORY: Every development task requires fresh AI agent
+class AgentManager {
+  static selectAgent(taskType) {
+    const agentMap = {
+      'backend': '@backend-agent',
+      'database': '@database-agent', 
+      'frontend': '@frontend-agent',
+      'analysis': '@static-analyzer',
+      'infrastructure': '@infrastructure-agent'
+    };
+    
+    return agentMap[taskType] || '@static-analyzer';
+  }
+  
+  static startFreshConversation() {
+    // Use Ctrl+Shift+N for new conversation
+    console.log('🔄 Starting fresh conversation with specialized agent');
+    return true;
+  }
+  
+  static clearContext() {
+    // Use Ctrl+Shift+C to clear context
+    console.log('🧹 Clearing previous conversation context');
+    return true;
+  }
+  
+  static validateAgentSelection(taskType, selectedAgent) {
+    const expectedAgent = this.selectAgent(taskType);
+    if (selectedAgent !== expectedAgent) {
+      console.warn(`⚠️  Consider using ${expectedAgent} for ${taskType} tasks`);
+    }
+    return selectedAgent === expectedAgent;
+  }
+}
+```
+
+### 2. Dependency Verification Pattern (Impact: 9/10)
 ```javascript
 // MANDATORY: Every script must start with dependency verification
 class ProjectInitializer {

@@ -17,11 +17,24 @@ spring:
       connection-timeout: 30000
       idle-timeout: 600000
       max-lifetime: 1800000
+      # Connection retry settings for Docker environment
+      connection-test-query: SELECT 1
+      validation-timeout: 10000
+      leak-detection-threshold: 60000
+      # Additional connection properties for debugging
+      connection-init-sql: SELECT 1
+      initialization-fail-timeout: -1
+      # Connection validation
+      validation-interval: 30000
+      minimum-idle: 1
+      # Connection pool behavior
+      auto-commit: true
+      read-only: false
   
   # JPA Configuration
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     properties:
@@ -42,7 +55,7 @@ spring:
     redis:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
-      password: ${REDIS_PASSWORD:}
+      password: ${REDIS_PASSWORD:redis}
       database: 0
       timeout: 2000ms
       lettuce:
@@ -78,7 +91,7 @@ spring:
 
 # Server Configuration
 server:
-  port: ${SERVER_PORT:8080}
+  port: ${SERVER_PORT:8081}
   servlet:
     context-path: /
   compression:

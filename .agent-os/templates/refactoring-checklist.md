@@ -7,6 +7,29 @@
 **Date**: [YYYY-MM-DD]  
 **Completed By**: [Developer Name]  
 **Reviewer**: [Reviewer Name]  
+**Agent Management**: Fresh agent for each refactoring phase
+
+---
+
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All refactoring work requires fresh AI agents for optimal analysis and validation.
+
+### Agent Assignment for Refactoring
+- **@static-analyzer**: Code quality analysis, standards compliance, architecture validation
+- **@backend-agent**: Backend refactoring, service decomposition, API optimization
+- **@frontend-agent**: Frontend refactoring, component optimization, UI/UX improvements
+- **@database-agent**: Database refactoring, schema optimization, query performance
+- **@infrastructure-agent**: Infrastructure refactoring, deployment optimization, monitoring improvements
+
+### Refactoring Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before refactoring work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for refactoring domain
+4. **Analyze Current State**: Use agent expertise for code analysis
+5. **Plan Refactoring**: Develop refactoring strategy with agent guidance
+6. **Execute Changes**: Implement refactoring with agent assistance
+7. **Validate Result**: Verify refactoring success with agent validation
 
 ---
 

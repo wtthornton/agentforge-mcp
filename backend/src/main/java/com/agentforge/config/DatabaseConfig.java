@@ -2,6 +2,7 @@ package com.agentforge.config;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +33,9 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.agentforge.repository")
 public class DatabaseConfig {
+
+    @Autowired
+    private DatabaseHealthConfig.DatabaseConnectionValidator connectionValidator;
 
     @Value("${spring.datasource.url}")
     private String databaseUrl;
@@ -83,8 +87,12 @@ public class DatabaseConfig {
         
         // Performance optimizations
         config.setLeakDetectionThreshold(60000); // 1 minute
-        config.setValidationTimeout(5000); // 5 seconds
+        config.setValidationTimeout(10000); // 10 seconds for Docker environment
         config.setConnectionTestQuery("SELECT 1");
+        
+        // Docker environment optimizations
+        config.setInitializationFailTimeout(-1); // Don't fail on startup
+        config.setConnectionInitSql("SELECT 1");
         
         // PostgreSQL specific optimizations
         config.addDataSourceProperty("cachePrepStmts", "true");
@@ -101,7 +109,34 @@ public class DatabaseConfig {
         // pgvector support
         config.addDataSourceProperty("stringtype", "unspecified");
         
-        return new HikariDataSource(config);
+        // Additional PostgreSQL connection properties for better compatibility
+        config.addDataSourceProperty("ApplicationName", "AgentForge");
+        config.addDataSourceProperty("tcpKeepAlive", "true");
+        config.addDataSourceProperty("socketTimeout", "30");
+        
+        HikariDataSource dataSource = new HikariDataSource(config);
+        
+        // Wait for database to be ready in Docker environment
+        try {
+            System.out.println("Waiting for database connection...");
+            System.out.println("Database URL: " + databaseUrl);
+            System.out.println("Database User: " + databaseUsername);
+            System.out.println("Database Password: " + (databasePassword != null ? "***" : "null"));
+            
+            connectionValidator.waitForDatabase(dataSource, 60000); // Wait up to 60 seconds
+            System.out.println("Database connection established successfully!");
+        } catch (Exception e) {
+            // Log the error but don't fail startup
+            System.err.println("Warning: Database connection failed during startup: " + e.getMessage());
+            System.err.println("Application will continue and retry connections as needed.");
+            System.err.println("Please check:");
+            System.err.println("1. Database container is running: docker ps | grep postgres");
+            System.err.println("2. Database credentials are correct");
+            System.err.println("3. Database port 5432 is accessible");
+            System.err.println("4. Database user 'agentforge' exists and has proper permissions");
+        }
+        
+        return dataSource;
     }
 
     /**

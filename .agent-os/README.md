@@ -6,6 +6,15 @@ Agent OS provides comprehensive standards, tools, and templates for systematic s
 
 ## 🎯 Core Principles
 
+### Mandatory Agent Rotation Strategy
+**CRITICAL**: Every development task requires a fresh AI agent to maintain optimal performance and avoid conversation length limitations.
+
+- **@static-analyzer**: Code quality, compliance, standards validation
+- **@database-agent**: PostgreSQL, schema management, performance optimization
+- **@frontend-agent**: React 19, TypeScript, UI/UX development
+- **@backend-agent**: Spring Boot 3.3, Java 21, API development
+- **@infrastructure-agent**: Docker, CI/CD, monitoring, deployment
+
 ### Mandatory Refactoring Enforcement
 **ALWAYS** perform refactoring after each specification phase completion:
 - **Phase 1**: Foundation refactoring (CRITICAL) - Security hardening, error handling
@@ -27,6 +36,7 @@ Agent OS provides comprehensive standards, tools, and templates for systematic s
 - **Testing Strategy**: `.agent-os/standards/testing-strategy.md`
 - **CI/CD Strategy**: `.agent-os/standards/ci-cd-strategy.md`
 - **Enforcement**: `.agent-os/standards/enforcement.md`
+- **Cursor Agent Management**: `.cursor/rules/agentforge-agent-management.mdc`
 
 ### Refactoring Standards
 - **Phase-Based Refactoring**: Mandatory refactoring after each phase
@@ -63,7 +73,7 @@ node .agent-os/scripts/quick-start.js
 node .agent-os/scripts/setup.js
 
 # Quick daily validation
-node .agent-os/scripts/setup.js validate
+node .agent-os/tools/compliance-checker.js --detailed
 
 # Validate refactoring for Phase 1
 node .agent-os/tools/refactoring-validator.js --phase=1 --validate
@@ -73,6 +83,9 @@ node .agent-os/tools/compliance-checker.js
 
 # Cursor IDE integration
 node .agent-os/tools/cursor/cursor-init.js
+
+# Agent management quick reference
+cat CURSOR-AGENT-MANAGEMENT.md
 ```
 
 ## 📋 Checklists & Templates

@@ -6,6 +6,24 @@
  * This script implements the consolidated lessons learned from multiple projects
  * to ensure one-pass project initialization with minimal manual fixes required.
  * 
+ * MANDATORY: Cursor Agent Management
+ * CRITICAL: All project initialization work requires fresh AI agents for optimal setup and validation.
+ * 
+ * Agent Assignment for Project Initialization:
+ * - @infrastructure-agent: Project structure, directory setup, tool configuration, deployment setup
+ * - @static-analyzer: Standards compliance, best practices, code quality, architecture validation
+ * - @backend-agent: Backend setup, Spring Boot configuration, Java project structure, API setup
+ * - @frontend-agent: Frontend setup, React configuration, TypeScript setup, UI/UX configuration
+ * - @database-agent: Database setup, schema initialization, connection configuration, data setup
+ * 
+ * Project Initialization Workflow:
+ * 1. Clear Context: Press Ctrl+Shift+C before project initialization
+ * 2. New Conversation: Press Ctrl+Shift+N for fresh agent
+ * 3. Select Agent: Choose appropriate agent type for initialization domain
+ * 4. Plan Setup: Use agent expertise for optimal project structure
+ * 5. Execute Initialization: Run initialization with agent guidance
+ * 6. Validate Setup: Verify project setup with agent assistance
+ * 
  * Based on patterns from:
  * - TappHA implementation lessons
  * - Validation suite development

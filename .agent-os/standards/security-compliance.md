@@ -1,5 +1,24 @@
 # Security & Compliance Standard (Enhanced)
 
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All security and compliance work requires fresh AI agents for optimal validation and protection.
+
+### Agent Assignment for Security Tasks
+- **@static-analyzer**: Security validation, compliance checking, vulnerability detection, standards enforcement
+- **@infrastructure-agent**: Infrastructure security, container security, deployment security, monitoring security
+- **@backend-agent**: Backend security, API security, authentication, authorization, data protection
+- **@frontend-agent**: Frontend security, UI security, input validation, XSS prevention, CSRF protection
+- **@database-agent**: Database security, SQL injection prevention, data encryption, access control
+
+### Security Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before security work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for security domain
+4. **Security Analysis**: Use agent expertise for comprehensive security validation
+5. **Vulnerability Assessment**: Identify and address security issues with agent guidance
+6. **Compliance Verification**: Verify security compliance with agent assistance
+
 ## Secure Defaults & Hardening
 - Deny-by-default; TLS and headers enabled by default.
 - Run containers as non-root; drop unneeded Linux capabilities.

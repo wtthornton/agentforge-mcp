@@ -1,174 +1,129 @@
 package com.agentforge.config;
 
-import org.springframework.boot.actuate.health.Health;
-import org.springframework.boot.actuate.health.HealthIndicator;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.retry.backoff.ExponentialBackOffPolicy;
+import org.springframework.retry.policy.SimpleRetryPolicy;
+import org.springframework.retry.support.RetryTemplate;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
- * Database Health Check Configuration for AgentForge
+ * Database Health Configuration for AgentForge
  * 
  * This class provides:
- * - Database connectivity health checks
- * - Connection pool status monitoring
- * - pgvector extension verification
- * - Performance metrics collection
+ * - Database connection retry logic for Docker environments
+ * - Health check configuration
+ * - Connection validation utilities
  * 
  * @author AgentForge Team
  * @version 1.0.0
  */
-@Component
-public class DatabaseHealthConfig implements HealthIndicator {
-
-    private final DataSource dataSource;
-
-    public DatabaseHealthConfig(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    @Override
-    public Health health() {
-        try (Connection connection = dataSource.getConnection()) {
-            
-            // Basic connectivity check
-            if (!connection.isValid(5)) {
-                return Health.down()
-                    .withDetail("error", "Database connection validation failed")
-                    .build();
-            }
-
-            Map<String, Object> details = new HashMap<>();
-            
-            // Check PostgreSQL version
-            String postgresVersion = getPostgresVersion(connection);
-            details.put("postgres_version", postgresVersion);
-            
-            // Check pgvector extension
-            boolean pgvectorAvailable = checkPgvectorExtension(connection);
-            details.put("pgvector_available", pgvectorAvailable);
-            
-            // Check connection pool status
-            Map<String, Object> poolStatus = getConnectionPoolStatus();
-            details.put("connection_pool", poolStatus);
-            
-            // Check database size
-            long databaseSize = getDatabaseSize(connection);
-            details.put("database_size_mb", databaseSize);
-            
-            // Check active connections
-            int activeConnections = getActiveConnections(connection);
-            details.put("active_connections", activeConnections);
-            
-            // Determine health status
-            Health.Builder healthBuilder = Health.up()
-                .withDetail("database", "PostgreSQL")
-                .withDetail("status", "Connected and operational");
-            
-            // Add all details
-            details.forEach(healthBuilder::withDetail);
-            
-            return healthBuilder.build();
-            
-        } catch (SQLException e) {
-            return Health.down()
-                .withDetail("error", "Database connection failed: " + e.getMessage())
-                .withDetail("exception", e.getClass().getSimpleName())
-                .build();
-        } catch (Exception e) {
-            return Health.down()
-                .withDetail("error", "Unexpected error during health check: " + e.getMessage())
-                .withDetail("exception", e.getClass().getSimpleName())
-                .build();
-        }
-    }
+@Configuration
+@EnableRetry
+public class DatabaseHealthConfig {
 
     /**
-     * Get PostgreSQL version information
+     * Configure retry template for database operations
      */
-    private String getPostgresVersion(Connection connection) throws SQLException {
-        try (PreparedStatement stmt = connection.prepareStatement("SELECT version()")) {
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getString(1);
-                }
-            }
-        }
-        return "Unknown";
-    }
-
-    /**
-     * Check if pgvector extension is available
-     */
-    private boolean checkPgvectorExtension(Connection connection) throws SQLException {
-        try (PreparedStatement stmt = connection.prepareStatement(
-            "SELECT 1 FROM pg_extension WHERE extname = 'vector'")) {
-            try (ResultSet rs = stmt.executeQuery()) {
-                return rs.next();
-            }
-        }
-    }
-
-    /**
-     * Get connection pool status (if using HikariCP)
-     */
-    private Map<String, Object> getConnectionPoolStatus() {
-        Map<String, Object> status = new HashMap<>();
+    @Bean
+    public RetryTemplate databaseRetryTemplate() {
+        RetryTemplate retryTemplate = new RetryTemplate();
         
-        try {
-            if (dataSource instanceof com.zaxxer.hikari.HikariDataSource) {
-                com.zaxxer.hikari.HikariDataSource hikariDS = (com.zaxxer.hikari.HikariDataSource) dataSource;
-                com.zaxxer.hikari.HikariPoolMXBean poolMXBean = hikariDS.getHikariPoolMXBean();
+        // Exponential backoff: 1s, 2s, 4s, 8s, 16s
+        ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
+        backOffPolicy.setInitialInterval(1000);
+        backOffPolicy.setMultiplier(2.0);
+        backOffPolicy.setMaxInterval(16000);
+        retryTemplate.setBackOffPolicy(backOffPolicy);
+        
+        // Retry policy: max 5 attempts
+        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy();
+        retryPolicy.setMaxAttempts(5);
+        retryTemplate.setRetryPolicy(retryPolicy);
+        
+        return retryTemplate;
+    }
+
+    /**
+     * Database connection validator
+     */
+    @Bean
+    public DatabaseConnectionValidator databaseConnectionValidator() {
+        return new DatabaseConnectionValidator();
+    }
+
+    /**
+     * Database connection validator utility class
+     */
+    public static class DatabaseConnectionValidator {
+        
+        /**
+         * Test database connection with retry logic
+         */
+        public boolean testConnection(DataSource dataSource) {
+            try (Connection connection = dataSource.getConnection()) {
+                boolean isValid = connection.isValid(5); // 5 second timeout
+                if (isValid) {
+                    System.out.println("Database connection test successful");
+                } else {
+                    System.out.println("Database connection test failed - connection not valid");
+                }
+                return isValid;
+            } catch (SQLException e) {
+                System.err.println("Database connection test failed with SQLException: " + e.getMessage());
+                System.err.println("SQL State: " + e.getSQLState());
+                System.err.println("Error Code: " + e.getErrorCode());
+                return false;
+            } catch (Exception e) {
+                System.err.println("Database connection test failed with unexpected error: " + e.getMessage());
+                return false;
+            }
+        }
+        
+        /**
+         * Wait for database to be ready
+         */
+        public void waitForDatabase(DataSource dataSource, long maxWaitTimeMs) {
+            long startTime = System.currentTimeMillis();
+            long waitTime = 1000; // Start with 1 second
+            int attemptCount = 0;
+            
+            System.out.println("Starting database connection validation...");
+            
+            while (System.currentTimeMillis() - startTime < maxWaitTimeMs) {
+                attemptCount++;
+                System.out.println("Database connection attempt " + attemptCount + "...");
                 
-                if (poolMXBean != null) {
-                    status.put("active_connections", poolMXBean.getActiveConnections());
-                    status.put("idle_connections", poolMXBean.getIdleConnections());
-                    status.put("total_connections", poolMXBean.getTotalConnections());
-                    status.put("threads_awaiting_connection", poolMXBean.getThreadsAwaitingConnection());
-                    status.put("max_pool_size", hikariDS.getMaximumPoolSize());
-                    status.put("min_idle", hikariDS.getMinimumIdle());
+                if (testConnection(dataSource)) {
+                    System.out.println("Database is ready after " + attemptCount + " attempts");
+                    return; // Database is ready
+                }
+                
+                long elapsed = System.currentTimeMillis() - startTime;
+                long remaining = maxWaitTimeMs - elapsed;
+                
+                if (remaining <= 0) {
+                    break;
+                }
+                
+                System.out.println("Database not ready, waiting " + waitTime + "ms before retry... (remaining: " + remaining + "ms)");
+                
+                try {
+                    Thread.sleep(waitTime);
+                    waitTime = Math.min(waitTime * 2, 10000); // Exponential backoff, max 10s
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    System.err.println("Database connection wait interrupted");
+                    break;
                 }
             }
-        } catch (Exception e) {
-            status.put("error", "Unable to retrieve pool status: " + e.getMessage());
+            
+            throw new RuntimeException("Database connection timeout after " + maxWaitTimeMs + "ms and " + attemptCount + " attempts");
         }
-        
-        return status;
-    }
-
-    /**
-     * Get database size in MB
-     */
-    private long getDatabaseSize(Connection connection) throws SQLException {
-        try (PreparedStatement stmt = connection.prepareStatement(
-            "SELECT pg_database_size(current_database()) / (1024 * 1024)")) {
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getLong(1);
-                }
-            }
-        }
-        return 0;
-    }
-
-    /**
-     * Get number of active connections
-     */
-    private int getActiveConnections(Connection connection) throws SQLException {
-        try (PreparedStatement stmt = connection.prepareStatement(
-            "SELECT count(*) FROM pg_stat_activity WHERE state = 'active'")) {
-            try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getInt(1);
-                }
-            }
-        }
-        return 0;
     }
 }

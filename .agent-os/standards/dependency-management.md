@@ -3,6 +3,25 @@
 ## 🎯 Purpose
 This document establishes comprehensive dependency management standards based on lessons learned from multiple projects to prevent version conflicts, missing dependencies, and compatibility issues.
 
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All dependency management tasks require fresh AI agents for optimal analysis and validation.
+
+### Agent Assignment for Dependency Tasks
+- **@static-analyzer**: Dependency compatibility analysis, version conflict resolution, standards compliance
+- **@backend-agent**: Backend dependency management (Spring Boot, Java, Maven/Gradle dependencies)
+- **@frontend-agent**: Frontend dependency management (React, TypeScript, build tool dependencies)
+- **@infrastructure-agent**: Infrastructure dependency management (Docker, CI/CD, monitoring dependencies)
+- **@database-agent**: Database dependency management (PostgreSQL drivers, pgvector, connection libraries)
+
+### Dependency Management Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before dependency work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for dependency domain
+4. **Analyze Dependencies**: Use agent expertise for compatibility analysis
+5. **Resolve Conflicts**: Address version conflicts with agent guidance
+6. **Validate Changes**: Verify dependency updates with agent assistance
+
 ## 📊 Critical Success Factors
 
 ### Issue Distribution Analysis

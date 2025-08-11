@@ -4,6 +4,24 @@
  * This template provides a standardized way to mock API clients
  * based on lessons learned from multiple projects.
  * 
+ * MANDATORY: Cursor Agent Management
+ * CRITICAL: All API mock development requires fresh AI agents for optimal design and validation.
+ * 
+ * Agent Assignment for API Mock Development:
+ * - @static-analyzer: Mock architecture, standards compliance, code quality, testing patterns
+ * - @backend-agent: Backend API mocking, service mocking, Java API mocking, Spring Boot mocking
+ * - @frontend-agent: Frontend API mocking, React API mocking, TypeScript mocking, UI API mocking
+ * - @database-agent: Database API mocking, data mocking, schema mocking, query mocking
+ * - @infrastructure-agent: Infrastructure API mocking, deployment mocking, monitoring mocking
+ * 
+ * API Mock Development Workflow:
+ * 1. Clear Context: Press Ctrl+Shift+C before API mock development
+ * 2. New Conversation: Press Ctrl+Shift+N for fresh agent
+ * 3. Select Agent: Choose appropriate agent type for API domain
+ * 4. Design Mocks: Use agent expertise for optimal mock architecture
+ * 5. Implement Mocks: Build mocks with agent guidance
+ * 6. Validate Mocks: Verify mock functionality with agent assistance
+ * 
  * Key Features:
  * - Consistent response format handling
  * - Automatic data unwrapping (no response.data nesting in mocks)

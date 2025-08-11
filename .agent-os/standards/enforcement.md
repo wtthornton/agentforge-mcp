@@ -2,6 +2,15 @@
 
 ## 🚨 **MANDATORY COMPLIANCE REQUIREMENTS**
 
+### **CRITICAL: Cursor Agent Management (MANDATORY)**
+**BEFORE** starting any development work, you **MUST**:
+1. **Clear Context**: Press `Ctrl+Shift+C` to clear previous conversation
+2. **New Conversation**: Press `Ctrl+Shift+N` to start fresh
+3. **Select Agent**: Choose appropriate agent type for the task
+4. **Define Scope**: State single, focused objective clearly
+
+**VIOLATION**: Any development without fresh AI agent will result in immediate compliance failure.
+
 ### **CRITICAL: Quick Context Gathering (MANDATORY)**
 **BEFORE** starting any development work, you **MUST** run:
 ```bash
@@ -16,6 +25,12 @@ This tool provides **full project context in <100ms** and is **REQUIRED** for:
 - Recent changes tracking
 
 **VIOLATION**: Any development without running this tool first will result in immediate compliance failure.
+
+### **Agent Management Workflow (MANDATORY)**
+1. **ALWAYS** clear context: Press `Ctrl+Shift+C`
+2. **ALWAYS** start fresh: Press `Ctrl+Shift+N`
+3. **ALWAYS** select agent: Choose appropriate agent type for the task
+4. **ALWAYS** define scope: State single, focused objective clearly
 
 ### **Context Gathering Workflow (MANDATORY)**
 1. **ALWAYS** start with: `node .agent-os/tools/quick-context-gatherer.js`
@@ -51,13 +66,19 @@ This tool provides **full project context in <100ms** and is **REQUIRED** for:
 
 ### **Pre-Development Check (MANDATORY)**
 ```bash
-# 1. Gather full context (REQUIRED)
+# 1. Agent Management (REQUIRED)
+#    - Clear context: Ctrl+Shift+C
+#    - New conversation: Ctrl+Shift+N
+#    - Select appropriate agent type
+#    - Define single, focused objective
+
+# 2. Gather full context (REQUIRED)
 node .agent-os/tools/quick-context-gatherer.js
 
-# 2. Check compliance (if needed)
+# 3. Check compliance (if needed)
 node .agent-os/tools/compliance-checker.js --summary
 
-# 3. Proceed with development
+# 4. Proceed with development
 ```
 
 ### **Violation Consequences**

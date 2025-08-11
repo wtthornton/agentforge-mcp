@@ -1,5 +1,24 @@
 # CI/CD Strategy for Agent-OS Projects
 
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All CI/CD work requires fresh AI agents for optimal pipeline design and validation.
+
+### Agent Assignment for CI/CD Tasks
+- **@infrastructure-agent**: CI/CD pipeline design, GitHub Actions configuration, deployment automation, infrastructure as code
+- **@static-analyzer**: Pipeline validation, standards compliance, security scanning configuration, quality gates
+- **@backend-agent**: Backend build pipelines, Spring Boot deployment, Java testing configuration, backend quality gates
+- **@frontend-agent**: Frontend build pipelines, React deployment, frontend testing configuration, frontend quality gates
+- **@database-agent**: Database migration pipelines, schema deployment, data integrity checks, database testing
+
+### CI/CD Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before CI/CD work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for CI/CD domain
+4. **Pipeline Design**: Use agent expertise for optimal pipeline configuration
+5. **Security Integration**: Implement security scanning with agent guidance
+6. **Validation**: Verify pipeline configuration with agent assistance
+
 ## Context
 GitHub Actions-based CI/CD for React (frontend) + Spring Boot (backend) + Dockerized stack (Postgres, InfluxDB, Prometheus, Grafana).
 

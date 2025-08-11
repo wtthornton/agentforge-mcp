@@ -6,6 +6,7 @@
 - **Date**: [YYYY-MM-DD]
 - **Reviewer**: [Name]
 - **Team Members**: [List of team members]
+- **Agent Management**: Fresh agent for each compliance check
 
 ## Pre-Development Compliance
 
@@ -42,6 +43,22 @@
   - [ ] PostgreSQL 17 with pgvector for database
   - [ ] OpenAI GPT-4o for AI capabilities
   - [ ] Docker 24 for containerization
+
+### Cursor Agent Management Compliance
+**MANDATORY**: All development tasks use fresh AI agents
+
+- [ ] **Agent rotation strategy implemented**
+  - [ ] Fresh conversation started for each compliance check
+  - [ ] Appropriate agent type selected for the task
+  - [ ] Context cleared before starting new task
+  - [ ] Single, focused objective maintained
+
+- [ ] **Agent type validation**
+  - [ ] **@static-analyzer**: Used for compliance and standards validation
+  - [ ] **@database-agent**: Used for database and schema compliance
+  - [ ] **@frontend-agent**: Used for frontend and UI compliance
+  - [ ] **@backend-agent**: Used for backend and API compliance
+  - [ ] **@infrastructure-agent**: Used for deployment and infrastructure compliance
 
 ### Planning Compliance
 - [ ] **Task tracking structure** established

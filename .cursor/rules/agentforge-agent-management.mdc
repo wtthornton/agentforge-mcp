@@ -1,0 +1,167 @@
+# AgentForge Cursor Agent Management Rules
+
+## 🎯 Mandatory Agent Rotation Strategy
+
+**CRITICAL**: Every development task requires a fresh AI agent to maintain optimal performance and avoid conversation length limitations.
+
+### Agent Types and Specializations
+
+#### 1. **@static-analyzer**
+- **Purpose**: Code quality, compliance checking, standards validation
+- **Use Cases**: 
+  - Code review and quality assessment
+  - Agent OS standards compliance
+  - Project structure analysis
+  - Best practices validation
+- **Example Prompts**:
+  - "Analyze this Java class for Agent OS compliance"
+  - "Check this code against our coding standards"
+  - "Review project structure for best practices"
+
+#### 2. **@database-agent**
+- **Purpose**: PostgreSQL 17, pgvector, schema management, performance optimization
+- **Use Cases**:
+  - Database schema design and optimization
+  - Query performance tuning
+  - Migration strategy planning
+  - Vector operations optimization
+- **Example Prompts**:
+  - "Help optimize this PostgreSQL query for better performance"
+  - "Design database schema for project analysis features"
+  - "Implement pgvector operations for embedding storage"
+
+#### 3. **@frontend-agent**
+- **Purpose**: React 19, TypeScript 5, UI/UX development, component architecture
+- **Use Cases**:
+  - React component development and optimization
+  - TypeScript type definitions and interfaces
+  - UI/UX improvements and accessibility
+  - State management with TanStack Query
+- **Example Prompts**:
+  - "Help me implement this React component with proper TypeScript types"
+  - "Review this component for accessibility and best practices"
+  - "Optimize this component's performance and re-rendering"
+
+#### 4. **@backend-agent**
+- **Purpose**: Spring Boot 3.3, Java 21, API development, service architecture
+- **Use Cases**:
+  - Spring Boot service implementation
+  - REST API design and development
+  - Controller-Service-Repository pattern implementation
+  - Java 21 features and optimizations
+- **Example Prompts**:
+  - "Help me implement this Spring Boot service method"
+  - "Design REST API endpoints for project analysis"
+  - "Implement proper error handling in this controller"
+
+#### 5. **@infrastructure-agent**
+- **Purpose**: Docker, CI/CD, monitoring, deployment, infrastructure optimization
+- **Use Cases**:
+  - Docker Compose configuration
+  - Prometheus and Grafana setup
+  - CI/CD pipeline configuration
+  - Production deployment strategies
+- **Example Prompts**:
+  - "Help configure this Docker Compose setup for development"
+  - "Set up monitoring and alerting for the MCP server"
+  - "Optimize infrastructure for production deployment"
+
+## 🔄 Implementation Requirements
+
+### Before Each Task
+1. **Clear Context**: Press `Ctrl+Shift+C` to clear previous conversation
+2. **New Conversation**: Press `Ctrl+Shift+N` to start fresh
+3. **Select Agent**: Choose appropriate agent type for the task
+4. **Define Scope**: State single, focused objective clearly
+5. **Provide Context**: Include relevant files and requirements
+
+### During Task Execution
+1. **Stay Focused**: Keep conversation on single objective
+2. **Use Agent Expertise**: Leverage specialized knowledge of selected agent
+3. **Request Clarification**: Ask for clarification if context seems unclear
+4. **Document Progress**: Note successful patterns and solutions
+
+### After Task Completion
+1. **Complete Objective**: Finish the specific task
+2. **Document Results**: Record successful approaches and solutions
+3. **Close Conversation**: End conversation to maintain context clarity
+4. **Move to Next**: Start fresh agent for next task
+
+## 📋 Task-Agent Mapping Guidelines
+
+### Backend Development Tasks
+- **Agent**: `@backend-agent`
+- **Tasks**: Java development, Spring Boot services, API endpoints, service layer architecture
+- **Files**: `.java` files, Spring Boot configuration, service implementations
+
+### Database and Data Tasks
+- **Agent**: `@database-agent`
+- **Tasks**: PostgreSQL operations, schema design, query optimization, vector operations
+- **Files**: SQL files, database configuration, entity models, repository implementations
+
+### Frontend Development Tasks
+- **Agent**: `@frontend-agent`
+- **Tasks**: React components, TypeScript development, UI/UX, state management
+- **Files**: `.tsx` files, TypeScript interfaces, CSS/TailwindCSS, component files
+
+### Code Quality and Compliance Tasks
+- **Agent**: `@static-analyzer`
+- **Tasks**: Code review, standards compliance, best practices validation, project analysis
+- **Files**: Any code files requiring analysis, standards documentation, compliance reports
+
+### Infrastructure and Operations Tasks
+- **Agent**: `@infrastructure-agent`
+- **Tasks**: Docker configuration, monitoring setup, deployment, CI/CD configuration
+- **Files**: Docker files, configuration files, monitoring setup, deployment scripts
+
+## 🚀 Quick Reference Commands
+
+### Keyboard Shortcuts
+- `Ctrl+Shift+N`: Start new conversation (MANDATORY for each task)
+- `Ctrl+Shift+C`: Clear current conversation context
+- `Ctrl+Shift+A`: Quick agent selection menu
+
+### Agent Selection Commands
+- `@backend-agent`: For Java/Spring Boot development
+- `@database-agent`: For database and data operations
+- `@frontend-agent`: For React/TypeScript development
+- `@static-analyzer`: For code analysis and compliance
+- `@infrastructure-agent`: For infrastructure and deployment
+
+## 📊 Quality Assurance
+
+### Agent Relevance Verification
+- **Check Agent Type**: Ensure selected agent matches task requirements
+- **Verify Expertise**: Confirm agent has knowledge in required domain
+- **Assess Response Quality**: Request clarification if responses seem off-target
+
+### Success Pattern Documentation
+- **Record Effective Combinations**: Note which agent types work best for specific tasks
+- **Document Best Practices**: Capture successful approaches and methodologies
+- **Share Insights**: Communicate effective patterns with team members
+
+### Continuous Improvement
+- **Monitor Performance**: Track agent effectiveness for different task types
+- **Adjust Strategy**: Refine agent selection based on performance data
+- **Update Guidelines**: Incorporate lessons learned into agent management strategy
+
+## 🎯 Benefits of Agent Rotation
+
+✅ **Prevents conversation length limitations**  
+✅ **Maintains fresh context for each task**  
+✅ **Provides specialized expertise for different domains**  
+✅ **Improves response quality and relevance**  
+✅ **Enables parallel development across different areas**  
+✅ **Reduces context confusion and improves focus**  
+✅ **Optimizes AI assistance for specific technical domains**  
+✅ **Maintains high-quality development workflow**
+
+---
+
+**Generated by AgentForge Agent Management System**  
+**Last Updated**: 2025-01-27  
+**Purpose**: Ensure optimal Cursor AI assistance through strategic agent rotation
+description:
+globs:
+alwaysApply: false
+---

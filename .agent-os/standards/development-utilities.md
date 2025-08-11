@@ -4,6 +4,25 @@
 
 This document consolidates lessons learned from Agent OS development into standardized utility usage patterns. These utilities have been extracted from actual project experiences and should be used consistently across all Agent OS projects.
 
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All development utility work requires fresh AI agents for optimal analysis and validation.
+
+### Agent Assignment for Utility Tasks
+- **@static-analyzer**: Utility validation, standards compliance, code quality analysis, utility architecture
+- **@backend-agent**: Backend utilities, Java utilities, Spring Boot utilities, API utilities
+- **@frontend-agent**: Frontend utilities, React utilities, TypeScript utilities, UI/UX utilities
+- **@database-agent**: Database utilities, data utilities, schema utilities, query utilities
+- **@infrastructure-agent**: Infrastructure utilities, deployment utilities, monitoring utilities, CI/CD utilities
+
+### Utility Development Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before utility work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for utility domain
+4. **Utility Analysis**: Use agent expertise for utility design and validation
+5. **Implementation**: Build utilities with agent guidance
+6. **Testing**: Verify utility functionality with agent assistance
+
 ## Available Utilities
 
 ### 1. Dependency Validation (`utils/dependency-validator.js`)

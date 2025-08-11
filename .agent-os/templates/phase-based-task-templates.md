@@ -1,13 +1,14 @@
 # Phase-Based Task Templates for Early Issue Detection
 
 ## Overview
-These templates automatically inject Agent OS standards validation and early issue detection at the appropriate development phases, ensuring maximum compliance and quality.
+These templates automatically inject Agent OS standards validation and early issue detection at the appropriate development phases, ensuring maximum compliance and quality. **CRITICAL**: All tasks require fresh AI agents for optimal performance and context clarity.
 
 ## Foundation Phase Task Templates
 
 ### Template: Environment Setup Validation
 **When to Use**: Before any code development begins
 **Auto-Trigger**: Project initialization, new developer onboarding
+**Required Agent**: @infrastructure-agent
 
 ```markdown
 ## Environment Setup Validation
@@ -63,6 +64,7 @@ These templates automatically inject Agent OS standards validation and early iss
 ### Template: Security-First Development
 **When to Use**: Before implementing any data handling or API endpoints
 **Auto-Trigger**: Creating new services, controllers, or data models
+**Required Agent**: @static-analyzer
 
 ```markdown
 ## Security-First Development Checklist

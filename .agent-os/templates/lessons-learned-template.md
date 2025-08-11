@@ -8,6 +8,7 @@
 - **Priority**: [High/Medium/Low]
 - **Category**: [Development/Process/Technology/Security/Performance/Team/Other]
 - **Tags**: [Comma-separated tags for searching]
+- **Agent Used**: [@static-analyzer/@database-agent/@frontend-agent/@backend-agent/@infrastructure-agent]
 
 ## Context
 **What was the situation?**
@@ -98,6 +99,52 @@ We achieved 85ms average latency (target: <100ms) and 92% accuracy (target: 90%)
 **How did this affect our standards compliance?**
 
 ### Compliance Status
+
+## Cursor Agent Management Impact
+**How did this affect our agent management strategy?**
+
+### Agent Management Status
+- [ ] **Agent Selection**: Appropriate agent type was selected for the task
+- [ ] **Fresh Context**: New conversation was started for this task
+- [ ] **Specialized Expertise**: Agent provided domain-specific assistance
+- [ ] **Context Clarity**: Conversation remained focused on single objective
+- [ ] **Quick Closure**: Conversation was closed after task completion
+
+### Agent Management Insights
+**What did we learn about agent management?**
+
+[Document insights about agent effectiveness, including:]
+- Which agent type worked best for this type of task
+- How agent selection affected task completion
+- What agent-specific patterns were most effective
+- How conversation management improved or hindered progress
+
+**Example:**
+```
+1. @backend-agent was highly effective for Spring Boot service implementation
+2. Starting fresh conversation prevented context confusion from previous tasks
+3. Using specialized agent expertise reduced implementation time by 40%
+4. Clear task definition helped agent provide more targeted assistance
+5. Quick conversation closure maintained context clarity for future tasks
+```
+
+### Agent Management Recommendations
+**What should we do differently with agent management?**
+
+[Provide specific recommendations for agent usage, including:]
+- Which agent types to use for similar tasks in the future
+- How to improve agent selection and conversation management
+- What agent-specific prompts work best for different task types
+- How to optimize the agent rotation strategy
+
+**Example:**
+```
+1. ALWAYS use @backend-agent for Java/Spring Boot development tasks
+2. ALWAYS start fresh conversation for each new subtask
+3. ALWAYS provide clear, single-objective task definitions
+4. ALWAYS close conversations after task completion
+5. ALWAYS document successful agent-task combinations for future reference
+```
 - **Before Change**: [XX]% compliance score
 - **After Change**: [XX]% compliance score
 - **Violations Introduced**: [Number] new violations

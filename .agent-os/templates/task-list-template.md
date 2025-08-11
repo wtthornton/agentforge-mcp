@@ -8,6 +8,7 @@
 **Status**: Active  
 **Next Review**: [Date]  
 **Owner**: Development Team  
+**Agent Management**: Mandatory fresh agent for each task  
 
 ## Tasks
 
@@ -15,13 +16,32 @@
 Each task should follow this structure:
 
 ```markdown
-- [ ] [Task Number]. **[Task Title]**
-  - [ ] [Task Number].[Sub-task Number] [Sub-task description]
-  - [ ] [Task Number].[Sub-task Number] [Sub-task description]
-  - [ ] [Task Number].[Sub-task Number] [Sub-task description]
+- [ ] [Task Number]. **[Task Title]** - **Agent**: [@static-analyzer/@database-agent/@frontend-agent/@backend-agent/@infrastructure-agent]
+  - [ ] [Task Number].[Sub-task Number] [Sub-task description] - **Agent**: [appropriate agent type]
+  - [ ] [Task Number].[Sub-task Number] [Sub-task description] - **Agent**: [appropriate agent type]
+  - [ ] [Task Number].[Sub-task Number] [Sub-task description] - **Agent**: [appropriate agent type]
   - [ ] [Task Number].[Sub-task Number] **Update lessons learned** - Capture insights from [task name] implementation
   - **Progress Note**: [Brief description of current progress]
 ```
+
+### Agent Management Requirements
+
+**CRITICAL**: Every task and sub-task requires a fresh AI agent to maintain optimal performance and avoid conversation length limitations.
+
+#### **Agent Selection Guidelines**
+- **@static-analyzer**: Code quality, compliance, standards validation tasks
+- **@database-agent**: PostgreSQL, schema, performance optimization tasks
+- **@frontend-agent**: React 19, TypeScript, UI/UX development tasks
+- **@backend-agent**: Spring Boot 3.3, Java 21, API development tasks
+- **@infrastructure-agent**: Docker, CI/CD, monitoring, deployment tasks
+
+#### **Agent Rotation Workflow**
+1. **Clear Context**: Press `Ctrl+Shift+C` before starting new task
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for the task
+4. **Define Scope**: State single, focused objective clearly
+5. **Complete Task**: Finish the specific task objective
+6. **Close Conversation**: End conversation to maintain context clarity
 
 ### Mandatory Lessons Learned Integration
 

@@ -1,6 +1,7 @@
 package com.agentforge.repository;
 
 import com.agentforge.entity.Project;
+import com.agentforge.entity.ProjectStatus;
 import com.agentforge.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,22 +39,22 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     /**
      * Find projects by status
      */
-    List<Project> findByStatus(Project.ProjectStatus status);
+    List<Project> findByStatus(ProjectStatus status);
 
     /**
      * Find projects by status with pagination
      */
-    Page<Project> findByStatus(Project.ProjectStatus status, Pageable pageable);
+    Page<Project> findByStatus(ProjectStatus status, Pageable pageable);
 
     /**
      * Find projects by owner and status
      */
-    List<Project> findByOwnerAndStatus(User owner, Project.ProjectStatus status);
+    List<Project> findByOwnerAndStatus(User owner, ProjectStatus status);
 
     /**
      * Find projects by owner and status with pagination
      */
-    Page<Project> findByOwnerAndStatus(User owner, Project.ProjectStatus status, Pageable pageable);
+    Page<Project> findByOwnerAndStatus(User owner, ProjectStatus status, Pageable pageable);
 
     /**
      * Find projects by technology stack containing the search term
@@ -103,12 +104,12 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     /**
      * Find projects by multiple statuses
      */
-    List<Project> findByStatusIn(List<Project.ProjectStatus> statuses);
+    List<Project> findByStatusIn(List<ProjectStatus> statuses);
 
     /**
      * Find projects by multiple statuses with pagination
      */
-    Page<Project> findByStatusIn(List<Project.ProjectStatus> statuses, Pageable pageable);
+    Page<Project> findByStatusIn(List<ProjectStatus> statuses, Pageable pageable);
 
     /**
      * Find projects by owner with pagination
@@ -118,7 +119,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     /**
      * Count projects by status
      */
-    long countByStatus(Project.ProjectStatus status);
+    long countByStatus(ProjectStatus status);
 
     /**
      * Count projects by owner
@@ -128,7 +129,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     /**
      * Count projects by owner and status
      */
-    long countByOwnerAndStatus(User owner, Project.ProjectStatus status);
+    long countByOwnerAndStatus(User owner, ProjectStatus status);
 
     /**
      * Find projects by lines of code range
@@ -184,7 +185,7 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     /**
      * Find projects by owner and status with pagination and sorting
      */
-    Page<Project> findByOwnerAndStatusOrderByCreatedAtDesc(User owner, Project.ProjectStatus status, Pageable pageable);
+    Page<Project> findByOwnerAndStatusOrderByCreatedAtDesc(User owner, ProjectStatus status, Pageable pageable);
 
     /**
      * Find projects by owner ordered by last analysis date (most recent first)
@@ -204,10 +205,15 @@ public interface ProjectRepository extends JpaRepository<Project, Long> {
     /**
      * Find projects by owner and status ordered by last analysis date
      */
-    List<Project> findByOwnerAndStatusOrderByLastAnalysisDateDesc(User owner, Project.ProjectStatus status);
+    List<Project> findByOwnerAndStatusOrderByLastAnalysisDateDesc(User owner, ProjectStatus status);
 
     /**
      * Find projects by owner and status ordered by creation date
      */
-    List<Project> findByOwnerAndStatusOrderByCreatedAtDesc(User owner, Project.ProjectStatus status);
+    Page<Project> findByOwnerAndStatusOrderByCreatedAtDesc(User owner, ProjectStatus status);
+
+    /**
+     * Check if project exists by name
+     */
+    boolean existsByName(String name);
 }

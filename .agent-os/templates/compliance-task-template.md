@@ -5,6 +5,26 @@
 **Priority**: High | Medium | Low  
 **Assigned**: [Developer Name]  
 **Due**: [YYYY-MM-DD]
+**Agent Used**: [@static-analyzer/@database-agent/@frontend-agent/@backend-agent/@infrastructure-agent]
+
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All compliance tasks require fresh AI agents for optimal validation and tracking.
+
+### Agent Assignment for Compliance Tasks
+- **@static-analyzer**: Compliance validation, standards checking, violation detection and resolution
+- **@backend-agent**: Backend compliance, API standards, service architecture validation
+- **@frontend-agent**: Frontend compliance, UI/UX standards, component architecture validation
+- **@database-agent**: Database compliance, schema standards, data integrity validation
+- **@infrastructure-agent**: Infrastructure compliance, deployment standards, monitoring validation
+
+### Compliance Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before compliance work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for compliance domain
+4. **Run Compliance Check**: Use agent expertise for comprehensive validation
+5. **Address Violations**: Fix issues with agent guidance
+6. **Verify Resolution**: Confirm compliance with agent assistance
 
 ### Subtasks
 

@@ -1,0 +1,67 @@
+{
+  "conversationSettings": {
+    "autoNewConversation": true,
+    "maxMessages": 20,
+    "contextRetention": "minimal",
+    "agentRotation": true,
+    "conversationMode": "fresh-start"
+  },
+  "projectContext": {
+    "agentforge": {
+      "defaultAgent": "static-analyzer",
+      "conversationMode": "fresh-start",
+      "agentTypes": {
+        "static-analyzer": {
+          "description": "Code quality, compliance, standards validation",
+          "useFor": ["code-review", "compliance", "standards", "analysis"]
+        },
+        "database-agent": {
+          "description": "PostgreSQL, schema, performance optimization",
+          "useFor": ["database", "schema", "queries", "performance"]
+        },
+        "frontend-agent": {
+          "description": "React 19, TypeScript, UI/UX development",
+          "useFor": ["react", "typescript", "ui", "frontend"]
+        },
+        "backend-agent": {
+          "description": "Spring Boot 3.3, Java 21, API development",
+          "useFor": ["java", "spring-boot", "api", "backend"]
+        },
+        "infrastructure-agent": {
+          "description": "Docker, CI/CD, monitoring, deployment",
+          "useFor": ["docker", "ci-cd", "monitoring", "deployment"]
+        }
+      }
+    }
+  },
+  "developmentWorkflow": {
+    "agentRotation": {
+      "enabled": true,
+      "mandatory": true,
+      "strategy": "per-subtask",
+      "benefits": [
+        "Prevents conversation length limitations",
+        "Maintains fresh context for each task",
+        "Provides specialized expertise for different domains",
+        "Improves response quality and relevance"
+      ]
+    },
+    "conversationManagement": {
+      "newConversationPerTask": true,
+      "contextClearOnStart": true,
+      "singleFocusPerConversation": true,
+      "quickClosureAfterTask": true
+    }
+  },
+  "keyboardShortcuts": {
+    "newConversation": "Ctrl+Shift+N",
+    "clearConversation": "Ctrl+Shift+C",
+    "agentSelection": "Ctrl+Shift+A"
+  },
+  "qualityAssurance": {
+    "agentRelevanceCheck": true,
+    "responseQualityValidation": true,
+    "successPatternDocumentation": true,
+    "continuousImprovement": true
+  }
+}

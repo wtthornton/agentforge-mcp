@@ -1,7 +1,7 @@
 # Agent-OS Feature Scoring Framework
 
 ## Overview
-This framework provides systematic criteria for evaluating and prioritizing features in Agent-OS development. It ensures resources are allocated to maximum impact features that directly improve developer productivity and code quality.
+This framework provides systematic criteria for evaluating and prioritizing features in Agent-OS development. It ensures resources are allocated to maximum impact features that directly improve developer productivity and code quality, while maintaining optimal AI assistance through strategic agent rotation.
 
 ## Mandatory Scoring Criteria
 
@@ -78,6 +78,7 @@ Features meeting ANY of the following criteria should be automatically deferred 
 - **Who**: Product owner + lead developer + 2 team members
 - **When**: During feature planning, before development estimation
 - **Format**: Individual scoring followed by consensus discussion
+- **Agent Management**: Fresh conversation with appropriate agent type for each feature
 
 ### 2. Scoring Review
 - **Frequency**: Bi-weekly during sprint planning
@@ -93,6 +94,11 @@ Features meeting ANY of the following criteria should be automatically deferred 
 
 ```markdown
 ## Feature: [Feature Name]
+
+### Agent Management
+- **Agent Type**: [@static-analyzer/@database-agent/@frontend-agent/@backend-agent/@infrastructure-agent]
+- **Fresh Conversation**: [Yes/No] - Started new conversation for this feature
+- **Context Clarity**: [Yes/No] - Single, focused objective maintained
 
 ### Scoring
 - **Business Impact**: [1-10] - [Justification]

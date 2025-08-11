@@ -14,6 +14,7 @@ This document defines mandatory testing standards to prevent common issues and e
 2. **Mock Reality**: Mocks must behave exactly like real implementations
 3. **Fail Fast**: Catch issues before code execution
 4. **Document Everything**: No implicit assumptions
+5. **Fresh Agent Context**: Use new AI agent for each testing task to maintain clarity
 
 ## Testing Stack
 
@@ -23,6 +24,13 @@ This document defines mandatory testing standards to prevent common issues and e
 - **Mocking**: Vitest built-in mocks
 - **Coverage**: Vitest coverage with c8
 - **Validation**: Custom pre-test validators
+
+### Agent Management Requirements
+- **@static-analyzer**: Test architecture and compliance validation
+- **@backend-agent**: Backend testing and service validation
+- **@frontend-agent**: Frontend testing and component validation
+- **@database-agent**: Database testing and schema validation
+- **@infrastructure-agent**: Infrastructure and deployment testing
 
 ### Configuration
 

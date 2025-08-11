@@ -3,6 +3,25 @@
 ## 🎯 Purpose
 This document establishes comprehensive configuration management standards based on lessons learned to prevent YAML duplicate keys, configuration conflicts, and deployment issues.
 
+## MANDATORY: Cursor Agent Management
+
+**CRITICAL**: All configuration management tasks require fresh AI agents for optimal analysis and validation.
+
+### Agent Assignment for Configuration Tasks
+- **@static-analyzer**: Configuration validation, standards compliance, YAML structure analysis
+- **@infrastructure-agent**: Infrastructure configuration (Docker, CI/CD, deployment configs)
+- **@backend-agent**: Backend configuration (Spring Boot, application properties, database configs)
+- **@frontend-agent**: Frontend configuration (Vite, TailwindCSS, build configs)
+- **@database-agent**: Database configuration (PostgreSQL, connection strings, schema configs)
+
+### Configuration Management Workflow
+1. **Clear Context**: Press `Ctrl+Shift+C` before configuration work
+2. **New Conversation**: Press `Ctrl+Shift+N` for fresh agent
+3. **Select Agent**: Choose appropriate agent type for configuration domain
+4. **Analyze Configuration**: Use agent expertise for configuration validation
+5. **Apply Changes**: Implement configuration updates with agent guidance
+6. **Validate Result**: Verify configuration changes with agent assistance
+
 ## 📊 Critical Issue Analysis
 
 ### Configuration Failure Distribution
