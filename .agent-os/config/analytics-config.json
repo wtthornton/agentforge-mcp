@@ -1,0 +1,49 @@
+{
+  "metricsRetention": 90,
+  "analysisIntervals": ["daily", "weekly", "monthly"],
+  "predictiveModels": ["trend", "anomaly", "performance"],
+  "dashboardRefresh": 300000,
+  "alertThresholds": {
+    "performance": {
+      "warning": 200,
+      "critical": 500
+    },
+    "availability": {
+      "warning": 95,
+      "critical": 90
+    },
+    "errorRate": {
+      "warning": 1,
+      "critical": 5
+    }
+  },
+  "reportingSchedule": {
+    "daily": "0 6 * * *",
+    "weekly": "0 6 * * 1",
+    "monthly": "0 6 1 * *"
+  },
+  "customMetrics": [
+    {
+      "name": "codeQualityIndex",
+      "source": "static_analysis",
+      "weight": 0.3
+    },
+    {
+      "name": "complianceScore",
+      "source": "compliance_checker",
+      "weight": 0.4
+    },
+    {
+      "name": "performanceIndex",
+      "source": "performance_monitor",
+      "weight": 0.3
+    }
+  ],
+  "dashboardSettings": {
+    "autoRefresh": true,
+    "refreshInterval": 30000,
+    "themes": ["light", "dark"],
+    "defaultTheme": "light",
+    "exportFormats": ["json", "csv", "pdf", "html"]
+  }
+}

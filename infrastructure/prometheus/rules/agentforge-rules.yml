@@ -1,38 +1,165 @@
 groups:
-  - name: agentforge
-    rules:
-      - alert: HighCPUUsage
-        expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: "High CPU usage detected"
-          description: "CPU usage is above 80% for more than 5 minutes"
+- name: agentforge-critical
+  rules:
+  - alert: ServiceDown
+    expr: up == 0
+    for: 1m
+    labels:
+      severity: critical
+      team: platform
+    annotations:
+      summary: "Service {{ $labels.instance }} is down"
+      description: "Service {{ $labels.instance }} has been down for more than 1 minute"
+      runbook_url: "https://docs.agentforge.local/runbooks/service-down"
 
-      - alert: HighMemoryUsage
-        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
-        for: 5m
-        labels:
-          severity: warning
-        annotations:
-          summary: "High memory usage detected"
-          description: "Memory usage is above 85% for more than 5 minutes"
+  - alert: HighErrorRate
+    expr: sum(rate(http_requests_total{status=~"5.."}[5m])) / sum(rate(http_requests_total[5m])) > 0.1
+    for: 5m
+    labels:
+      severity: critical
+      team: backend
+    annotations:
+      summary: "High error rate detected"
+      description: "Error rate is {{ $value | humanizePercentage }} for the last 5 minutes"
+      runbook_url: "https://docs.agentforge.local/runbooks/high-error-rate"
 
-      - alert: PostgresDown
-        expr: up{job="postgres"} == 0
-        for: 1m
-        labels:
-          severity: critical
-        annotations:
-          summary: "PostgreSQL is down"
-          description: "PostgreSQL service is not responding"
+  - alert: DatabaseConnectionFailure
+    expr: postgres_up == 0
+    for: 30s
+    labels:
+      severity: critical
+      team: database
+    annotations:
+      summary: "Database connection failure"
+      description: "Unable to connect to PostgreSQL database for {{ $labels.instance }}"
+      runbook_url: "https://docs.agentforge.local/runbooks/database-down"
 
-      - alert: RedisDown
-        expr: up{job="redis"} == 0
-        for: 1m
-        labels:
-          severity: critical
-        annotations:
-          summary: "Redis is down"
-          description: "Redis service is not responding"
+- name: agentforge-performance
+  rules:
+  - alert: HighResponseTime
+    expr: histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le, service)) > 2
+    for: 10m
+    labels:
+      severity: warning
+      team: backend
+    annotations:
+      summary: "High response time on {{ $labels.service }}"
+      description: "95th percentile response time is {{ $value }}s for {{ $labels.service }}"
+
+  - alert: HighCPUUsage
+    expr: 100 - (avg by (instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+    for: 10m
+    labels:
+      severity: warning
+      team: platform
+    annotations:
+      summary: "High CPU usage on {{ $labels.instance }}"
+      description: "CPU usage is {{ $value }}% on {{ $labels.instance }}"
+
+  - alert: HighMemoryUsage
+    expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+    for: 5m
+    labels:
+      severity: warning
+      team: platform
+    annotations:
+      summary: "High memory usage on {{ $labels.instance }}"
+      description: "Memory usage is {{ $value }}% on {{ $labels.instance }}"
+
+  - alert: LowDiskSpace
+    expr: (node_filesystem_size_bytes - node_filesystem_free_bytes) / node_filesystem_size_bytes * 100 > 90
+    for: 5m
+    labels:
+      severity: warning
+      team: platform
+    annotations:
+      summary: "Low disk space on {{ $labels.instance }}"
+      description: "Disk usage is {{ $value }}% on {{ $labels.instance }} for {{ $labels.mountpoint }}"
+
+- name: agentforge-database
+  rules:
+  - alert: DatabaseConnections
+    expr: postgres_connections_active / postgres_connections_max > 0.8
+    for: 2m
+    labels:
+      severity: warning
+      team: database
+    annotations:
+      summary: "High database connection usage"
+      description: "Database connection usage is {{ $value | humanizePercentage }} on {{ $labels.instance }}"
+
+  - alert: SlowDatabaseQueries
+    expr: avg(postgres_query_duration_seconds) > 5
+    for: 5m
+    labels:
+      severity: warning
+      team: database
+    annotations:
+      summary: "Slow database queries detected"
+      description: "Average query duration is {{ $value }}s on {{ $labels.instance }}"
+
+  - alert: DatabaseReplicationLag
+    expr: postgres_replication_lag_seconds > 300
+    for: 2m
+    labels:
+      severity: warning
+      team: database
+    annotations:
+      summary: "High database replication lag"
+      description: "Replication lag is {{ $value }}s on {{ $labels.instance }}"
+
+- name: agentforge-cache
+  rules:
+  - alert: LowCacheHitRate
+    expr: redis_cache_hit_rate < 0.6
+    for: 10m
+    labels:
+      severity: warning
+      team: backend
+    annotations:
+      summary: "Low cache hit rate"
+      description: "Cache hit rate is {{ $value | humanizePercentage }} on {{ $labels.instance }}"
+
+  - alert: RedisMemoryUsage
+    expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+    for: 5m
+    labels:
+      severity: warning
+      team: cache
+    annotations:
+      summary: "High Redis memory usage"
+      description: "Redis memory usage is {{ $value | humanizePercentage }} on {{ $labels.instance }}"
+
+- name: agentforge-application
+  rules:
+  - alert: HighJVMHeapUsage
+    expr: jvm_memory_used_bytes{area="heap"} / jvm_memory_max_bytes{area="heap"} > 0.8
+    for: 5m
+    labels:
+      severity: warning
+      team: backend
+    annotations:
+      summary: "High JVM heap usage"
+      description: "JVM heap usage is {{ $value | humanizePercentage }} on {{ $labels.instance }}"
+
+  - alert: NodeJSEventLoopLag
+    expr: nodejs_eventloop_lag_seconds > 0.1
+    for: 5m
+    labels:
+      severity: warning
+      team: mcp
+    annotations:
+      summary: "High Node.js event loop lag"
+      description: "Event loop lag is {{ $value }}s on {{ $labels.instance }}"
+
+- name: agentforge-business
+  rules:
+  - alert: HighAnalysisFailureRate
+    expr: sum(rate(agentforge_analysis_total{status="failed"}[10m])) / sum(rate(agentforge_analysis_total[10m])) > 0.05
+    for: 5m
+    labels:
+      severity: warning
+      team: product
+    annotations:
+      summary: "High analysis failure rate"
+      description: "Analysis failure rate is {{ $value | humanizePercentage }}"

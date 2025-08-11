@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "type": "comprehensive",
+    "generatedAt": "2025-08-11T20:06:09.588Z",
+    "version": "1.0.0",
+    "dataPoints": 1
+  },
+  "summary": {
+    "status": "healthy",
+    "score": 95
+  },
+  "metrics": {
+    "timestamp": "2025-08-11T20:06:09.588Z",
+    "system": {
+      "uptime": 0.085202756,
+      "memoryUsage": {
+        "rss": 47.94140625,
+        "heapTotal": 7.77734375,
+        "heapUsed": 4.003692626953125,
+        "external": 1.459803581237793
+      },
+      "cpuUsage": {
+        "user": 75247,
+        "system": 6422
+      },
+      "loadAverage": [
+        0,
+        0.11,
+        0.23
+      ],
+      "platform": "linux",
+      "version": "v18.19.1",
+      "arch": "x64"
+    },
+    "application": {
+      "requestCount": 308,
+      "responseTime": 65,
+      "errorRate": 1.7900175391700244,
+      "activeUsers": 64,
+      "cacheHitRate": 94.34905970181903,
+      "databaseConnections": 10,
+      "queueDepth": 43
+    },
+    "business": {
+      "projectAnalyses": 486,
+      "complianceScore": 98,
+      "codeQuality": 94,
+      "userSatisfaction": 4.995244826433829,
+      "featureUsage": {},
+      "conversionRate": 5.465502158388207
+    },
+    "performance": {
+      "throughput": 1081,
+      "latency": {
+        "p50": 143,
+        "p90": 123,
+        "p95": 139,
+        "p99": 158
+      },
+      "availability": 96.5532843204675,
+      "resourceUtilization": {},
+      "scalingMetrics": {}
+    },
+    "security": {
+      "securityEvents": 5,
+      "vulnerabilities": [],
+      "accessAttempts": 874,
+      "complianceViolations": 1,
+      "encryptionCoverage": 97.37881318745323
+    }
+  },
+  "analysis": {
+    "trendAnalysis": {
+      "status": "insufficient_data",
+      "message": "Need at least 10 data points for trend analysis"
+    },
+    "anomalyDetection": {
+      "count": 0,
+      "anomalies": [],
+      "severity": "low"
+    },
+    "performancePrediction": {
+      "status": "insufficient_data"
+    },
+    "capacityPlanning": {},
+    "riskAssessment": {},
+    "recommendations": []
+  },
+  "recommendations": [
+    {
+      "category": "Performance",
+      "description": "Optimize database queries",
+      "priority": "high",
+      "impact": "medium"
+    },
+    {
+      "category": "Security",
+      "description": "Update dependencies",
+      "priority": "medium",
+      "impact": "high"
+    }
+  ],
+  "alerts": [],
+  "trends": {},
+  "forecasts": {}
+}

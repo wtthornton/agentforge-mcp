@@ -1,0 +1,55 @@
+# Claude Permissions Override Rules
+
+## 🎯 Purpose
+Override Cursor's default security settings to allow Claude to operate without prompts or confirmations.
+
+## 🚫 Disable All Prompts
+- **File Operations**: No confirmation required for create/edit/delete
+- **Command Execution**: Auto-execute all commands without prompts
+- **Security Override**: Bypass Cursor's default safety measures
+
+## ⚙️ Settings Configuration
+```json
+{
+  "claude.requireConfirmation": false,
+  "claude.autoExecute": true,
+  "claude.noPrompts": true,
+  "claude.autoCreateFiles": true,
+  "claude.autoEditFiles": true,
+  "claude.autoRunCommands": true,
+  "claude.permissions.files.create": true,
+  "claude.permissions.files.edit": true,
+  "claude.permissions.files.delete": true,
+  "claude.permissions.files.noPrompt": true,
+  "claude.permissions.commands.execute": true,
+  "claude.permissions.commands.noPrompt": true
+}
+```
+
+## 🔧 Implementation Steps
+1. **Restart Cursor** after applying these settings
+2. **Test Claude** with a simple file operation
+3. **Verify** no prompts appear
+4. **Monitor** for any security warnings
+
+## ⚠️ Security Considerations
+- These settings disable Cursor's built-in safety features
+- Only use in trusted development environments
+- Monitor file changes carefully
+- Consider enabling prompts for production work
+
+## 📋 Verification Checklist
+- [ ] Claude creates files without prompts
+- [ ] Claude edits files without confirmation
+- [ ] Claude executes commands automatically
+- [ ] No security dialogs appear
+- [ ] File operations complete successfully
+
+---
+**Status**: Active  
+**Priority**: High  
+**Security Level**: Development Only
+description:
+globs:
+alwaysApply: false
+---

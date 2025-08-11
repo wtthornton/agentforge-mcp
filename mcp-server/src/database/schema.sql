@@ -185,6 +185,121 @@ CREATE INDEX IF NOT EXISTS idx_code_embeddings_project_id ON code_embeddings(pro
 CREATE INDEX IF NOT EXISTS idx_code_embeddings_content_hash ON code_embeddings(content_hash);
 CREATE INDEX IF NOT EXISTS idx_code_embeddings_vector ON code_embeddings USING ivfflat (embedding vector_cosine_ops);
 
+-- Performance optimization indexes
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_projects_path_hash ON projects USING hash(path);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_projects_name_text ON projects USING gin(to_tsvector('english', name));
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_projects_description_text ON projects USING gin(to_tsvector('english', description));
+
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_project_analyses_composite ON project_analyses(project_id, analysis_type, status, started_at);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_project_analyses_results_gin ON project_analyses USING gin(results);
+
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_compliance_violations_composite ON compliance_violations(compliance_id, severity, rule_id);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_compliance_violations_file_path ON compliance_violations(file_path);
+
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_project_files_composite ON project_files(project_id, language, file_extension);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_project_files_complexity ON project_files(complexity_score) WHERE complexity_score IS NOT NULL;
+
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_audit_logs_composite ON audit_logs(user_id, action, created_at);
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_audit_logs_resource ON audit_logs(resource_type, resource_id);
+
+-- Partial indexes for better performance on filtered queries
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_projects_active ON projects(id, name, created_at) WHERE status != 'deleted';
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_analyses_pending ON project_analyses(id, project_id, started_at) WHERE status = 'pending';
+CREATE INDEX CONCURRENTLY IF NOT EXISTS idx_compliance_high_severity ON compliance_violations(id, compliance_id, message) WHERE severity IN ('critical', 'high');
+
+-- Materialized view for project statistics (for performance)
+CREATE MATERIALIZED VIEW IF NOT EXISTS project_statistics AS
+SELECT 
+    p.id,
+    p.name,
+    p.status,
+    p.compliance_score,
+    COUNT(DISTINCT pf.id) as total_files,
+    COUNT(DISTINCT pd.id) as total_directories,
+    SUM(pf.lines_of_code) as total_lines,
+    AVG(pf.complexity_score) as avg_complexity,
+    COUNT(DISTINCT pa.id) as total_analyses,
+    COUNT(DISTINCT CASE WHEN cv.severity = 'critical' THEN cv.id END) as critical_violations,
+    COUNT(DISTINCT CASE WHEN cv.severity = 'high' THEN cv.id END) as high_violations,
+    MAX(pa.completed_at) as last_analysis_date
+FROM projects p
+LEFT JOIN project_files pf ON p.id = pf.project_id
+LEFT JOIN project_directories pd ON p.id = pd.project_id
+LEFT JOIN project_analyses pa ON p.id = pa.project_id
+LEFT JOIN project_compliance pc ON p.id = pc.project_id
+LEFT JOIN compliance_violations cv ON pc.id = cv.compliance_id
+GROUP BY p.id, p.name, p.status, p.compliance_score;
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_project_statistics_id ON project_statistics(id);
+
+-- Function to refresh materialized view
+CREATE OR REPLACE FUNCTION refresh_project_statistics()
+RETURNS void AS $$
+BEGIN
+    REFRESH MATERIALIZED VIEW CONCURRENTLY project_statistics;
+END;
+$$ LANGUAGE plpgsql;
+
+-- Performance monitoring views
+CREATE OR REPLACE VIEW database_performance AS
+SELECT 
+    schemaname,
+    tablename,
+    attname,
+    n_distinct,
+    correlation,
+    most_common_vals,
+    most_common_freqs
+FROM pg_stats 
+WHERE schemaname = 'public'
+ORDER BY tablename, attname;
+
+CREATE OR REPLACE VIEW slow_queries AS
+SELECT 
+    query,
+    calls,
+    total_time,
+    mean_time,
+    rows,
+    100.0 * shared_blks_hit / nullif(shared_blks_hit + shared_blks_read, 0) AS hit_percent
+FROM pg_stat_statements
+ORDER BY mean_time DESC
+LIMIT 20;
+
+CREATE OR REPLACE VIEW connection_stats AS
+SELECT 
+    state,
+    COUNT(*) as connection_count,
+    MAX(EXTRACT(EPOCH FROM (now() - state_change))) as max_duration
+FROM pg_stat_activity
+WHERE state IS NOT NULL
+GROUP BY state
+ORDER BY connection_count DESC;
+
+-- Database maintenance procedures
+CREATE OR REPLACE FUNCTION optimize_database()
+RETURNS void AS $$
+DECLARE
+    table_name text;
+BEGIN
+    -- Update statistics for all tables
+    FOR table_name IN 
+        SELECT tablename FROM pg_tables WHERE schemaname = 'public'
+    LOOP
+        EXECUTE 'ANALYZE ' || quote_ident(table_name);
+    END LOOP;
+    
+    -- Refresh materialized views
+    PERFORM refresh_project_statistics();
+    
+    -- Log optimization completion
+    INSERT INTO audit_logs (user_id, action, resource_type, details, created_at)
+    VALUES ('system', 'database_optimization', 'database', 
+            jsonb_build_object('timestamp', now(), 'type', 'scheduled_maintenance'), 
+            now());
+END;
+$$ LANGUAGE plpgsql;
+
 -- Insert initial data
 INSERT INTO projects (name, description, path, technology_stack, status, total_files, total_directories, total_lines_of_code)
 VALUES (

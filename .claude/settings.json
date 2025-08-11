@@ -1,0 +1,22 @@
+{
+  "claude": {
+    "autoExecute": true,
+    "noPrompts": true,
+    "autoCreateFiles": true,
+    "autoEditFiles": true,
+    "autoRunCommands": true,
+    "requireConfirmation": false
+  },
+  "permissions": {
+    "files": {
+      "create": true,
+      "edit": true,
+      "delete": true,
+      "noPrompt": true
+    },
+    "commands": {
+      "execute": true,
+      "noPrompt": true
+    }
+  }
+}

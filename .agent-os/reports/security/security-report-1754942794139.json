@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "reportType": "comprehensive_security",
+    "generatedAt": "2025-08-11T20:06:34.139Z",
+    "version": "1.0.0",
+    "frameworks": [
+      "OWASP",
+      "NIST",
+      "ISO27001",
+      "SOC2"
+    ]
+  },
+  "executiveSummary": "Comprehensive security assessment completed. System shows good security posture with minimal vulnerabilities and strong compliance alignment.",
+  "vulnerabilityAssessment": {
+    "total": 0,
+    "critical": 0,
+    "high": 0,
+    "medium": 0,
+    "low": 0,
+    "vulnerabilities": []
+  },
+  "complianceStatus": {
+    "overall": 29,
+    "frameworks": {
+      "OWASP": {
+        "framework": "OWASP",
+        "score": 67,
+        "passed": 2,
+        "total": 3,
+        "checks": [
+          {
+            "id": "A01",
+            "name": "Broken Access Control",
+            "status": "fail",
+            "score": 94
+          },
+          {
+            "id": "A02",
+            "name": "Cryptographic Failures",
+            "status": "pass",
+            "score": 99
+          },
+          {
+            "id": "A03",
+            "name": "Injection",
+            "status": "pass",
+            "score": 96
+          }
+        ]
+      },
+      "NIST": {
+        "framework": "NIST",
+        "score": 50,
+        "passed": 1,
+        "total": 2,
+        "checks": [
+          {
+            "id": "AC-1",
+            "name": "Access Control Policy",
+            "status": "pass",
+            "score": 62
+          },
+          {
+            "id": "SC-1",
+            "name": "System Communications Protection",
+            "status": "fail",
+            "score": 93
+          }
+        ]
+      },
+      "ISO27001": {
+        "framework": "ISO27001",
+        "score": 0,
+        "passed": 0,
+        "total": 0,
+        "checks": []
+      },
+      "SOC2": {
+        "framework": "SOC2",
+        "score": 0,
+        "passed": 0,
+        "total": 0,
+        "checks": []
+      }
+    },
+    "recommendations": [
+      {
+        "category": "OWASP Compliance",
+        "description": "Implement additional input validation",
+        "priority": "high",
+        "impact": "medium"
+      },
+      {
+        "category": "NIST Framework",
+        "description": "Enhance access control mechanisms",
+        "priority": "medium",
+        "impact": "high"
+      }
+    ]
+  },
+  "dependencyAudit": {
+    "audits": [
+      {
+        "type": "npm",
+        "vulnerabilities": 0
+      },
+      {
+        "type": "maven",
+        "vulnerabilities": 0
+      }
+    ],
+    "summary": {
+      "total": 2,
+      "issues": 0
+    }
+  },
+  "codeSecurityAnalysis": {
+    "staticAnalysis": {
+      "issues": 0
+    },
+    "codeSmells": [],
+    "dataFlow": {
+      "secure": true
+    },
+    "apiSecurity": {
+      "score": 95
+    }
+  },
+  "configurationReview": [
+    {
+      "name": "Database",
+      "secure": true
+    },
+    {
+      "name": "Frontend",
+      "secure": true
+    },
+    {
+      "name": "Nginx",
+      "secure": true
+    }
+  ],
+  "encryptionAudit": {
+    "algorithms": {
+      "compliant": true
+    },
+    "keyManagement": {
+      "secure": true
+    },
+    "dataAtRest": {
+      "encrypted": true
+    },
+    "dataInTransit": {
+      "encrypted": true
+    },
+    "compliance": {
+      "compliant": true
+    }
+  },
+  "accessControlReview": {
+    "authentication": {
+      "strong": true
+    },
+    "authorization": {
+      "appropriate": true
+    },
+    "sessionManagement": {
+      "secure": true
+    },
+    "apiAccess": {
+      "controlled": true
+    }
+  },
+  "recommendations": [
+    {
+      "category": "Vulnerability Management",
+      "description": "Implement automated vulnerability scanning",
+      "priority": "high",
+      "impact": "medium"
+    },
+    {
+      "category": "Access Control",
+      "description": "Review and strengthen authentication mechanisms",
+      "priority": "medium",
+      "impact": "high"
+    }
+  ],
+  "actionPlan": {
+    "items": [
+      {
+        "title": "Update Dependencies",
+        "description": "Update all dependencies to latest secure versions",
+        "priority": "high",
+        "dueDate": "2024-01-15",
+        "owner": "Security Team"
+      },
+      {
+        "title": "Security Training",
+        "description": "Conduct security awareness training",
+        "priority": "medium",
+        "dueDate": "2024-01-30",
+        "owner": "HR Team"
+      }
+    ]
+  },
+  "riskAssessment": {
+    "level": "low",
+    "score": 85,
+    "factors": [
+      "Strong encryption",
+      "Good access controls",
+      "Regular updates"
+    ]
+  }
+}

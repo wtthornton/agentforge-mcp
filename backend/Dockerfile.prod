@@ -1,0 +1,65 @@
+# Multi-stage build for AgentForge Backend Production
+FROM maven:3.9.6-eclipse-temurin-21-alpine AS builder
+
+# Set working directory
+WORKDIR /app
+
+# Copy pom.xml first to leverage Docker cache for dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline -B
+
+# Copy source code
+COPY src ./src
+
+# Build the application
+RUN mvn clean package -DskipTests -B && \
+    mv target/*.jar app.jar
+
+# Production stage
+FROM eclipse-temurin:21-jre-alpine
+
+# Install security updates and required packages
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache \
+        curl \
+        bash \
+        tini \
+        && \
+    rm -rf /var/cache/apk/*
+
+# Create non-root user
+RUN addgroup -g 1001 -S appgroup && \
+    adduser -u 1001 -S appuser -G appgroup
+
+# Set working directory
+WORKDIR /app
+
+# Copy application JAR from builder stage
+COPY --from=builder --chown=appuser:appgroup /app/app.jar .
+
+# Create directories for logs and temp files
+RUN mkdir -p /app/logs /app/temp && \
+    chown -R appuser:appgroup /app
+
+# Set environment variables for production
+ENV JAVA_OPTS="-server -Xms512m -Xmx1g -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:+UseStringDeduplication" \
+    SPRING_PROFILES_ACTIVE=production \
+    LOG_ROOT=/app/logs \
+    TEMP_DIR=/app/temp
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8081/actuator/health || exit 1
+
+# Switch to non-root user
+USER appuser
+
+# Expose port
+EXPOSE 8081
+
+# Use tini as PID 1 for proper signal handling
+ENTRYPOINT ["/sbin/tini", "--"]
+
+# Start the application
+CMD ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]

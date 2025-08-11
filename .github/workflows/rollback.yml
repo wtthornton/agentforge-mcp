@@ -1,0 +1,158 @@
+name: Emergency Rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to rollback'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+        - staging
+        - production
+      version:
+        description: 'Version/tag to rollback to'
+        required: true
+        type: string
+      reason:
+        description: 'Rollback reason'
+        required: true
+        type: string
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: agentforge
+
+jobs:
+  rollback:
+    name: Emergency Rollback
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.environment }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.version }}
+
+      - name: Validate rollback version
+        run: |
+          if ! git tag --list | grep -q "^${{ github.event.inputs.version }}$"; then
+            echo "Error: Tag ${{ github.event.inputs.version }} does not exist"
+            exit 1
+          fi
+
+      - name: Create rollback issue
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Emergency Rollback to ${{ github.event.inputs.version }}`,
+              body: `## Rollback Details
+              
+              **Environment:** ${{ github.event.inputs.environment }}
+              **Target Version:** ${{ github.event.inputs.version }}
+              **Reason:** ${{ github.event.inputs.reason }}
+              **Initiated by:** @${{ github.actor }}
+              **Timestamp:** ${new Date().toISOString()}
+              
+              ## Actions Taken
+              - [ ] Database backup created
+              - [ ] Application rolled back
+              - [ ] Health checks passed
+              - [ ] Monitoring verified
+              
+              ## Follow-up Required
+              - [ ] Root cause analysis
+              - [ ] Fix implementation
+              - [ ] Re-deployment planning
+              `,
+              labels: ['rollback', 'urgent', ${{ github.event.inputs.environment }}]
+            });
+            console.log(`Created rollback issue: ${issue.data.html_url}`);
+
+      - name: Backup current state
+        env:
+          HOST: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_HOST || secrets.STAGING_HOST }}
+          USER: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_USER || secrets.STAGING_USER }}
+          SSH_KEY: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_SSH_KEY || secrets.STAGING_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          
+          # Create emergency backup
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no $USER@$HOST '
+            cd /opt/agentforge &&
+            ./infrastructure/production/deploy-production.sh backup
+          '
+
+      - name: Perform rollback
+        env:
+          HOST: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_HOST || secrets.STAGING_HOST }}
+          USER: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_USER || secrets.STAGING_USER }}
+          SSH_KEY: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_SSH_KEY || secrets.STAGING_SSH_KEY }}
+        run: |
+          ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no $USER@$HOST '
+            cd /opt/agentforge &&
+            git fetch --tags &&
+            git checkout ${{ github.event.inputs.version }} &&
+            
+            # Pull images for the specific version
+            export IMAGE_TAG=${{ github.event.inputs.version }}
+            docker-compose -f infrastructure/production/docker-compose.prod.yml pull
+            docker-compose -f infrastructure/production/docker-compose.prod.yml up -d
+            
+            # Wait for services to be ready
+            sleep 60
+          '
+
+      - name: Verify rollback
+        env:
+          URL: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.STAGING_URL }}
+        run: |
+          # Health checks
+          timeout 300 bash -c 'until curl -f $URL/health; do sleep 10; done'
+          curl -f $URL/api/actuator/health
+          
+          # Additional verification
+          response=$(curl -s $URL/api/actuator/info | jq -r '.build.version // "unknown"')
+          echo "Current version after rollback: $response"
+          
+          if [ "$response" != "${{ github.event.inputs.version }}" ]; then
+            echo "Warning: Version mismatch detected"
+          fi
+
+      - name: Notify teams
+        if: always()
+        uses: 8398a7/action-slack@v3
+        with:
+          status: ${{ job.status }}
+          text: |
+            🚨 **Emergency Rollback Completed**
+            
+            **Environment:** ${{ github.event.inputs.environment }}
+            **Rolled back to:** ${{ github.event.inputs.version }}
+            **Reason:** ${{ github.event.inputs.reason }}
+            **Status:** ${{ job.status == 'success' && '✅ Success' || '❌ Failed' }}
+            **Initiated by:** ${{ github.actor }}
+          webhook_url: ${{ secrets.SLACK_WEBHOOK }}
+
+      - name: Post-rollback monitoring
+        if: success()
+        env:
+          URL: ${{ github.event.inputs.environment == 'production' && secrets.PRODUCTION_URL || secrets.STAGING_URL }}
+        run: |
+          # Monitor for 15 minutes after rollback
+          echo "Starting post-rollback monitoring..."
+          for i in {1..90}; do
+            echo "Health check $i/90..."
+            if ! curl -f $URL/health > /dev/null 2>&1; then
+              echo "Health check failed during monitoring!"
+              exit 1
+            fi
+            sleep 10
+          done
+          echo "Post-rollback monitoring completed successfully"

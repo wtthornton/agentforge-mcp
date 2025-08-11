@@ -1,0 +1,287 @@
+# AgentForge Production Alert Rules
+
+groups:
+  - name: agentforge.infrastructure
+    interval: 30s
+    rules:
+      # High CPU usage
+      - alert: HighCPUUsage
+        expr: 100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "High CPU usage detected"
+          description: "CPU usage is above 80% for more than 5 minutes"
+
+      # High memory usage
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "High memory usage detected"
+          description: "Memory usage is above 85% for more than 5 minutes"
+
+      # Disk space warning
+      - alert: LowDiskSpace
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) * 100 < 20
+        for: 2m
+        labels:
+          severity: warning
+          service: infrastructure
+        annotations:
+          summary: "Low disk space warning"
+          description: "Disk space is below 20% on {{ $labels.mountpoint }}"
+
+      # Disk space critical
+      - alert: CriticalDiskSpace
+        expr: (node_filesystem_avail_bytes / node_filesystem_size_bytes) * 100 < 10
+        for: 1m
+        labels:
+          severity: critical
+          service: infrastructure
+        annotations:
+          summary: "Critical disk space alert"
+          description: "Disk space is below 10% on {{ $labels.mountpoint }}"
+
+  - name: agentforge.application
+    interval: 15s
+    rules:
+      # Application down
+      - alert: ApplicationDown
+        expr: up{job=~"agentforge-.*"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: application
+        annotations:
+          summary: "AgentForge application is down"
+          description: "{{ $labels.job }} has been down for more than 1 minute"
+
+      # High response time
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, http_request_duration_seconds_bucket{job=~"agentforge-.*"}) > 2
+        for: 5m
+        labels:
+          severity: warning
+          service: application
+        annotations:
+          summary: "High response time detected"
+          description: "95th percentile response time is above 2 seconds"
+
+      # High error rate
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{job=~"agentforge-.*", status=~"5.."}[5m]) / rate(http_requests_total{job=~"agentforge-.*"}[5m]) > 0.05
+        for: 3m
+        labels:
+          severity: critical
+          service: application
+        annotations:
+          summary: "High error rate detected"
+          description: "Error rate is above 5% for {{ $labels.job }}"
+
+      # Low throughput
+      - alert: LowThroughput
+        expr: rate(http_requests_total{job=~"agentforge-.*"}[5m]) < 1
+        for: 10m
+        labels:
+          severity: warning
+          service: application
+        annotations:
+          summary: "Low application throughput"
+          description: "Request rate is below 1 req/sec for {{ $labels.job }}"
+
+      # JVM memory pressure (for backend)
+      - alert: JVMMemoryPressure
+        expr: jvm_memory_used_bytes{job="agentforge-backend"} / jvm_memory_max_bytes{job="agentforge-backend"} > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "JVM memory pressure detected"
+          description: "JVM memory usage is above 80% for {{ $labels.instance }}"
+
+      # JVM garbage collection pressure
+      - alert: HighGCPressure
+        expr: rate(jvm_gc_collection_seconds_sum{job="agentforge-backend"}[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          service: backend
+        annotations:
+          summary: "High garbage collection pressure"
+          description: "GC time is above 10% for {{ $labels.instance }}"
+
+  - name: agentforge.database
+    interval: 30s
+    rules:
+      # Database down
+      - alert: PostgreSQLDown
+        expr: pg_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "PostgreSQL database is down"
+          description: "PostgreSQL has been down for more than 1 minute"
+
+      # High database connections
+      - alert: HighDatabaseConnections
+        expr: pg_stat_activity_count / pg_settings_max_connections > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "High database connection usage"
+          description: "Database connections are above 80% of max_connections"
+
+      # Slow queries
+      - alert: SlowQueries
+        expr: pg_stat_activity_max_tx_duration > 300
+        for: 2m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "Slow database queries detected"
+          description: "Database queries running longer than 5 minutes detected"
+
+      # Database locks
+      - alert: DatabaseLocks
+        expr: pg_locks_count > 100
+        for: 2m
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "High number of database locks"
+          description: "More than 100 database locks detected"
+
+  - name: agentforge.cache
+    interval: 30s
+    rules:
+      # Redis down
+      - alert: RedisDown
+        expr: redis_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          service: cache
+        annotations:
+          summary: "Redis cache is down"
+          description: "Redis has been down for more than 1 minute"
+
+      # High Redis memory usage
+      - alert: HighRedisMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "High Redis memory usage"
+          description: "Redis memory usage is above 80%"
+
+      # Low cache hit rate
+      - alert: LowCacheHitRate
+        expr: redis_keyspace_hits_total / (redis_keyspace_hits_total + redis_keyspace_misses_total) < 0.8
+        for: 10m
+        labels:
+          severity: warning
+          service: cache
+        annotations:
+          summary: "Low cache hit rate"
+          description: "Cache hit rate is below 80%"
+
+  - name: agentforge.security
+    interval: 60s
+    rules:
+      # SSL certificate expiry
+      - alert: SSLCertificateExpiry
+        expr: probe_ssl_earliest_cert_expiry - time() < 7 * 24 * 3600
+        for: 1m
+        labels:
+          severity: warning
+          service: security
+        annotations:
+          summary: "SSL certificate expiring soon"
+          description: "SSL certificate for {{ $labels.instance }} expires in less than 7 days"
+
+      # SSL certificate critical
+      - alert: SSLCertificateExpiryCritical
+        expr: probe_ssl_earliest_cert_expiry - time() < 24 * 3600
+        for: 1m
+        labels:
+          severity: critical
+          service: security
+        annotations:
+          summary: "SSL certificate expiring very soon"
+          description: "SSL certificate for {{ $labels.instance }} expires in less than 24 hours"
+
+      # Failed authentication attempts
+      - alert: HighFailedAuthAttempts
+        expr: rate(authentication_attempts_total{result="failure"}[5m]) > 10
+        for: 2m
+        labels:
+          severity: warning
+          service: security
+        annotations:
+          summary: "High number of failed authentication attempts"
+          description: "More than 10 failed authentication attempts per second"
+
+  - name: agentforge.business
+    interval: 60s
+    rules:
+      # Low analysis completion rate
+      - alert: LowAnalysisCompletionRate
+        expr: rate(agentforge_analysis_completed_total[5m]) / rate(agentforge_analysis_started_total[5m]) < 0.9
+        for: 10m
+        labels:
+          severity: warning
+          service: business
+        annotations:
+          summary: "Low analysis completion rate"
+          description: "Analysis completion rate is below 90%"
+
+      # High analysis failure rate
+      - alert: HighAnalysisFailureRate
+        expr: rate(agentforge_analysis_failed_total[5m]) / rate(agentforge_analysis_started_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+          service: business
+        annotations:
+          summary: "High analysis failure rate"
+          description: "Analysis failure rate is above 10%"
+
+  - name: agentforge.compliance
+    interval: 300s
+    rules:
+      # Compliance score drop
+      - alert: ComplianceScoreDrop
+        expr: agentforge_compliance_score < 90
+        for: 5m
+        labels:
+          severity: warning
+          service: compliance
+        annotations:
+          summary: "Compliance score dropped"
+          description: "Overall compliance score is below 90%"
+
+      # Critical vulnerabilities detected
+      - alert: CriticalVulnerabilities
+        expr: agentforge_vulnerabilities_total{severity="critical"} > 0
+        for: 1m
+        labels:
+          severity: critical
+          service: security
+        annotations:
+          summary: "Critical vulnerabilities detected"
+          description: "{{ $value }} critical vulnerabilities found in security scan"
