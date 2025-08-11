@@ -1,8 +1,8 @@
 {
-  "timestamp": "2025-08-11T00:00:10.586Z",
-  "runId": "run_1754870410586_76h579djl",
+  "timestamp": "2025-08-11T04:30:31.530Z",
+  "runId": "run_1754886631530_z9ozkp5pr",
   "overallScore": 100,
-  "filesChecked": 4,
+  "filesChecked": 5,
   "criticalIssues": 0,
   "warnings": 0,
   "executionTime": 0,
@@ -11,114 +11,114 @@
     "effectiveness": {
       "tech-stack": {
         "violationRate": 0,
-        "totalChecks": 18,
+        "totalChecks": 19,
         "totalViolations": 0,
         "priority": "LOW",
         "lastViolation": null,
         "complianceTrend": "stable",
         "status": "GOOD",
-        "referenceCount": 18,
-        "lastReferenced": "2025-08-11T00:00:10.586Z",
+        "referenceCount": 19,
+        "lastReferenced": "2025-08-11T04:30:31.529Z",
         "usageFrequency": "LOW"
       },
       "code-style": {
-        "violationRate": 78,
-        "totalChecks": 18,
+        "violationRate": 74,
+        "totalChecks": 19,
         "totalViolations": 14,
         "priority": "HIGH",
-        "lastViolation": "2025-08-11T00:00:10.585Z",
+        "lastViolation": "2025-08-11T04:30:31.528Z",
         "complianceTrend": "stable",
         "status": "CRITICAL",
-        "referenceCount": 18,
-        "lastReferenced": "2025-08-11T00:00:10.586Z",
+        "referenceCount": 19,
+        "lastReferenced": "2025-08-11T04:30:31.529Z",
         "usageFrequency": "LOW"
       },
       "security-compliance": {
-        "violationRate": 6,
-        "totalChecks": 18,
+        "violationRate": 5,
+        "totalChecks": 19,
         "totalViolations": 1,
         "priority": "LOW",
-        "lastViolation": "2025-08-11T00:00:10.579Z",
+        "lastViolation": "2025-08-11T04:30:31.524Z",
         "complianceTrend": "stable",
         "status": "GOOD",
-        "referenceCount": 18,
-        "lastReferenced": "2025-08-11T00:00:10.586Z",
+        "referenceCount": 19,
+        "lastReferenced": "2025-08-11T04:30:31.529Z",
         "usageFrequency": "LOW"
       },
       "best-practices": {
         "violationRate": 0,
-        "totalChecks": 18,
+        "totalChecks": 19,
         "totalViolations": 0,
         "priority": "LOW",
         "lastViolation": null,
         "complianceTrend": "stable",
         "status": "GOOD",
-        "referenceCount": 18,
-        "lastReferenced": "2025-08-11T00:00:10.586Z",
+        "referenceCount": 19,
+        "lastReferenced": "2025-08-11T04:30:31.529Z",
         "usageFrequency": "LOW"
       },
       "testing-strategy": {
         "violationRate": 0,
-        "totalChecks": 18,
+        "totalChecks": 19,
         "totalViolations": 0,
         "priority": "LOW",
         "lastViolation": null,
         "complianceTrend": "stable",
         "status": "GOOD",
-        "referenceCount": 18,
-        "lastReferenced": "2025-08-11T00:00:10.586Z",
+        "referenceCount": 19,
+        "lastReferenced": "2025-08-11T04:30:31.529Z",
         "usageFrequency": "LOW"
       }
     },
     "ranking": [
       {
         "name": "code-style",
-        "violationRate": 77.77777777777779,
-        "totalChecks": 18,
+        "violationRate": 73.68421052631578,
+        "totalChecks": 19,
         "totalViolations": 14,
         "priority": "HIGH",
         "status": "CRITICAL",
-        "referenceCount": 18,
+        "referenceCount": 19,
         "usageFrequency": "LOW"
       },
       {
         "name": "security-compliance",
-        "violationRate": 5.555555555555555,
-        "totalChecks": 18,
+        "violationRate": 5.263157894736842,
+        "totalChecks": 19,
         "totalViolations": 1,
         "priority": "LOW",
         "status": "GOOD",
-        "referenceCount": 18,
+        "referenceCount": 19,
         "usageFrequency": "LOW"
       },
       {
         "name": "tech-stack",
         "violationRate": 0,
-        "totalChecks": 18,
+        "totalChecks": 19,
         "totalViolations": 0,
         "priority": "LOW",
         "status": "GOOD",
-        "referenceCount": 18,
+        "referenceCount": 19,
         "usageFrequency": "LOW"
       },
       {
         "name": "best-practices",
         "violationRate": 0,
-        "totalChecks": 18,
+        "totalChecks": 19,
         "totalViolations": 0,
         "priority": "LOW",
         "status": "GOOD",
-        "referenceCount": 18,
+        "referenceCount": 19,
         "usageFrequency": "LOW"
       },
       {
         "name": "testing-strategy",
         "violationRate": 0,
-        "totalChecks": 18,
+        "totalChecks": 19,
         "totalViolations": 0,
         "priority": "LOW",
         "status": "GOOD",
-        "referenceCount": 18,
+        "referenceCount": 19,
         "usageFrequency": "LOW"
       }
     ],
@@ -126,65 +126,65 @@
       "mostReferenced": [
         {
           "name": "tech-stack",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "code-style",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "security-compliance",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "best-practices",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "testing-strategy",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         }
       ],
       "leastReferenced": [
         {
           "name": "testing-strategy",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "best-practices",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "security-compliance",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "code-style",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "tech-stack",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         }
       ],
       "highUsage": [],
@@ -192,33 +192,33 @@
       "lowUsage": [
         {
           "name": "tech-stack",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "code-style",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "security-compliance",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "best-practices",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "testing-strategy",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         }
       ]
     },
@@ -397,7 +397,7 @@
         {
           "name": "code-style",
           "type": "OBSOLETE",
-          "violationRate": 77.77777777777779,
+          "violationRate": 73.68421052631578,
           "usageFrequency": "LOW",
           "reason": "High violation rate with low adoption suggests outdated standard",
           "recommendation": "Review and update or deprecate this standard",
@@ -504,13 +504,13 @@
         "code-style": {
           "score": 30,
           "factors": [
-            "High violation rate (77.77777777777779%)",
+            "High violation rate (73.68421052631578%)",
             "Low adoption rate"
           ],
           "status": "INEFFECTIVE",
-          "violationRate": 77.77777777777779,
+          "violationRate": 73.68421052631578,
           "usageFrequency": "LOW",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "daysSinceLastReference": 0,
           "recommendation": "Standard is ineffective and needs redesign"
         },
@@ -520,9 +520,9 @@
             "Low adoption rate"
           ],
           "status": "EFFECTIVE",
-          "violationRate": 5.555555555555555,
+          "violationRate": 5.263157894736842,
           "usageFrequency": "LOW",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "daysSinceLastReference": 0,
           "recommendation": "Standard is effective but could be improved"
         },
@@ -534,7 +534,7 @@
           "status": "EFFECTIVE",
           "violationRate": 0,
           "usageFrequency": "LOW",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "daysSinceLastReference": 0,
           "recommendation": "Standard is effective but could be improved"
         },
@@ -546,7 +546,7 @@
           "status": "EFFECTIVE",
           "violationRate": 0,
           "usageFrequency": "LOW",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "daysSinceLastReference": 0,
           "recommendation": "Standard is effective but could be improved"
         },
@@ -558,7 +558,7 @@
           "status": "EFFECTIVE",
           "violationRate": 0,
           "usageFrequency": "LOW",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "daysSinceLastReference": 0,
           "recommendation": "Standard is effective but could be improved"
         }
@@ -568,7 +568,7 @@
           "standard": "code-style",
           "currentScore": 30,
           "factors": [
-            "High violation rate (77.77777777777779%)",
+            "High violation rate (73.68421052631578%)",
             "Low adoption rate"
           ],
           "priority": "MEDIUM",
@@ -824,7 +824,7 @@
           "type": "REDESIGN_STANDARD",
           "standard": "code-style",
           "priority": "HIGH",
-          "reason": "Standard is ineffective (77.77777777777779% violation rate, LOW usage)",
+          "reason": "Standard is ineffective (73.68421052631578% violation rate, LOW usage)",
           "action": "Completely redesign code-style for better adoption and compliance",
           "impact": "HIGH",
           "effort": "HIGH",
@@ -850,32 +850,32 @@
       "mostViolated": [
         {
           "name": "code-style",
-          "violationRate": 77.77777777777779,
-          "totalChecks": 18,
+          "violationRate": 73.68421052631578,
+          "totalChecks": 19,
           "totalViolations": 14,
           "priority": "HIGH",
           "status": "CRITICAL",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         },
         {
           "name": "security-compliance",
-          "violationRate": 5.555555555555555,
-          "totalChecks": 18,
+          "violationRate": 5.263157894736842,
+          "totalChecks": 19,
           "totalViolations": 1,
           "priority": "LOW",
           "status": "GOOD",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         },
         {
           "name": "tech-stack",
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "status": "GOOD",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         }
       ],
@@ -883,55 +883,55 @@
         {
           "name": "testing-strategy",
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "status": "GOOD",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         },
         {
           "name": "best-practices",
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "status": "GOOD",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         },
         {
           "name": "tech-stack",
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "status": "GOOD",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         }
       ],
       "mostReferenced": [
         {
           "name": "tech-stack",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "code-style",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         },
         {
           "name": "security-compliance",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW",
-          "lastReferenced": "2025-08-11T00:00:10.586Z"
+          "lastReferenced": "2025-08-11T04:30:31.529Z"
         }
       ],
-      "totalReferences": 90,
+      "totalReferences": 95,
       "totalUnused": 17,
       "totalObsolete": 1,
       "clearStandards": 4,
@@ -949,12 +949,12 @@
     }
   },
   "performanceMetrics": {
-    "overallAverage": 0.39,
-    "totalFiles": 18,
-    "totalTime": 7,
+    "overallAverage": 0.26,
+    "totalFiles": 19,
+    "totalTime": 5,
     "fileTypePerformance": {
       ".md": {
-        "averageTime": 0.5,
+        "averageTime": 0.36,
         "count": 14,
         "totalSize": 118156,
         "averageSize": 8440,
@@ -962,9 +962,9 @@
       },
       ".json": {
         "averageTime": 0,
-        "count": 3,
-        "totalSize": 6683,
-        "averageSize": 2228,
+        "count": 4,
+        "totalSize": 6751,
+        "averageSize": 1688,
         "efficiency": 0
       },
       ".ts": {
@@ -977,15 +977,15 @@
     }
   },
   "analytics": {
-    "timestamp": "2025-08-11T00:00:10.694Z",
+    "timestamp": "2025-08-11T04:30:31.618Z",
     "executionTime": 0,
     "averageFileProcessingTime": {
-      "overallAverage": 0.39,
-      "totalFiles": 18,
-      "totalTime": 7,
+      "overallAverage": 0.26,
+      "totalFiles": 19,
+      "totalTime": 5,
       "fileTypePerformance": {
         ".md": {
-          "averageTime": 0.5,
+          "averageTime": 0.36,
           "count": 14,
           "totalSize": 118156,
           "averageSize": 8440,
@@ -993,9 +993,9 @@
         },
         ".json": {
           "averageTime": 0,
-          "count": 3,
-          "totalSize": 6683,
-          "averageSize": 2228,
+          "count": 4,
+          "totalSize": 6751,
+          "averageSize": 1688,
           "efficiency": 0
         },
         ".ts": {
@@ -1009,41 +1009,41 @@
     },
     "validationPerformance": {
       "technology-stack": {
-        "averageTime": 0.06,
+        "averageTime": 0.05,
         "totalTime": 1,
-        "count": 18,
+        "count": 19,
         "minTime": 0,
         "maxTime": 1,
-        "efficiency": 0.06
+        "efficiency": 0.05
       },
       "code-style": {
-        "averageTime": 0.06,
+        "averageTime": 0.05,
         "totalTime": 1,
-        "count": 18,
+        "count": 19,
         "minTime": 0,
         "maxTime": 1,
-        "efficiency": 0.06
+        "efficiency": 0.05
       },
       "security": {
         "averageTime": 0.11,
         "totalTime": 2,
-        "count": 18,
+        "count": 19,
         "minTime": 0,
         "maxTime": 1,
         "efficiency": 0.11
       },
       "architecture": {
-        "averageTime": 0.06,
-        "totalTime": 1,
-        "count": 18,
+        "averageTime": 0,
+        "totalTime": 0,
+        "count": 19,
         "minTime": 0,
-        "maxTime": 1,
-        "efficiency": 0.06
+        "maxTime": 0,
+        "efficiency": 0
       },
       "testing": {
         "averageTime": 0,
         "totalTime": 0,
-        "count": 18,
+        "count": 19,
         "minTime": 0,
         "maxTime": 0,
         "efficiency": 0
@@ -1059,114 +1059,114 @@
       "effectiveness": {
         "tech-stack": {
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "lastViolation": null,
           "complianceTrend": "stable",
           "status": "GOOD",
-          "referenceCount": 18,
-          "lastReferenced": "2025-08-11T00:00:10.586Z",
+          "referenceCount": 19,
+          "lastReferenced": "2025-08-11T04:30:31.529Z",
           "usageFrequency": "LOW"
         },
         "code-style": {
-          "violationRate": 78,
-          "totalChecks": 18,
+          "violationRate": 74,
+          "totalChecks": 19,
           "totalViolations": 14,
           "priority": "HIGH",
-          "lastViolation": "2025-08-11T00:00:10.585Z",
+          "lastViolation": "2025-08-11T04:30:31.528Z",
           "complianceTrend": "stable",
           "status": "CRITICAL",
-          "referenceCount": 18,
-          "lastReferenced": "2025-08-11T00:00:10.586Z",
+          "referenceCount": 19,
+          "lastReferenced": "2025-08-11T04:30:31.529Z",
           "usageFrequency": "LOW"
         },
         "security-compliance": {
-          "violationRate": 6,
-          "totalChecks": 18,
+          "violationRate": 5,
+          "totalChecks": 19,
           "totalViolations": 1,
           "priority": "LOW",
-          "lastViolation": "2025-08-11T00:00:10.579Z",
+          "lastViolation": "2025-08-11T04:30:31.524Z",
           "complianceTrend": "stable",
           "status": "GOOD",
-          "referenceCount": 18,
-          "lastReferenced": "2025-08-11T00:00:10.586Z",
+          "referenceCount": 19,
+          "lastReferenced": "2025-08-11T04:30:31.529Z",
           "usageFrequency": "LOW"
         },
         "best-practices": {
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "lastViolation": null,
           "complianceTrend": "stable",
           "status": "GOOD",
-          "referenceCount": 18,
-          "lastReferenced": "2025-08-11T00:00:10.586Z",
+          "referenceCount": 19,
+          "lastReferenced": "2025-08-11T04:30:31.529Z",
           "usageFrequency": "LOW"
         },
         "testing-strategy": {
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "lastViolation": null,
           "complianceTrend": "stable",
           "status": "GOOD",
-          "referenceCount": 18,
-          "lastReferenced": "2025-08-11T00:00:10.586Z",
+          "referenceCount": 19,
+          "lastReferenced": "2025-08-11T04:30:31.529Z",
           "usageFrequency": "LOW"
         }
       },
       "ranking": [
         {
           "name": "code-style",
-          "violationRate": 77.77777777777779,
-          "totalChecks": 18,
+          "violationRate": 73.68421052631578,
+          "totalChecks": 19,
           "totalViolations": 14,
           "priority": "HIGH",
           "status": "CRITICAL",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         },
         {
           "name": "security-compliance",
-          "violationRate": 5.555555555555555,
-          "totalChecks": 18,
+          "violationRate": 5.263157894736842,
+          "totalChecks": 19,
           "totalViolations": 1,
           "priority": "LOW",
           "status": "GOOD",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         },
         {
           "name": "tech-stack",
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "status": "GOOD",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         },
         {
           "name": "best-practices",
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "status": "GOOD",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         },
         {
           "name": "testing-strategy",
           "violationRate": 0,
-          "totalChecks": 18,
+          "totalChecks": 19,
           "totalViolations": 0,
           "priority": "LOW",
           "status": "GOOD",
-          "referenceCount": 18,
+          "referenceCount": 19,
           "usageFrequency": "LOW"
         }
       ],
@@ -1174,65 +1174,65 @@
         "mostReferenced": [
           {
             "name": "tech-stack",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "code-style",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "security-compliance",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "best-practices",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "testing-strategy",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           }
         ],
         "leastReferenced": [
           {
             "name": "testing-strategy",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "best-practices",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "security-compliance",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "code-style",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "tech-stack",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           }
         ],
         "highUsage": [],
@@ -1240,33 +1240,33 @@
         "lowUsage": [
           {
             "name": "tech-stack",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "code-style",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "security-compliance",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "best-practices",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "testing-strategy",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           }
         ]
       },
@@ -1445,7 +1445,7 @@
           {
             "name": "code-style",
             "type": "OBSOLETE",
-            "violationRate": 77.77777777777779,
+            "violationRate": 73.68421052631578,
             "usageFrequency": "LOW",
             "reason": "High violation rate with low adoption suggests outdated standard",
             "recommendation": "Review and update or deprecate this standard",
@@ -1552,13 +1552,13 @@
           "code-style": {
             "score": 30,
             "factors": [
-              "High violation rate (77.77777777777779%)",
+              "High violation rate (73.68421052631578%)",
               "Low adoption rate"
             ],
             "status": "INEFFECTIVE",
-            "violationRate": 77.77777777777779,
+            "violationRate": 73.68421052631578,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is ineffective and needs redesign"
           },
@@ -1568,9 +1568,9 @@
               "Low adoption rate"
             ],
             "status": "EFFECTIVE",
-            "violationRate": 5.555555555555555,
+            "violationRate": 5.263157894736842,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is effective but could be improved"
           },
@@ -1582,7 +1582,7 @@
             "status": "EFFECTIVE",
             "violationRate": 0,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is effective but could be improved"
           },
@@ -1594,7 +1594,7 @@
             "status": "EFFECTIVE",
             "violationRate": 0,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is effective but could be improved"
           },
@@ -1606,7 +1606,7 @@
             "status": "EFFECTIVE",
             "violationRate": 0,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is effective but could be improved"
           }
@@ -1616,7 +1616,7 @@
             "standard": "code-style",
             "currentScore": 30,
             "factors": [
-              "High violation rate (77.77777777777779%)",
+              "High violation rate (73.68421052631578%)",
               "Low adoption rate"
             ],
             "priority": "MEDIUM",
@@ -1872,7 +1872,7 @@
             "type": "REDESIGN_STANDARD",
             "standard": "code-style",
             "priority": "HIGH",
-            "reason": "Standard is ineffective (77.77777777777779% violation rate, LOW usage)",
+            "reason": "Standard is ineffective (73.68421052631578% violation rate, LOW usage)",
             "action": "Completely redesign code-style for better adoption and compliance",
             "impact": "HIGH",
             "effort": "HIGH",
@@ -1898,32 +1898,32 @@
         "mostViolated": [
           {
             "name": "code-style",
-            "violationRate": 77.77777777777779,
-            "totalChecks": 18,
+            "violationRate": 73.68421052631578,
+            "totalChecks": 19,
             "totalViolations": 14,
             "priority": "HIGH",
             "status": "CRITICAL",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           },
           {
             "name": "security-compliance",
-            "violationRate": 5.555555555555555,
-            "totalChecks": 18,
+            "violationRate": 5.263157894736842,
+            "totalChecks": 19,
             "totalViolations": 1,
             "priority": "LOW",
             "status": "GOOD",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           },
           {
             "name": "tech-stack",
             "violationRate": 0,
-            "totalChecks": 18,
+            "totalChecks": 19,
             "totalViolations": 0,
             "priority": "LOW",
             "status": "GOOD",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           }
         ],
@@ -1931,55 +1931,55 @@
           {
             "name": "testing-strategy",
             "violationRate": 0,
-            "totalChecks": 18,
+            "totalChecks": 19,
             "totalViolations": 0,
             "priority": "LOW",
             "status": "GOOD",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           },
           {
             "name": "best-practices",
             "violationRate": 0,
-            "totalChecks": 18,
+            "totalChecks": 19,
             "totalViolations": 0,
             "priority": "LOW",
             "status": "GOOD",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           },
           {
             "name": "tech-stack",
             "violationRate": 0,
-            "totalChecks": 18,
+            "totalChecks": 19,
             "totalViolations": 0,
             "priority": "LOW",
             "status": "GOOD",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           }
         ],
         "mostReferenced": [
           {
             "name": "tech-stack",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "code-style",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           },
           {
             "name": "security-compliance",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW",
-            "lastReferenced": "2025-08-11T00:00:10.586Z"
+            "lastReferenced": "2025-08-11T04:30:31.529Z"
           }
         ],
-        "totalReferences": 90,
+        "totalReferences": 95,
         "totalUnused": 17,
         "totalObsolete": 1,
         "clearStandards": 4,
@@ -2000,7 +2000,7 @@
       {
         "priority": "HIGH",
         "category": "Standards",
-        "message": "🚨 code-style has critical violation rate (78%)",
+        "message": "🚨 code-style has critical violation rate (74%)",
         "action": "Urgently review and rewrite code-style documentation with clear examples",
         "impact": "HIGH",
         "effort": "HIGH"
@@ -2362,7 +2362,7 @@
           "type": "UPDATE_DOCUMENTATION_BASED_ON_USAGE",
           "document": "code-style.md",
           "priority": "HIGH",
-          "reason": "Standard has 77.77777777777779% violation rate and LOW usage",
+          "reason": "Standard has 73.68421052631578% violation rate and LOW usage",
           "action": "Update code-style.md to address compliance issues and improve clarity",
           "impact": "HIGH",
           "effort": "MEDIUM",
@@ -2578,15 +2578,15 @@
       "performance": {
         "byFileType": {
           ".md": {
-            "totalTime": 7,
+            "totalTime": 5,
             "count": 14,
-            "averageTime": 0.5,
+            "averageTime": 0.35714285714285715,
             "minTime": 0,
-            "maxTime": 5
+            "maxTime": 2
           },
           ".json": {
             "totalTime": 0,
-            "count": 3,
+            "count": 4,
             "averageTime": 0,
             "minTime": 0,
             "maxTime": 0
@@ -2602,403 +2602,319 @@
         "byValidationType": {
           "technology-stack": {
             "totalTime": 1,
-            "count": 18,
-            "averageTime": 0.05555555555555555,
+            "count": 19,
+            "averageTime": 0.05263157894736842,
             "minTime": 0,
             "maxTime": 1,
             "baselineChecks": [
               {
                 "executionTime": 1,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.564Z"
+                "timestamp": "2025-08-11T04:30:31.516Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.570Z"
+                "timestamp": "2025-08-11T04:30:31.518Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.571Z"
+                "timestamp": "2025-08-11T04:30:31.519Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.572Z"
+                "timestamp": "2025-08-11T04:30:31.520Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.573Z"
+                "timestamp": "2025-08-11T04:30:31.520Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.574Z"
+                "timestamp": "2025-08-11T04:30:31.521Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.575Z"
+                "timestamp": "2025-08-11T04:30:31.522Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.576Z"
+                "timestamp": "2025-08-11T04:30:31.522Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.576Z"
+                "timestamp": "2025-08-11T04:30:31.522Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.578Z"
+                "timestamp": "2025-08-11T04:30:31.523Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.578Z"
+                "timestamp": "2025-08-11T04:30:31.524Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.579Z"
+                "timestamp": "2025-08-11T04:30:31.525Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.580Z"
+                "timestamp": "2025-08-11T04:30:31.525Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.582Z"
+                "timestamp": "2025-08-11T04:30:31.527Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
+                "timestamp": "2025-08-11T04:30:31.527Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
+                "timestamp": "2025-08-11T04:30:31.528Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.585Z"
+                "timestamp": "2025-08-11T04:30:31.528Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.586Z"
+                "timestamp": "2025-08-11T04:30:31.529Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.529Z"
               }
             ]
           },
           "code-style": {
             "totalTime": 1,
-            "count": 18,
-            "averageTime": 0.05555555555555555,
+            "count": 19,
+            "averageTime": 0.05263157894736842,
             "minTime": 0,
             "maxTime": 1,
             "baselineChecks": [
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.566Z"
+                "timestamp": "2025-08-11T04:30:31.517Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.570Z"
+                "timestamp": "2025-08-11T04:30:31.518Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.571Z"
+                "timestamp": "2025-08-11T04:30:31.519Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.572Z"
+                "timestamp": "2025-08-11T04:30:31.520Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.573Z"
+                "timestamp": "2025-08-11T04:30:31.520Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.574Z"
+                "timestamp": "2025-08-11T04:30:31.521Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.575Z"
+                "timestamp": "2025-08-11T04:30:31.522Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.576Z"
+                "timestamp": "2025-08-11T04:30:31.522Z"
               },
               {
                 "executionTime": 1,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.577Z"
+                "timestamp": "2025-08-11T04:30:31.523Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.578Z"
+                "timestamp": "2025-08-11T04:30:31.523Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.578Z"
+                "timestamp": "2025-08-11T04:30:31.524Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.579Z"
+                "timestamp": "2025-08-11T04:30:31.525Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.580Z"
+                "timestamp": "2025-08-11T04:30:31.525Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.582Z"
+                "timestamp": "2025-08-11T04:30:31.527Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
+                "timestamp": "2025-08-11T04:30:31.527Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
+                "timestamp": "2025-08-11T04:30:31.528Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.585Z"
+                "timestamp": "2025-08-11T04:30:31.528Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.586Z"
+                "timestamp": "2025-08-11T04:30:31.529Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.529Z"
               }
             ]
           },
           "security": {
             "totalTime": 2,
-            "count": 18,
-            "averageTime": 0.1111111111111111,
+            "count": 19,
+            "averageTime": 0.10526315789473684,
             "minTime": 0,
             "maxTime": 1,
             "baselineChecks": [
               {
-                "executionTime": 1,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.567Z"
-              },
-              {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.570Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.571Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.572Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.573Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.574Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.575Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.576Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.577Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.578Z"
+                "timestamp": "2025-08-11T04:30:31.517Z"
               },
               {
                 "executionTime": 1,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.579Z"
+                "timestamp": "2025-08-11T04:30:31.519Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.579Z"
+                "timestamp": "2025-08-11T04:30:31.519Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.580Z"
+                "timestamp": "2025-08-11T04:30:31.520Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.582Z"
+                "timestamp": "2025-08-11T04:30:31.520Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
+                "timestamp": "2025-08-11T04:30:31.521Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
+                "timestamp": "2025-08-11T04:30:31.522Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.585Z"
+                "timestamp": "2025-08-11T04:30:31.522Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.586Z"
+                "timestamp": "2025-08-11T04:30:31.523Z"
+              },
+              {
+                "executionTime": 1,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.524Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.524Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.525Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.525Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.527Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.527Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.528Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.528Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.529Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.529Z"
               }
             ]
           },
           "architecture": {
-            "totalTime": 1,
-            "count": 18,
-            "averageTime": 0.05555555555555555,
-            "minTime": 0,
-            "maxTime": 1,
-            "baselineChecks": [
-              {
-                "executionTime": 1,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.568Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.570Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.571Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.572Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.573Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.574Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.575Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.576Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.577Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.578Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.579Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.579Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.580Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.582Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.585Z"
-              },
-              {
-                "executionTime": 0,
-                "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.586Z"
-              }
-            ]
-          },
-          "testing": {
             "totalTime": 0,
-            "count": 18,
+            "count": 19,
             "averageTime": 0,
             "minTime": 0,
             "maxTime": 0,
@@ -3006,100 +2922,209 @@
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.568Z"
+                "timestamp": "2025-08-11T04:30:31.517Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.570Z"
+                "timestamp": "2025-08-11T04:30:31.519Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.571Z"
+                "timestamp": "2025-08-11T04:30:31.519Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.572Z"
+                "timestamp": "2025-08-11T04:30:31.520Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.573Z"
+                "timestamp": "2025-08-11T04:30:31.520Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.574Z"
+                "timestamp": "2025-08-11T04:30:31.521Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.575Z"
+                "timestamp": "2025-08-11T04:30:31.522Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.576Z"
+                "timestamp": "2025-08-11T04:30:31.522Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.577Z"
+                "timestamp": "2025-08-11T04:30:31.523Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.578Z"
+                "timestamp": "2025-08-11T04:30:31.524Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.579Z"
+                "timestamp": "2025-08-11T04:30:31.524Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.579Z"
+                "timestamp": "2025-08-11T04:30:31.525Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.580Z"
+                "timestamp": "2025-08-11T04:30:31.525Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.582Z"
+                "timestamp": "2025-08-11T04:30:31.527Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
+                "timestamp": "2025-08-11T04:30:31.527Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.584Z"
+                "timestamp": "2025-08-11T04:30:31.528Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.585Z"
+                "timestamp": "2025-08-11T04:30:31.528Z"
               },
               {
                 "executionTime": 0,
                 "status": "SLOW",
-                "timestamp": "2025-08-11T00:00:10.586Z"
+                "timestamp": "2025-08-11T04:30:31.529Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.529Z"
+              }
+            ]
+          },
+          "testing": {
+            "totalTime": 0,
+            "count": 19,
+            "averageTime": 0,
+            "minTime": 0,
+            "maxTime": 0,
+            "baselineChecks": [
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.517Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.519Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.519Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.520Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.520Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.521Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.522Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.522Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.523Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.524Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.524Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.525Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.525Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.527Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.527Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.528Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.528Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.529Z"
+              },
+              {
+                "executionTime": 0,
+                "status": "SLOW",
+                "timestamp": "2025-08-11T04:30:31.529Z"
               }
             ]
           }
         },
         "byTimeRange": {
           "0-100ms": {
-            "count": 90,
-            "totalTime": 5
+            "count": 95,
+            "totalTime": 4
           },
           "100-500ms": {
             "count": 0,
@@ -3120,13 +3145,13 @@
           "code-style": {
             "score": 30,
             "factors": [
-              "High violation rate (77.77777777777779%)",
+              "High violation rate (73.68421052631578%)",
               "Low adoption rate"
             ],
             "status": "INEFFECTIVE",
-            "violationRate": 77.77777777777779,
+            "violationRate": 73.68421052631578,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is ineffective and needs redesign"
           },
@@ -3136,9 +3161,9 @@
               "Low adoption rate"
             ],
             "status": "EFFECTIVE",
-            "violationRate": 5.555555555555555,
+            "violationRate": 5.263157894736842,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is effective but could be improved"
           },
@@ -3150,7 +3175,7 @@
             "status": "EFFECTIVE",
             "violationRate": 0,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is effective but could be improved"
           },
@@ -3162,7 +3187,7 @@
             "status": "EFFECTIVE",
             "violationRate": 0,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is effective but could be improved"
           },
@@ -3174,7 +3199,7 @@
             "status": "EFFECTIVE",
             "violationRate": 0,
             "usageFrequency": "LOW",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "daysSinceLastReference": 0,
             "recommendation": "Standard is effective but could be improved"
           }
@@ -3183,65 +3208,65 @@
           "mostReferenced": [
             {
               "name": "tech-stack",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "code-style",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "security-compliance",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "best-practices",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "testing-strategy",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             }
           ],
           "leastReferenced": [
             {
               "name": "testing-strategy",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "best-practices",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "security-compliance",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "code-style",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "tech-stack",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             }
           ],
           "highUsage": [],
@@ -3249,85 +3274,85 @@
           "lowUsage": [
             {
               "name": "tech-stack",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "code-style",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "security-compliance",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "best-practices",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             },
             {
               "name": "testing-strategy",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW",
-              "lastReferenced": "2025-08-11T00:00:10.586Z"
+              "lastReferenced": "2025-08-11T04:30:31.529Z"
             }
           ]
         },
         "byViolationRate": [
           {
             "name": "code-style",
-            "violationRate": 77.77777777777779,
-            "totalChecks": 18,
+            "violationRate": 73.68421052631578,
+            "totalChecks": 19,
             "totalViolations": 14,
             "priority": "HIGH",
             "status": "CRITICAL",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           },
           {
             "name": "security-compliance",
-            "violationRate": 5.555555555555555,
-            "totalChecks": 18,
+            "violationRate": 5.263157894736842,
+            "totalChecks": 19,
             "totalViolations": 1,
             "priority": "LOW",
             "status": "GOOD",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           },
           {
             "name": "tech-stack",
             "violationRate": 0,
-            "totalChecks": 18,
+            "totalChecks": 19,
             "totalViolations": 0,
             "priority": "LOW",
             "status": "GOOD",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           },
           {
             "name": "best-practices",
             "violationRate": 0,
-            "totalChecks": 18,
+            "totalChecks": 19,
             "totalViolations": 0,
             "priority": "LOW",
             "status": "GOOD",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           },
           {
             "name": "testing-strategy",
             "violationRate": 0,
-            "totalChecks": 18,
+            "totalChecks": 19,
             "totalViolations": 0,
             "priority": "LOW",
             "status": "GOOD",
-            "referenceCount": 18,
+            "referenceCount": 19,
             "usageFrequency": "LOW"
           }
         ]
@@ -3354,13 +3379,13 @@
     "exportableReports": {
       "csv": {
         "violations": "File,Type,Severity,Message,Line,Standard\n",
-        "performance": "File,ProcessingTime,FileSize,FileType\n\".agent-os\\AGENT-OS-FUNDAMENTALS.md\",\"5\",\"13272\",\".md\"\n\".agent-os\\AGENT-OS-SETUP-COMPLETE.md\",\"0\",\"11466\",\".md\"\n\".agent-os\\BUILDER-METHODS-INTEGRATION.md\",\"0\",\"6802\",\".md\"\n\".agent-os\\DEVELOPER-GUIDE.md\",\"0\",\"6005\",\".md\"\n\".agent-os\\FRAMEWORK-UPDATE-SUMMARY.md\",\"0\",\"10953\",\".md\"\n\".agent-os\\package.json\",\"0\",\"3151\",\".json\"\n\".agent-os\\QUICK-START-GUIDE.md\",\"0\",\"7002\",\".md\"\n\".agent-os\\README-UTILITIES.md\",\"0\",\"6752\",\".md\"\n\".agent-os\\README-v2.md\",\"1\",\"11912\",\".md\"\n\".agent-os\\README.md\",\"0\",\"9786\",\".md\"\n\".agent-os\\REAL-TIME-INTEGRATION-SUMMARY.md\",\"1\",\"11633\",\".md\"\n\".agent-os\\REORGANIZATION-PLAN.md\",\"0\",\"7541\",\".md\"\n\".agent-os\\REORGANIZATION-SUMMARY.md\",\"0\",\"5421\",\".md\"\n\".agent-os\\SCRIPT-REORGANIZATION-PLAN.md\",\"0\",\"4642\",\".md\"\n\".agent-os\\tsconfig.json\",\"0\",\"1322\",\".json\"\n\".agent-os\\vitest.config.ts\",\"0\",\"402\",\".ts\"\n\".cursor\\README.md\",\"0\",\"4969\",\".md\"\n\".cursor\\workspace.json\",\"0\",\"2210\",\".json\"\n",
-        "standards": "Standard,ViolationRate,TotalChecks,TotalViolations,Status\n\"code-style\",\"77.77777777777779\",\"18\",\"14\",\"CRITICAL\"\n\"security-compliance\",\"5.555555555555555\",\"18\",\"1\",\"GOOD\"\n\"tech-stack\",\"0\",\"18\",\"0\",\"GOOD\"\n\"best-practices\",\"0\",\"18\",\"0\",\"GOOD\"\n\"testing-strategy\",\"0\",\"18\",\"0\",\"GOOD\"\n"
+        "performance": "File,ProcessingTime,FileSize,FileType\n\".agent-os\\AGENT-OS-FUNDAMENTALS.md\",\"2\",\"13272\",\".md\"\n\".agent-os\\AGENT-OS-SETUP-COMPLETE.md\",\"1\",\"11466\",\".md\"\n\".agent-os\\BUILDER-METHODS-INTEGRATION.md\",\"0\",\"6802\",\".md\"\n\".agent-os\\DEVELOPER-GUIDE.md\",\"0\",\"6005\",\".md\"\n\".agent-os\\FRAMEWORK-UPDATE-SUMMARY.md\",\"0\",\"10953\",\".md\"\n\".agent-os\\package.json\",\"0\",\"3151\",\".json\"\n\".agent-os\\QUICK-START-GUIDE.md\",\"0\",\"7002\",\".md\"\n\".agent-os\\README-UTILITIES.md\",\"0\",\"6752\",\".md\"\n\".agent-os\\README-v2.md\",\"1\",\"11912\",\".md\"\n\".agent-os\\README.md\",\"1\",\"9786\",\".md\"\n\".agent-os\\REAL-TIME-INTEGRATION-SUMMARY.md\",\"0\",\"11633\",\".md\"\n\".agent-os\\REORGANIZATION-PLAN.md\",\"0\",\"7541\",\".md\"\n\".agent-os\\REORGANIZATION-SUMMARY.md\",\"0\",\"5421\",\".md\"\n\".agent-os\\SCRIPT-REORGANIZATION-PLAN.md\",\"0\",\"4642\",\".md\"\n\".agent-os\\tsconfig.json\",\"0\",\"1322\",\".json\"\n\".agent-os\\vitest.config.ts\",\"0\",\"402\",\".ts\"\n\".cursor\\README.md\",\"0\",\"4969\",\".md\"\n\".cursor\\workspace.json\",\"0\",\"2210\",\".json\"\n\".vscode\\settings.json\",\"0\",\"68\",\".json\"\n",
+        "standards": "Standard,ViolationRate,TotalChecks,TotalViolations,Status\n\"code-style\",\"73.68421052631578\",\"19\",\"14\",\"CRITICAL\"\n\"security-compliance\",\"5.263157894736842\",\"19\",\"1\",\"GOOD\"\n\"tech-stack\",\"0\",\"19\",\"0\",\"GOOD\"\n\"best-practices\",\"0\",\"19\",\"0\",\"GOOD\"\n\"testing-strategy\",\"0\",\"19\",\"0\",\"GOOD\"\n"
       },
       "json": {
         "summary": {
-          "timestamp": "2025-08-11T00:00:10.735Z",
-          "totalFiles": 4,
+          "timestamp": "2025-08-11T04:30:31.662Z",
+          "totalFiles": 5,
           "totalViolations": 0,
           "complianceScore": 100,
           "executionTime": 0
@@ -3369,109 +3394,114 @@
         "performance": {
           "fileTypes": {
             ".md": {
-              "totalTime": 7,
+              "totalTime": 5,
               "count": 14,
-              "averageTime": 0.5,
+              "averageTime": 0.35714285714285715,
               "minTime": 0,
-              "maxTime": 5,
+              "maxTime": 2,
               "totalSize": 118156,
               "averageSize": 8439.714285714286,
               "baselineChecks": [
                 {
-                  "processingTime": 5,
+                  "processingTime": 2,
                   "status": "NORMAL",
-                  "timestamp": "2025-08-11T00:00:10.568Z"
-                },
-                {
-                  "processingTime": 0,
-                  "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.570Z"
-                },
-                {
-                  "processingTime": 0,
-                  "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.571Z"
-                },
-                {
-                  "processingTime": 0,
-                  "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.572Z"
-                },
-                {
-                  "processingTime": 0,
-                  "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.573Z"
-                },
-                {
-                  "processingTime": 0,
-                  "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.576Z"
-                },
-                {
-                  "processingTime": 0,
-                  "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.576Z"
+                  "timestamp": "2025-08-11T04:30:31.518Z"
                 },
                 {
                   "processingTime": 1,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.577Z"
+                  "timestamp": "2025-08-11T04:30:31.519Z"
                 },
                 {
                   "processingTime": 0,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.578Z"
+                  "timestamp": "2025-08-11T04:30:31.519Z"
+                },
+                {
+                  "processingTime": 0,
+                  "status": "SLOW",
+                  "timestamp": "2025-08-11T04:30:31.520Z"
+                },
+                {
+                  "processingTime": 0,
+                  "status": "SLOW",
+                  "timestamp": "2025-08-11T04:30:31.521Z"
+                },
+                {
+                  "processingTime": 0,
+                  "status": "SLOW",
+                  "timestamp": "2025-08-11T04:30:31.522Z"
+                },
+                {
+                  "processingTime": 0,
+                  "status": "SLOW",
+                  "timestamp": "2025-08-11T04:30:31.522Z"
                 },
                 {
                   "processingTime": 1,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.579Z"
+                  "timestamp": "2025-08-11T04:30:31.523Z"
+                },
+                {
+                  "processingTime": 1,
+                  "status": "SLOW",
+                  "timestamp": "2025-08-11T04:30:31.524Z"
                 },
                 {
                   "processingTime": 0,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.579Z"
+                  "timestamp": "2025-08-11T04:30:31.524Z"
                 },
                 {
                   "processingTime": 0,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.581Z"
+                  "timestamp": "2025-08-11T04:30:31.525Z"
                 },
                 {
                   "processingTime": 0,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.582Z"
+                  "timestamp": "2025-08-11T04:30:31.526Z"
                 },
                 {
                   "processingTime": 0,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.585Z"
+                  "timestamp": "2025-08-11T04:30:31.527Z"
+                },
+                {
+                  "processingTime": 0,
+                  "status": "SLOW",
+                  "timestamp": "2025-08-11T04:30:31.528Z"
                 }
               ]
             },
             ".json": {
               "totalTime": 0,
-              "count": 3,
+              "count": 4,
               "averageTime": 0,
               "minTime": 0,
               "maxTime": 0,
-              "totalSize": 6683,
-              "averageSize": 2227.6666666666665,
+              "totalSize": 6751,
+              "averageSize": 1687.75,
               "baselineChecks": [
                 {
                   "processingTime": 0,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.574Z"
+                  "timestamp": "2025-08-11T04:30:31.521Z"
                 },
                 {
                   "processingTime": 0,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.584Z"
+                  "timestamp": "2025-08-11T04:30:31.527Z"
                 },
                 {
                   "processingTime": 0,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.586Z"
+                  "timestamp": "2025-08-11T04:30:31.529Z"
+                },
+                {
+                  "processingTime": 0,
+                  "status": "SLOW",
+                  "timestamp": "2025-08-11T04:30:31.530Z"
                 }
               ]
             },
@@ -3487,24 +3517,24 @@
                 {
                   "processingTime": 0,
                   "status": "SLOW",
-                  "timestamp": "2025-08-11T00:00:10.584Z"
+                  "timestamp": "2025-08-11T04:30:31.528Z"
                 }
               ]
             }
           },
           ".agent-os\\AGENT-OS-FUNDAMENTALS.md": {
-            "processingTime": 5,
+            "processingTime": 2,
             "fileSize": 13272,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.568Z",
+            "timestamp": "2025-08-11T04:30:31.518Z",
             "baselineStatus": "NORMAL",
             "baselineMessage": "Performance within normal range"
           },
           ".agent-os\\AGENT-OS-SETUP-COMPLETE.md": {
-            "processingTime": 0,
+            "processingTime": 1,
             "fileSize": 11466,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.570Z",
+            "timestamp": "2025-08-11T04:30:31.519Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3512,7 +3542,7 @@
             "processingTime": 0,
             "fileSize": 6802,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.571Z",
+            "timestamp": "2025-08-11T04:30:31.519Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3520,7 +3550,7 @@
             "processingTime": 0,
             "fileSize": 6005,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.572Z",
+            "timestamp": "2025-08-11T04:30:31.520Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3528,7 +3558,7 @@
             "processingTime": 0,
             "fileSize": 10953,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.573Z",
+            "timestamp": "2025-08-11T04:30:31.521Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3536,7 +3566,7 @@
             "processingTime": 0,
             "fileSize": 3151,
             "fileType": ".json",
-            "timestamp": "2025-08-11T00:00:10.574Z",
+            "timestamp": "2025-08-11T04:30:31.521Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3544,7 +3574,7 @@
             "processingTime": 0,
             "fileSize": 7002,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.576Z",
+            "timestamp": "2025-08-11T04:30:31.522Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3552,7 +3582,7 @@
             "processingTime": 0,
             "fileSize": 6752,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.576Z",
+            "timestamp": "2025-08-11T04:30:31.522Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3560,23 +3590,23 @@
             "processingTime": 1,
             "fileSize": 11912,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.577Z",
+            "timestamp": "2025-08-11T04:30:31.523Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
           ".agent-os\\README.md": {
-            "processingTime": 0,
+            "processingTime": 1,
             "fileSize": 9786,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.578Z",
+            "timestamp": "2025-08-11T04:30:31.524Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
           ".agent-os\\REAL-TIME-INTEGRATION-SUMMARY.md": {
-            "processingTime": 1,
+            "processingTime": 0,
             "fileSize": 11633,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.579Z",
+            "timestamp": "2025-08-11T04:30:31.524Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3584,7 +3614,7 @@
             "processingTime": 0,
             "fileSize": 7541,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.579Z",
+            "timestamp": "2025-08-11T04:30:31.525Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3592,7 +3622,7 @@
             "processingTime": 0,
             "fileSize": 5421,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.580Z",
+            "timestamp": "2025-08-11T04:30:31.526Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3600,7 +3630,7 @@
             "processingTime": 0,
             "fileSize": 4642,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.582Z",
+            "timestamp": "2025-08-11T04:30:31.527Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3608,7 +3638,7 @@
             "processingTime": 0,
             "fileSize": 1322,
             "fileType": ".json",
-            "timestamp": "2025-08-11T00:00:10.584Z",
+            "timestamp": "2025-08-11T04:30:31.527Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3616,7 +3646,7 @@
             "processingTime": 0,
             "fileSize": 402,
             "fileType": ".ts",
-            "timestamp": "2025-08-11T00:00:10.584Z",
+            "timestamp": "2025-08-11T04:30:31.528Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3624,7 +3654,7 @@
             "processingTime": 0,
             "fileSize": 4969,
             "fileType": ".md",
-            "timestamp": "2025-08-11T00:00:10.585Z",
+            "timestamp": "2025-08-11T04:30:31.528Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           },
@@ -3632,7 +3662,15 @@
             "processingTime": 0,
             "fileSize": 2210,
             "fileType": ".json",
-            "timestamp": "2025-08-11T00:00:10.586Z",
+            "timestamp": "2025-08-11T04:30:31.529Z",
+            "baselineStatus": "SLOW",
+            "baselineMessage": "Performance is slow"
+          },
+          ".vscode\\settings.json": {
+            "processingTime": 0,
+            "fileSize": 68,
+            "fileType": ".json",
+            "timestamp": "2025-08-11T04:30:31.529Z",
             "baselineStatus": "SLOW",
             "baselineMessage": "Performance is slow"
           }
@@ -3641,114 +3679,114 @@
           "effectiveness": {
             "tech-stack": {
               "violationRate": 0,
-              "totalChecks": 18,
+              "totalChecks": 19,
               "totalViolations": 0,
               "priority": "LOW",
               "lastViolation": null,
               "complianceTrend": "stable",
               "status": "GOOD",
-              "referenceCount": 18,
-              "lastReferenced": "2025-08-11T00:00:10.586Z",
+              "referenceCount": 19,
+              "lastReferenced": "2025-08-11T04:30:31.529Z",
               "usageFrequency": "LOW"
             },
             "code-style": {
-              "violationRate": 78,
-              "totalChecks": 18,
+              "violationRate": 74,
+              "totalChecks": 19,
               "totalViolations": 14,
               "priority": "HIGH",
-              "lastViolation": "2025-08-11T00:00:10.585Z",
+              "lastViolation": "2025-08-11T04:30:31.528Z",
               "complianceTrend": "stable",
               "status": "CRITICAL",
-              "referenceCount": 18,
-              "lastReferenced": "2025-08-11T00:00:10.586Z",
+              "referenceCount": 19,
+              "lastReferenced": "2025-08-11T04:30:31.529Z",
               "usageFrequency": "LOW"
             },
             "security-compliance": {
-              "violationRate": 6,
-              "totalChecks": 18,
+              "violationRate": 5,
+              "totalChecks": 19,
               "totalViolations": 1,
               "priority": "LOW",
-              "lastViolation": "2025-08-11T00:00:10.579Z",
+              "lastViolation": "2025-08-11T04:30:31.524Z",
               "complianceTrend": "stable",
               "status": "GOOD",
-              "referenceCount": 18,
-              "lastReferenced": "2025-08-11T00:00:10.586Z",
+              "referenceCount": 19,
+              "lastReferenced": "2025-08-11T04:30:31.529Z",
               "usageFrequency": "LOW"
             },
             "best-practices": {
               "violationRate": 0,
-              "totalChecks": 18,
+              "totalChecks": 19,
               "totalViolations": 0,
               "priority": "LOW",
               "lastViolation": null,
               "complianceTrend": "stable",
               "status": "GOOD",
-              "referenceCount": 18,
-              "lastReferenced": "2025-08-11T00:00:10.586Z",
+              "referenceCount": 19,
+              "lastReferenced": "2025-08-11T04:30:31.529Z",
               "usageFrequency": "LOW"
             },
             "testing-strategy": {
               "violationRate": 0,
-              "totalChecks": 18,
+              "totalChecks": 19,
               "totalViolations": 0,
               "priority": "LOW",
               "lastViolation": null,
               "complianceTrend": "stable",
               "status": "GOOD",
-              "referenceCount": 18,
-              "lastReferenced": "2025-08-11T00:00:10.586Z",
+              "referenceCount": 19,
+              "lastReferenced": "2025-08-11T04:30:31.529Z",
               "usageFrequency": "LOW"
             }
           },
           "ranking": [
             {
               "name": "code-style",
-              "violationRate": 77.77777777777779,
-              "totalChecks": 18,
+              "violationRate": 73.68421052631578,
+              "totalChecks": 19,
               "totalViolations": 14,
               "priority": "HIGH",
               "status": "CRITICAL",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW"
             },
             {
               "name": "security-compliance",
-              "violationRate": 5.555555555555555,
-              "totalChecks": 18,
+              "violationRate": 5.263157894736842,
+              "totalChecks": 19,
               "totalViolations": 1,
               "priority": "LOW",
               "status": "GOOD",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW"
             },
             {
               "name": "tech-stack",
               "violationRate": 0,
-              "totalChecks": 18,
+              "totalChecks": 19,
               "totalViolations": 0,
               "priority": "LOW",
               "status": "GOOD",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW"
             },
             {
               "name": "best-practices",
               "violationRate": 0,
-              "totalChecks": 18,
+              "totalChecks": 19,
               "totalViolations": 0,
               "priority": "LOW",
               "status": "GOOD",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW"
             },
             {
               "name": "testing-strategy",
               "violationRate": 0,
-              "totalChecks": 18,
+              "totalChecks": 19,
               "totalViolations": 0,
               "priority": "LOW",
               "status": "GOOD",
-              "referenceCount": 18,
+              "referenceCount": 19,
               "usageFrequency": "LOW"
             }
           ],
@@ -3756,65 +3794,65 @@
             "mostReferenced": [
               {
                 "name": "tech-stack",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "code-style",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "security-compliance",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "best-practices",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "testing-strategy",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               }
             ],
             "leastReferenced": [
               {
                 "name": "testing-strategy",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "best-practices",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "security-compliance",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "code-style",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "tech-stack",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               }
             ],
             "highUsage": [],
@@ -3822,33 +3860,33 @@
             "lowUsage": [
               {
                 "name": "tech-stack",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "code-style",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "security-compliance",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "best-practices",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "testing-strategy",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               }
             ]
           },
@@ -4027,7 +4065,7 @@
               {
                 "name": "code-style",
                 "type": "OBSOLETE",
-                "violationRate": 77.77777777777779,
+                "violationRate": 73.68421052631578,
                 "usageFrequency": "LOW",
                 "reason": "High violation rate with low adoption suggests outdated standard",
                 "recommendation": "Review and update or deprecate this standard",
@@ -4134,13 +4172,13 @@
               "code-style": {
                 "score": 30,
                 "factors": [
-                  "High violation rate (77.77777777777779%)",
+                  "High violation rate (73.68421052631578%)",
                   "Low adoption rate"
                 ],
                 "status": "INEFFECTIVE",
-                "violationRate": 77.77777777777779,
+                "violationRate": 73.68421052631578,
                 "usageFrequency": "LOW",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "daysSinceLastReference": 0,
                 "recommendation": "Standard is ineffective and needs redesign"
               },
@@ -4150,9 +4188,9 @@
                   "Low adoption rate"
                 ],
                 "status": "EFFECTIVE",
-                "violationRate": 5.555555555555555,
+                "violationRate": 5.263157894736842,
                 "usageFrequency": "LOW",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "daysSinceLastReference": 0,
                 "recommendation": "Standard is effective but could be improved"
               },
@@ -4164,7 +4202,7 @@
                 "status": "EFFECTIVE",
                 "violationRate": 0,
                 "usageFrequency": "LOW",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "daysSinceLastReference": 0,
                 "recommendation": "Standard is effective but could be improved"
               },
@@ -4176,7 +4214,7 @@
                 "status": "EFFECTIVE",
                 "violationRate": 0,
                 "usageFrequency": "LOW",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "daysSinceLastReference": 0,
                 "recommendation": "Standard is effective but could be improved"
               },
@@ -4188,7 +4226,7 @@
                 "status": "EFFECTIVE",
                 "violationRate": 0,
                 "usageFrequency": "LOW",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "daysSinceLastReference": 0,
                 "recommendation": "Standard is effective but could be improved"
               }
@@ -4198,7 +4236,7 @@
                 "standard": "code-style",
                 "currentScore": 30,
                 "factors": [
-                  "High violation rate (77.77777777777779%)",
+                  "High violation rate (73.68421052631578%)",
                   "Low adoption rate"
                 ],
                 "priority": "MEDIUM",
@@ -4454,7 +4492,7 @@
                 "type": "REDESIGN_STANDARD",
                 "standard": "code-style",
                 "priority": "HIGH",
-                "reason": "Standard is ineffective (77.77777777777779% violation rate, LOW usage)",
+                "reason": "Standard is ineffective (73.68421052631578% violation rate, LOW usage)",
                 "action": "Completely redesign code-style for better adoption and compliance",
                 "impact": "HIGH",
                 "effort": "HIGH",
@@ -4480,32 +4518,32 @@
             "mostViolated": [
               {
                 "name": "code-style",
-                "violationRate": 77.77777777777779,
-                "totalChecks": 18,
+                "violationRate": 73.68421052631578,
+                "totalChecks": 19,
                 "totalViolations": 14,
                 "priority": "HIGH",
                 "status": "CRITICAL",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW"
               },
               {
                 "name": "security-compliance",
-                "violationRate": 5.555555555555555,
-                "totalChecks": 18,
+                "violationRate": 5.263157894736842,
+                "totalChecks": 19,
                 "totalViolations": 1,
                 "priority": "LOW",
                 "status": "GOOD",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW"
               },
               {
                 "name": "tech-stack",
                 "violationRate": 0,
-                "totalChecks": 18,
+                "totalChecks": 19,
                 "totalViolations": 0,
                 "priority": "LOW",
                 "status": "GOOD",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW"
               }
             ],
@@ -4513,55 +4551,55 @@
               {
                 "name": "testing-strategy",
                 "violationRate": 0,
-                "totalChecks": 18,
+                "totalChecks": 19,
                 "totalViolations": 0,
                 "priority": "LOW",
                 "status": "GOOD",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW"
               },
               {
                 "name": "best-practices",
                 "violationRate": 0,
-                "totalChecks": 18,
+                "totalChecks": 19,
                 "totalViolations": 0,
                 "priority": "LOW",
                 "status": "GOOD",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW"
               },
               {
                 "name": "tech-stack",
                 "violationRate": 0,
-                "totalChecks": 18,
+                "totalChecks": 19,
                 "totalViolations": 0,
                 "priority": "LOW",
                 "status": "GOOD",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW"
               }
             ],
             "mostReferenced": [
               {
                 "name": "tech-stack",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "code-style",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               },
               {
                 "name": "security-compliance",
-                "referenceCount": 18,
+                "referenceCount": 19,
                 "usageFrequency": "LOW",
-                "lastReferenced": "2025-08-11T00:00:10.586Z"
+                "lastReferenced": "2025-08-11T04:30:31.529Z"
               }
             ],
-            "totalReferences": 90,
+            "totalReferences": 95,
             "totalUnused": 17,
             "totalObsolete": 1,
             "clearStandards": 4,
@@ -4592,17 +4630,17 @@
         }
       },
       "html": {
-        "main": "\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Compliance Analytics Report</title>\n    <style>\n        body { font-family: Arial, sans-serif; margin: 20px; }\n        .summary { background: #f5f5f5; padding: 20px; border-radius: 5px; }\n        .section { margin: 20px 0; }\n        .metric { display: inline-block; margin: 10px; padding: 10px; background: #fff; border: 1px solid #ddd; }\n        .critical { color: #d32f2f; }\n        .warning { color: #f57c00; }\n        .success { color: #388e3c; }\n    </style>\n</head>\n<body>\n    <h1>Compliance Analytics Report</h1>\n    <div class=\"summary\">\n        <h2>Summary</h2>\n        <div class=\"metric\">Total Files: 4</div>\n        <div class=\"metric\">Total Violations: 0</div>\n        <div class=\"metric\">Compliance Score: 100%</div>\n        <div class=\"metric\">Execution Time: 0ms</div>\n    </div>\n    \n    <div class=\"section\">\n        <h2>Violations by Type</h2>\n        <table border=\"1\"><tr><th>Type</th><th>Count</th><th>Files</th><th>Critical</th><th>Warning</th></tr></table>\n    </div>\n    \n    <div class=\"section\">\n        <h2>Performance Metrics</h2>\n        <table border=\"1\"><tr><th>File Type</th><th>Count</th><th>Avg Time (ms)</th><th>Total Time (ms)</th></tr><tr><td>.md</td><td>14</td><td>1</td><td>7</td></tr><tr><td>.json</td><td>3</td><td>0</td><td>0</td></tr><tr><td>.ts</td><td>1</td><td>0</td><td>0</td></tr></table>\n    </div>\n    \n    <div class=\"section\">\n        <h2>Standards Effectiveness</h2>\n        <table border=\"1\"><tr><th>Standard</th><th>Violation Rate</th><th>Status</th><th>Total Checks</th></tr><tr><td>code-style</td><td>77.77777777777779%</td><td class=\"critical\">CRITICAL</td><td>18</td></tr><tr><td>security-compliance</td><td>5.555555555555555%</td><td class=\"success\">GOOD</td><td>18</td></tr><tr><td>tech-stack</td><td>0%</td><td class=\"success\">GOOD</td><td>18</td></tr><tr><td>best-practices</td><td>0%</td><td class=\"success\">GOOD</td><td>18</td></tr><tr><td>testing-strategy</td><td>0%</td><td class=\"success\">GOOD</td><td>18</td></tr></table>\n    </div>\n</body>\n</html>",
+        "main": "\n<!DOCTYPE html>\n<html>\n<head>\n    <title>Compliance Analytics Report</title>\n    <style>\n        body { font-family: Arial, sans-serif; margin: 20px; }\n        .summary { background: #f5f5f5; padding: 20px; border-radius: 5px; }\n        .section { margin: 20px 0; }\n        .metric { display: inline-block; margin: 10px; padding: 10px; background: #fff; border: 1px solid #ddd; }\n        .critical { color: #d32f2f; }\n        .warning { color: #f57c00; }\n        .success { color: #388e3c; }\n    </style>\n</head>\n<body>\n    <h1>Compliance Analytics Report</h1>\n    <div class=\"summary\">\n        <h2>Summary</h2>\n        <div class=\"metric\">Total Files: 5</div>\n        <div class=\"metric\">Total Violations: 0</div>\n        <div class=\"metric\">Compliance Score: 100%</div>\n        <div class=\"metric\">Execution Time: 0ms</div>\n    </div>\n    \n    <div class=\"section\">\n        <h2>Violations by Type</h2>\n        <table border=\"1\"><tr><th>Type</th><th>Count</th><th>Files</th><th>Critical</th><th>Warning</th></tr></table>\n    </div>\n    \n    <div class=\"section\">\n        <h2>Performance Metrics</h2>\n        <table border=\"1\"><tr><th>File Type</th><th>Count</th><th>Avg Time (ms)</th><th>Total Time (ms)</th></tr><tr><td>.md</td><td>14</td><td>0</td><td>5</td></tr><tr><td>.json</td><td>4</td><td>0</td><td>0</td></tr><tr><td>.ts</td><td>1</td><td>0</td><td>0</td></tr></table>\n    </div>\n    \n    <div class=\"section\">\n        <h2>Standards Effectiveness</h2>\n        <table border=\"1\"><tr><th>Standard</th><th>Violation Rate</th><th>Status</th><th>Total Checks</th></tr><tr><td>code-style</td><td>73.68421052631578%</td><td class=\"critical\">CRITICAL</td><td>19</td></tr><tr><td>security-compliance</td><td>5.263157894736842%</td><td class=\"success\">GOOD</td><td>19</td></tr><tr><td>tech-stack</td><td>0%</td><td class=\"success\">GOOD</td><td>19</td></tr><tr><td>best-practices</td><td>0%</td><td class=\"success\">GOOD</td><td>19</td></tr><tr><td>testing-strategy</td><td>0%</td><td class=\"success\">GOOD</td><td>19</td></tr></table>\n    </div>\n</body>\n</html>",
         "violations": "<table border=\"1\"><tr><th>Type</th><th>Count</th><th>Files</th><th>Critical</th><th>Warning</th></tr></table>",
-        "performance": "<table border=\"1\"><tr><th>File Type</th><th>Count</th><th>Avg Time (ms)</th><th>Total Time (ms)</th></tr><tr><td>.md</td><td>14</td><td>1</td><td>7</td></tr><tr><td>.json</td><td>3</td><td>0</td><td>0</td></tr><tr><td>.ts</td><td>1</td><td>0</td><td>0</td></tr></table>",
-        "standards": "<table border=\"1\"><tr><th>Standard</th><th>Violation Rate</th><th>Status</th><th>Total Checks</th></tr><tr><td>code-style</td><td>77.77777777777779%</td><td class=\"critical\">CRITICAL</td><td>18</td></tr><tr><td>security-compliance</td><td>5.555555555555555%</td><td class=\"success\">GOOD</td><td>18</td></tr><tr><td>tech-stack</td><td>0%</td><td class=\"success\">GOOD</td><td>18</td></tr><tr><td>best-practices</td><td>0%</td><td class=\"success\">GOOD</td><td>18</td></tr><tr><td>testing-strategy</td><td>0%</td><td class=\"success\">GOOD</td><td>18</td></tr></table>"
+        "performance": "<table border=\"1\"><tr><th>File Type</th><th>Count</th><th>Avg Time (ms)</th><th>Total Time (ms)</th></tr><tr><td>.md</td><td>14</td><td>0</td><td>5</td></tr><tr><td>.json</td><td>4</td><td>0</td><td>0</td></tr><tr><td>.ts</td><td>1</td><td>0</td><td>0</td></tr></table>",
+        "standards": "<table border=\"1\"><tr><th>Standard</th><th>Violation Rate</th><th>Status</th><th>Total Checks</th></tr><tr><td>code-style</td><td>73.68421052631578%</td><td class=\"critical\">CRITICAL</td><td>19</td></tr><tr><td>security-compliance</td><td>5.263157894736842%</td><td class=\"success\">GOOD</td><td>19</td></tr><tr><td>tech-stack</td><td>0%</td><td class=\"success\">GOOD</td><td>19</td></tr><tr><td>best-practices</td><td>0%</td><td class=\"success\">GOOD</td><td>19</td></tr><tr><td>testing-strategy</td><td>0%</td><td class=\"success\">GOOD</td><td>19</td></tr></table>"
       },
       "markdown": {
-        "main": "# Compliance Analytics Report\n\n**Generated:** 2025-08-11T00:00:10.736Z\n\n## Summary\n\n- **Total Files:** 4\n- **Total Violations:** 0\n- **Compliance Score:** 100%\n- **Execution Time:** 0ms\n\n## Violations\n\n\n## Performance\n\n- **Average Processing Time:** 0.39ms\n- **Total Processing Time:** 7ms\n\n## Standards Effectiveness\n\n- **code-style:** 77.77777777777779% violation rate\n- **security-compliance:** 5.555555555555555% violation rate\n- **tech-stack:** 0% violation rate\n- **best-practices:** 0% violation rate\n- **testing-strategy:** 0% violation rate\n",
-        "summary": "# Compliance Analytics Report\n\n**Generated:** 2025-08-11T00:00:10.736Z\n\n",
+        "main": "# Compliance Analytics Report\n\n**Generated:** 2025-08-11T04:30:31.663Z\n\n## Summary\n\n- **Total Files:** 5\n- **Total Violations:** 0\n- **Compliance Score:** 100%\n- **Execution Time:** 0ms\n\n## Violations\n\n\n## Performance\n\n- **Average Processing Time:** 0.26ms\n- **Total Processing Time:** 5ms\n\n## Standards Effectiveness\n\n- **code-style:** 73.68421052631578% violation rate\n- **security-compliance:** 5.263157894736842% violation rate\n- **tech-stack:** 0% violation rate\n- **best-practices:** 0% violation rate\n- **testing-strategy:** 0% violation rate\n",
+        "summary": "# Compliance Analytics Report\n\n**Generated:** 2025-08-11T04:30:31.663Z\n\n",
         "violations": "\n\n\n",
-        "performance": "\n\n- **Average Processing Time:** 0.39ms\n- **Total Processing Time:** 7ms\n\n",
-        "standards": " Effectiveness\n\n- **code-style:** 77.77777777777779% violation rate\n- **security-compliance:** 5.555555555555555% violation rate\n- **tech-stack:** 0% violation rate\n- **best-practices:** 0% violation rate\n- **testing-strategy:** 0% violation rate\n"
+        "performance": "\n\n- **Average Processing Time:** 0.26ms\n- **Total Processing Time:** 5ms\n\n",
+        "standards": " Effectiveness\n\n- **code-style:** 73.68421052631578% violation rate\n- **security-compliance:** 5.263157894736842% violation rate\n- **tech-stack:** 0% violation rate\n- **best-practices:** 0% violation rate\n- **testing-strategy:** 0% violation rate\n"
       }
     },
     "prioritizedActionItems": {
@@ -4613,7 +4651,7 @@
           "source": "violation_analysis",
           "priority": "HIGH",
           "category": "Standards",
-          "message": "🚨 code-style has critical violation rate (78%)",
+          "message": "🚨 code-style has critical violation rate (74%)",
           "action": "Urgently review and rewrite code-style documentation with clear examples",
           "impact": "HIGH",
           "effort": "HIGH",
@@ -5520,7 +5558,7 @@
           "source": "violation_analysis",
           "priority": "HIGH",
           "category": "Standards",
-          "message": "🚨 code-style has critical violation rate (78%)",
+          "message": "🚨 code-style has critical violation rate (74%)",
           "action": "Urgently review and rewrite code-style documentation with clear examples",
           "impact": "HIGH",
           "effort": "HIGH",

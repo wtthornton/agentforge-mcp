@@ -1,38 +1,75 @@
-import { EnhancedMCPService } from '../services/enhancedMCPService';
+import { EnhancedMCPService, MCPRequestContext } from '../services/enhancedMCPService';
+import { DatabaseService } from '../services/databaseService';
 import { ProjectRepository } from '../repositories/ProjectRepository';
 import { BaseRepository } from '../repositories/BaseRepository';
 import { createLogger } from 'winston';
 
-// Mock repositories
+// Mock the database service
+const mockDatabaseService = {
+  initialize: jest.fn(),
+  analyzeProject: jest.fn(),
+  getMetrics: jest.fn()
+} as jest.Mocked<DatabaseService>;
+
+// Mock the project repository
 const mockProjectRepository = {
   findById: jest.fn(),
   create: jest.fn(),
   update: jest.fn(),
   delete: jest.fn(),
-  findAll: jest.fn()
+  findAll: jest.fn(),
+  findByPath: jest.fn(),
+  updateStatus: jest.fn(),
+  updateComplianceScore: jest.fn(),
+  getProjectStats: jest.fn(),
+  searchProjects: jest.fn()
 } as jest.Mocked<ProjectRepository>;
 
+// Mock the base repository
 const mockBaseRepository = {
-  testConnection: jest.fn(),
-  query: jest.fn(),
-  transaction: jest.fn()
-} as jest.Mocked<BaseRepository>;
+  findById: jest.fn(),
+  create: jest.fn(),
+  update: jest.fn(),
+  delete: jest.fn(),
+  findAll: jest.fn()
+} as jest.Mocked<BaseRepository<any>>;
 
 // Mock logger
-const mockLogger = createLogger({
-  level: 'error',
-  transports: []
-});
+const mockLogger = {
+  info: jest.fn(),
+  warn: jest.fn(),
+  error: jest.fn(),
+  debug: jest.fn()
+} as any;
 
 describe('EnhancedMCPService', () => {
   let enhancedMCPService: EnhancedMCPService;
 
   beforeEach(() => {
     jest.clearAllMocks();
+    
+    // Mock the database service methods
+    mockDatabaseService.analyzeProject.mockResolvedValue({
+      projectPath: process.cwd(),
+      structure: { totalFiles: 100, totalDirectories: 20 },
+      technologyStack: { primary: ['Node.js'], frameworks: ['Express'] },
+      codeQuality: { totalLines: 5000, codeFiles: 50 },
+      performance: { system: { uptime: 1000 } },
+      compliance: { score: 85 },
+      recommendations: ['Add tests', 'Improve documentation']
+    });
+
+    mockDatabaseService.getMetrics.mockResolvedValue({
+      timestamp: new Date().toISOString(),
+      project: { path: process.cwd() },
+      system: { uptime: 1000, platform: 'win32', nodeVersion: '18.0.0' },
+      analysis: {},
+      performance: {}
+    });
+
     enhancedMCPService = new EnhancedMCPService(
       mockLogger,
-      mockProjectRepository,
-      mockBaseRepository
+      mockDatabaseService
     );
   });
 
@@ -478,6 +515,189 @@ describe('EnhancedMCPService', () => {
       
       expect(result.error).toBeDefined();
       expect(result.error?.data).toContain('not found');
+    });
+  });
+
+  describe('Task 2.2: Advanced Project Analysis Capabilities', () => {
+    it('should analyze project structure with enhanced capabilities', async () => {
+      const mockContext: MCPRequestContext = {
+        requestId: 'test-2.2.1',
+        timestamp: new Date().toISOString(),
+        method: 'analyzeProject',
+        metadata: {
+          priority: 'normal',
+          retryCount: 0
+        },
+        priority: 'normal',
+        retryCount: 0
+      };
+
+      const mockParams = {
+        path: process.cwd(),
+        enhanced: true
+      };
+
+      const result = await enhancedMCPService.analyzeProject(mockParams, mockContext);
+      
+      expect(result).toBeDefined();
+      expect(result.projectPath).toBe(process.cwd());
+      expect(result.structure).toBeDefined();
+      expect(result.technologyStack).toBeDefined();
+      expect(result.codeQuality).toBeDefined();
+      expect(result.performance).toBeDefined();
+      expect(result.compliance).toBeDefined();
+      expect(result.recommendations).toBeDefined();
+      expect(Array.isArray(result.recommendations)).toBe(true);
+    });
+
+    it('should detect advanced technology stack', async () => {
+      const mockContext: MCPRequestContext = {
+        requestId: 'test-2.2.2',
+        timestamp: new Date().toISOString(),
+        method: 'analyzeProject',
+        metadata: {
+          priority: 'normal',
+          retryCount: 0
+        },
+        priority: 'normal',
+        retryCount: 0
+      };
+
+      const mockParams = {
+        path: process.cwd(),
+        enhanced: true
+      };
+
+      const result = await enhancedMCPService.analyzeProject(mockParams, mockContext);
+      
+      expect(result.technologyStack.primary).toBeDefined();
+      expect(result.technologyStack.frameworks).toBeDefined();
+      expect(result.technologyStack.buildTools).toBeDefined();
+      expect(result.technologyStack.databases).toBeDefined();
+      expect(result.technologyStack.testing).toBeDefined();
+      expect(result.technologyStack.deployment).toBeDefined();
+      expect(result.technologyStack.monitoring).toBeDefined();
+      expect(result.technologyStack.details).toBeDefined();
+    });
+
+    it('should analyze advanced code quality metrics', async () => {
+      const mockContext: MCPRequestContext = {
+        requestId: 'test-2.2.3',
+        timestamp: new Date().toISOString(),
+        method: 'analyzeProject',
+        metadata: {
+          priority: 'normal',
+          retryCount: 0
+        },
+        priority: 'normal',
+        retryCount: 0
+      };
+
+      const mockParams = {
+        path: process.cwd(),
+        enhanced: true
+      };
+
+      const result = await enhancedMCPService.analyzeProject(mockParams, mockContext);
+      
+      expect(result.codeQuality.totalLines).toBeGreaterThanOrEqual(0);
+      expect(result.codeQuality.codeFiles).toBeGreaterThanOrEqual(0);
+      expect(result.codeQuality.documentationFiles).toBeGreaterThanOrEqual(0);
+      expect(result.codeQuality.configurationFiles).toBeGreaterThanOrEqual(0);
+      expect(result.codeQuality.testFiles).toBeGreaterThanOrEqual(0);
+      expect(result.codeQuality.buildFiles).toBeGreaterThanOrEqual(0);
+      expect(result.codeQuality.complexityMetrics).toBeDefined();
+      expect(result.codeQuality.codeStyle).toBeDefined();
+      expect(result.codeQuality.security).toBeDefined();
+    });
+
+    it('should provide performance analysis', async () => {
+      const mockContext: MCPRequestContext = {
+        requestId: 'test-2.2.4',
+        timestamp: new Date().toISOString(),
+        method: 'analyzeProject',
+        metadata: {
+          priority: 'normal',
+          retryCount: 0
+        },
+        priority: 'normal',
+        retryCount: 0
+      };
+
+      const mockParams = {
+        path: process.cwd(),
+        enhanced: true
+      };
+
+      const result = await enhancedMCPService.analyzeProject(mockParams, mockContext);
+      
+      expect(result.performance.system).toBeDefined();
+      expect(result.performance.project).toBeDefined();
+      expect(result.performance.analysis).toBeDefined();
+      expect(result.performance.system.uptime).toBeGreaterThan(0);
+      expect(result.performance.system.memory).toBeDefined();
+      expect(result.performance.system.cpu).toBeDefined();
+    });
+
+    it('should generate actionable recommendations', async () => {
+      const mockContext: MCPRequestContext = {
+        requestId: 'test-2.2.5',
+        timestamp: new Date().toISOString(),
+        method: 'analyzeProject',
+        metadata: {
+          priority: 'normal',
+          retryCount: 0
+        },
+        priority: 'normal',
+        retryCount: 0
+      };
+
+      const mockParams = {
+        path: process.cwd(),
+        enhanced: true
+      };
+
+      const result = await enhancedMCPService.analyzeProject(mockParams, mockContext);
+      
+      expect(result.recommendations).toBeDefined();
+      expect(Array.isArray(result.recommendations)).toBe(true);
+      
+      // Recommendations should be actionable
+      result.recommendations.forEach((recommendation: string) => {
+        expect(typeof recommendation).toBe('string');
+        expect(recommendation.length).toBeGreaterThan(0);
+        expect(recommendation).toMatch(/^[A-Z]/); // Should start with capital letter
+      });
+    });
+
+    it('should provide enhanced metrics', async () => {
+      const mockContext: MCPRequestContext = {
+        requestId: 'test-2.2.6',
+        timestamp: new Date().toISOString(),
+        method: 'getMetrics',
+        metadata: {
+          priority: 'normal',
+          retryCount: 0
+        },
+        priority: 'normal',
+        retryCount: 0
+      };
+
+      const mockParams = {
+        path: process.cwd()
+      };
+
+      const result = await enhancedMCPService.getMetrics(mockParams, mockContext);
+      
+      expect(result).toBeDefined();
+      expect(result.timestamp).toBeDefined();
+      expect(result.project).toBeDefined();
+      expect(result.system).toBeDefined();
+      expect(result.analysis).toBeDefined();
+      expect(result.performance).toBeDefined();
+      expect(result.system.uptime).toBeGreaterThan(0);
+      expect(result.system.platform).toBeDefined();
+      expect(result.system.nodeVersion).toBeDefined();
     });
   });
 });

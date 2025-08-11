@@ -1,0 +1,169 @@
+{
+  "validationEngines": {
+    "pattern-check": {
+      "description": "Check for specific patterns in code",
+      "implementation": "PatternValidator",
+      "configurable": true
+    },
+    "component-check": {
+      "description": "Verify required components exist",
+      "implementation": "ComponentValidator",
+      "configurable": true
+    },
+    "structure-check": {
+      "description": "Validate architectural structure",
+      "implementation": "StructureValidator",
+      "configurable": true
+    },
+    "performance-check": {
+      "description": "Check performance metrics",
+      "implementation": "PerformanceValidator",
+      "configurable": true
+    },
+    "tech-stack-check": {
+      "description": "Validate technology stack compliance",
+      "implementation": "TechStackValidator",
+      "configurable": true
+    },
+    "file-size-check": {
+      "description": "Check file size and line count",
+      "implementation": "FileSizeValidator",
+      "configurable": true
+    },
+    "complexity-check": {
+      "description": "Check code complexity metrics",
+      "implementation": "ComplexityValidator",
+      "configurable": true
+    },
+    "documentation-check": {
+      "description": "Check documentation coverage",
+      "implementation": "DocumentationValidator",
+      "configurable": true
+    },
+    "input-validation-check": {
+      "description": "Check input validation implementation",
+      "implementation": "InputValidationValidator",
+      "configurable": true
+    },
+    "authentication-check": {
+      "description": "Check authentication requirements",
+      "implementation": "AuthenticationValidator",
+      "configurable": true
+    }
+  },
+  "defaultRules": {
+    "codeQuality": {
+      "maxComplexity": 10,
+      "maxLineLength": 120,
+      "requireComments": true,
+      "requireTests": true,
+      "maxFileSize": 1000,
+      "maxMethodLength": 50,
+      "maxClassLength": 500
+    },
+    "security": {
+      "requireAuthentication": true,
+      "requireAuthorization": true,
+      "requireInputValidation": true,
+      "requireOutputSanitization": true,
+      "requireSecureHeaders": true,
+      "requireHTTPS": true,
+      "maxSessionTimeout": 3600
+    },
+    "architecture": {
+      "requireLayeredArchitecture": true,
+      "requireDependencyInjection": true,
+      "requireInterfaceSegregation": true,
+      "requireSingleResponsibility": true,
+      "maxDependencies": 5,
+      "requireErrorHandling": true,
+      "requireLogging": true
+    },
+    "performance": {
+      "maxResponseTime": 200,
+      "maxMemoryUsage": 512,
+      "requireCaching": true,
+      "requireConnectionPooling": true,
+      "requireAsyncProcessing": true,
+      "maxDatabaseConnections": 20,
+      "requireLoadBalancing": false
+    },
+    "testing": {
+      "minTestCoverage": 85,
+      "requireUnitTests": true,
+      "requireIntegrationTests": true,
+      "requirePerformanceTests": false,
+      "maxTestExecutionTime": 30,
+      "requireMocking": true
+    },
+    "documentation": {
+      "minDocumentationCoverage": 80,
+      "requireAPIDocumentation": true,
+      "requireCodeComments": true,
+      "requireREADME": true,
+      "requireArchitectureDocs": true,
+      "requireDeploymentDocs": true
+    }
+  },
+  "severityLevels": {
+    "critical": {
+      "score": 10,
+      "color": "#dc2626",
+      "description": "Must be fixed immediately",
+      "action": "block-deployment"
+    },
+    "high": {
+      "score": 7,
+      "color": "#ea580c",
+      "description": "Should be fixed before release",
+      "action": "warn-deployment"
+    },
+    "medium": {
+      "score": 4,
+      "color": "#ca8a04",
+      "description": "Should be addressed soon",
+      "action": "recommend-fix"
+    },
+    "low": {
+      "score": 1,
+      "color": "#16a34a",
+      "description": "Nice to have improvement",
+      "action": "suggest-improvement"
+    }
+  },
+  "validationModes": {
+    "strict": {
+      "description": "All rules must pass",
+      "failOnWarning": true,
+      "failOnRecommendation": true,
+      "useCustomStandards": true
+    },
+    "standard": {
+      "description": "Mandatory rules must pass, warnings allowed",
+      "failOnWarning": false,
+      "failOnRecommendation": false,
+      "useCustomStandards": true
+    },
+    "relaxed": {
+      "description": "Only critical violations fail",
+      "failOnWarning": false,
+      "failOnRecommendation": false,
+      "useCustomStandards": false
+    }
+  },
+  "reporting": {
+    "formats": ["json", "html", "markdown", "csv"],
+    "includeViolations": true,
+    "includeRecommendations": true,
+    "includeMetrics": true,
+    "includeActionItems": true,
+    "includeTrends": true
+  },
+  "performance": {
+    "maxValidationTime": 300,
+    "parallelValidation": true,
+    "cacheResults": true,
+    "cacheTTL": 3600,
+    "batchSize": 100
+  }
+}

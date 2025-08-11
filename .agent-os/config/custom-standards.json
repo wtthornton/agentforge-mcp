@@ -1,0 +1,189 @@
+{
+  "agentforge-specific": {
+    "name": "AgentForge Project Standards",
+    "description": "Custom standards specific to AgentForge project requirements",
+    "version": "1.0.0",
+    "rules": [
+      {
+        "id": "AF-001",
+        "name": "Static Analyzer Only",
+        "description": "No AI suggestion features, dynamic AI processing, or AI-driven automation",
+        "type": "mandatory",
+        "priority": "critical",
+        "category": "project-constraints",
+        "validation": {
+          "type": "pattern-check",
+          "patterns": [
+            "AI suggestion",
+            "dynamic AI",
+            "AI-driven automation",
+            "machine learning",
+            "AI chat interface"
+          ],
+          "excludePatterns": [
+            "static analysis",
+            "code quality",
+            "security checking"
+          ]
+        }
+      },
+      {
+        "id": "AF-002",
+        "name": "Core Components Priority",
+        "description": "Focus on logging, reporting, monitoring, and project analysis services",
+        "type": "mandatory",
+        "priority": "high",
+        "category": "architecture",
+        "validation": {
+          "type": "component-check",
+          "requiredComponents": [
+            "LoggingService",
+            "MonitoringService",
+            "ReportingService",
+            "ProjectAnalysisService"
+          ]
+        }
+      },
+      {
+        "id": "AF-003",
+        "name": "Controller-Service-Repository Pattern",
+        "description": "Enforce Controller → Service → Repository pattern in backend",
+        "type": "mandatory",
+        "priority": "high",
+        "category": "architecture",
+        "validation": {
+          "type": "structure-check",
+          "requiredLayers": [
+            "controller",
+            "service",
+            "repository"
+          ]
+        }
+      },
+      {
+        "id": "AF-004",
+        "name": "Performance Targets",
+        "description": "Meet specified performance targets for response times and memory usage",
+        "type": "recommended",
+        "priority": "medium",
+        "category": "performance",
+        "validation": {
+          "type": "performance-check",
+          "targets": {
+            "backendResponseTime": 200,
+            "frontendTTI": 1800,
+            "analysisSpeed": 30,
+            "memoryUsage": 512
+          }
+        }
+      },
+      {
+        "id": "AF-005",
+        "name": "Technology Stack Compliance",
+        "description": "Use specified technology stack with Context7 validation",
+        "type": "mandatory",
+        "priority": "high",
+        "category": "tech-stack",
+        "validation": {
+          "type": "tech-stack-check",
+          "required": {
+            "backend": "Spring Boot 3.3+",
+            "frontend": "React 19 + TypeScript 5",
+            "database": "PostgreSQL 17",
+            "containerization": "Docker 24"
+          }
+        }
+      }
+    ]
+  },
+  "code-quality": {
+    "name": "Code Quality Standards",
+    "description": "Enhanced code quality validation rules",
+    "version": "1.0.0",
+    "rules": [
+      {
+        "id": "CQ-001",
+        "name": "Maximum File Size",
+        "description": "Files should not exceed 1000 lines",
+        "type": "recommended",
+        "priority": "medium",
+        "category": "maintainability",
+        "validation": {
+          "type": "file-size-check",
+          "maxLines": 1000
+        }
+      },
+      {
+        "id": "CQ-002",
+        "name": "Cyclomatic Complexity",
+        "description": "Methods should have cyclomatic complexity ≤ 10",
+        "type": "recommended",
+        "priority": "medium",
+        "category": "complexity",
+        "validation": {
+          "type": "complexity-check",
+          "maxComplexity": 10
+        }
+      },
+      {
+        "id": "CQ-003",
+        "name": "Documentation Coverage",
+        "description": "Public APIs should have documentation",
+        "type": "recommended",
+        "priority": "low",
+        "category": "documentation",
+        "validation": {
+          "type": "documentation-check",
+          "minCoverage": 80
+        }
+      }
+    ]
+  },
+  "security": {
+    "name": "Security Standards",
+    "description": "Security and compliance validation rules",
+    "version": "1.0.0",
+    "rules": [
+      {
+        "id": "SEC-001",
+        "name": "No Hardcoded Secrets",
+        "description": "No hardcoded API keys, passwords, or sensitive data",
+        "type": "mandatory",
+        "priority": "critical",
+        "category": "secrets",
+        "validation": {
+          "type": "pattern-check",
+          "forbiddenPatterns": [
+            "password.*=.*['\"][^'\"]+['\"]",
+            "api_key.*=.*['\"][^'\"]+['\"]",
+            "secret.*=.*['\"][^'\"]+['\"]"
+          ]
+        }
+      },
+      {
+        "id": "SEC-002",
+        "name": "Input Validation",
+        "description": "All user inputs must be validated",
+        "type": "mandatory",
+        "priority": "high",
+        "category": "input-validation",
+        "validation": {
+          "type": "input-validation-check",
+          "required": true
+        }
+      },
+      {
+        "id": "SEC-003",
+        "name": "Authentication Required",
+        "description": "Protected endpoints must require authentication",
+        "type": "mandatory",
+        "priority": "high",
+        "category": "authentication",
+        "validation": {
+          "type": "authentication-check",
+          "required": true
+        }
+      }
+    ]
+  }
+}

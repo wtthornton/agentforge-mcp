@@ -1,0 +1,80 @@
+# Test Configuration for AgentForge
+# This file configures the test environment for database integration testing
+
+spring:
+  application:
+    name: agentforge-backend-test
+  
+  # Test Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/agentforge
+    username: agentforge
+    password: agentforge
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 1
+      connection-timeout: 10000
+      idle-timeout: 300000
+      max-lifetime: 900000
+      connection-test-query: SELECT 1
+      validation-timeout: 5000
+      leak-detection-threshold: 30000
+  
+  # JPA Configuration for Tests
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+        show_sql: false
+        jdbc:
+          batch_size: 10
+        order_inserts: true
+        order_updates: true
+        batch_versioned_data: true
+        connection:
+          provider_disables_autocommit: true
+  
+  # Flyway Configuration for Tests
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    validate-on-migrate: true
+    locations: classpath:db/migration
+  
+  # Test-specific settings
+  test:
+    database:
+      replace: none
+  
+  # Disable security for tests
+  security:
+    user:
+      name: test
+      password: test
+      roles: TEST
+
+# Test-specific logging
+logging:
+  level:
+    root: WARN
+    com.agentforge: DEBUG
+    org.springframework.test: DEBUG
+    org.hibernate.SQL: false
+    org.hibernate.type.descriptor.sql.BasicBinder: false
+
+# Test performance settings
+performance:
+  async:
+    core-pool-size: 2
+    max-pool-size: 5
+    queue-capacity: 10
+    keep-alive-seconds: 30
+  cache:
+    default-ttl: 60
+    max-size: 100
