@@ -1,8 +1,12 @@
 # Tech Stack (2025, Enhanced) - Context7 Priority
 
-## MANDATORY: Context7 First Approach
+## 🚨 MANDATORY: Product Folder First Approach
 
-**ALWAYS** validate technology choices against Context7 documentation before implementing.
+**CRITICAL**: **ALWAYS** reference `.agent-os/product/tech-stack.md` FIRST for exact technology versions and constraints.
+
+## MANDATORY: Context7 Second Approach
+
+**THEN** validate technology choices against Context7 documentation for best practices and current patterns.
 
 ## MANDATORY: Cursor Agent Management
 
@@ -95,4 +99,14 @@
 - **Apply:** Update tech stack recommendations based on lessons learned and Context7 findings
 - **Reference:** See `@~/.agent-os/lessons-learned/categories/development/README.md` for technology lessons
 
-**Cursor Effect:** Guides AI to **choose the right modern stack** and generate compatible code & config using Context7 as the primary source.
+## 📋 Product Folder Reference
+
+### Current Project Technology Stack
+**Reference**: `.agent-os/product/tech-stack.md` for exact versions and constraints
+
+### Technology Validation Workflow
+1. **FIRST**: Check `.agent-os/product/tech-stack.md` for project-specific versions
+2. **SECOND**: Validate against Context7 for best practices and current patterns
+3. **THIRD**: Apply standards for implementation details
+
+**Cursor Effect:** Guides AI to **FIRST** reference product folder for exact technology constraints, **THEN** use Context7 for best practices and validation.

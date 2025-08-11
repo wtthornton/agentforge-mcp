@@ -14,12 +14,19 @@ Claude Code now has:
 
 ## 🔗 Integration Points
 
-### 1. Cursor Rules Integration
+### 1. 🎯 PRODUCT FOLDER PRIORITY (MANDATORY FIRST)
+- **Auto-loads** product specifications from `.agent-os/product/`
+- **Tech Stack**: `.agent-os/product/tech-stack.md` - **MANDATORY FIRST REFERENCE**
+- **Mission & Goals**: `.agent-os/product/mission.md` - **PROJECT CONSTRAINTS**
+- **Features**: `.agent-os/product/FEATURES.md` - **REQUIRED FUNCTIONALITY**
+- **Decisions**: `.agent-os/product/decisions.md` - **ARCHITECTURE CHOICES**
+
+### 2. Cursor Rules Integration
 - **Auto-loads** all rules from `.cursor/rules/`
 - **Enforces compliance** with the same standards as Cursor
 - **Maintains consistency** across development environments
 
-### 2. Agent OS Standards
+### 3. Agent OS Standards (Secondary Priority)
 - **Auto-loads** standards from `.agent-os/standards/`
 - **Enforces compliance** with all development patterns
 - **Maintains quality gates** and performance targets
@@ -33,10 +40,11 @@ Claude Code now has:
 
 ### Before Starting Any Work
 Claude Code automatically:
-1. **Loads cursor rules** and Agent OS standards
-2. **Validates project context** and constraints
-3. **Checks compliance status** of current codebase
-4. **Prepares development environment** with all necessary tools
+1. **FIRST loads product specifications** from `.agent-os/product/` (tech-stack, mission, features)
+2. **THEN loads cursor rules** and Agent OS standards
+3. **Validates project context** and constraints against product folder
+4. **Checks compliance status** of current codebase
+5. **Prepares development environment** with all necessary tools
 
 ### During Development
 Claude Code automatically:

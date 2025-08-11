@@ -1,0 +1,114 @@
+# Product Folder Priority Rules for AgentForge
+
+## 🎯 MANDATORY: Product Folder First Approach
+
+**CRITICAL**: The `.agent-os/product/` folder contains the **ACTUAL PROJECT SPECIFICATIONS** and must be referenced **FIRST** before any other standards or rules.
+
+## 📁 Product Folder Structure Priority
+
+### 1. **tech-stack.md** - MANDATORY FIRST REFERENCE
+- **Contains**: Exact technology versions and constraints
+- **Usage**: **ALWAYS** check this before making technology decisions
+- **Priority**: **HIGHEST** - overrides standards folder versions
+
+### 2. **mission.md** - PROJECT GOALS AND CONSTRAINTS
+- **Contains**: Project purpose, goals, and business requirements
+- **Usage**: **ALWAYS** review before feature planning
+- **Priority**: **HIGH** - defines what the project should do
+
+### 3. **FEATURES.md** - REQUIRED FUNCTIONALITY
+- **Contains**: Specific features and requirements
+- **Usage**: **ALWAYS** reference during development planning
+- **Priority**: **HIGH** - defines what to build
+
+### 4. **decisions.md** - ARCHITECTURE CHOICES
+- **Contains**: Technical decisions and rationale
+- **Usage**: **ALWAYS** review before making architectural changes
+- **Priority**: **MEDIUM** - provides context for decisions
+
+## 🚨 Development Workflow Priority
+
+### Before ANY Development Work
+1. **FIRST**: Read `.agent-os/product/tech-stack.md` for technology constraints
+2. **SECOND**: Read `.agent-os/product/mission.md` for project goals
+3. **THIRD**: Read `.agent-os/product/FEATURES.md` for requirements
+4. **FOURTH**: Reference standards folder for Context7 validation and patterns
+
+### Technology Decision Process
+1. **Check Product Folder**: What versions are specified?
+2. **Validate with Context7**: Are these versions current and supported?
+3. **Apply Standards**: Follow code style and best practices
+4. **Document**: Update decisions.md if making changes
+
+## 📋 Product vs Standards Priority Matrix
+
+| Decision Type | Product Folder Priority | Standards Folder Usage |
+|---------------|------------------------|------------------------|
+| **Technology Versions** | **MANDATORY** - Use exact versions | Context7 validation only |
+| **Project Goals** | **MANDATORY** - Project constraints | Not applicable |
+| **Feature Requirements** | **MANDATORY** - What to build | Not applicable |
+| **Code Style** | Not applicable | **MANDATORY** - How to write |
+| **Security Patterns** | Not applicable | **MANDATORY** - Best practices |
+| **Testing Strategy** | Not applicable | **MANDATORY** - How to test |
+
+## 🔍 Reference Pattern Examples
+
+### ✅ CORRECT: Product Folder First
+```bash
+# Technology decision
+"According to .agent-os/product/tech-stack.md, we use React 19.0.0 and TypeScript 5.5.3"
+
+# Feature planning
+"Based on .agent-os/product/mission.md, the project goal is static analysis only"
+
+# Architecture decision
+"Following .agent-os/product/decisions.md, we use Controller → Service → Repository pattern"
+```
+
+### ❌ INCORRECT: Standards Folder First
+```bash
+# Technology decision
+"According to .agent-os/standards/tech-stack.md, we use React 19.x and TypeScript 5.x"
+
+# Feature planning
+"Based on standards, we should implement AI features" (ignoring product constraints)
+```
+
+## 🎯 Success Criteria
+
+### Product Folder Compliance
+- **100%** technology decisions reference product folder first
+- **100%** feature planning starts with product mission
+- **100%** development follows product constraints
+- **100%** architecture decisions respect product decisions
+
+### Standards Integration
+- **100%** Context7 validation after product folder reference
+- **100%** code style compliance with standards
+- **100%** security patterns from standards
+- **100%** testing strategy from standards
+
+## 🚫 Forbidden Patterns
+
+- **NO** technology decisions without product folder reference
+- **NO** feature development without mission.md review
+- **NO** architectural changes without decisions.md review
+- **NO** standards folder usage before product folder
+
+## ✅ Required Patterns
+
+- **ALWAYS** start with product folder for project context
+- **ALWAYS** use exact versions from product tech-stack.md
+- **ALWAYS** validate against Context7 after product folder reference
+- **ALWAYS** follow standards for implementation details
+
+---
+
+**Created**: 2025-01-27  
+**Status**: Active  
+**Priority**: **HIGHEST** - Must be followed before any other rules  
+**Next Review**: Weekly during active development
+description: Product folder priority rules - MANDATORY FIRST for all development decisions
+globs:
+alwaysApply: true
+---

@@ -8,8 +8,11 @@ AgentForge is a static analyzer and project setup/migration utility that follows
 ## 📚 Mandatory Standards Reference
 **ALWAYS** reference these standards before making any code changes:
 
-### Core Standards
-- **Technology Stack**: `.agent-os/standards/tech-stack.md` - Mandatory technology choices
+### 🎯 PRIMARY PRIORITY: Product Technology Stack
+- **Technology Stack**: `.agent-os/product/tech-stack.md` - **MANDATORY FIRST REFERENCE** for all technology decisions
+- **Mission & Features**: `.agent-os/product/mission.md` and `.agent-os/product/FEATURES.md` - **PROJECT CONSTRAINTS AND GOALS**
+
+### Core Standards (Secondary Priority)
 - **Code Style**: `.agent-os/standards/code-style.md` - Coding conventions and patterns
 - **Best Practices**: `.agent-os/standards/best-practices.md` - Development principles
 - **Security & Compliance**: `.agent-os/standards/security-compliance.md` - Security requirements
@@ -20,7 +23,12 @@ AgentForge is a static analyzer and project setup/migration utility that follows
 - **Development Patterns**: `.agent-os/standards/consolidated-development-patterns.md` - Consolidated patterns
 - **Configuration Management**: `.agent-os/standards/configuration-management.md` - Config standards
 
-### Context7 Integration (CRITICAL)
+### Product Folder Priority (CRITICAL)
+- **Product Priority Rules**: `.cursor/rules/product-priority.mdc` - **MANDATORY FIRST** for all project decisions
+- **Product Tech Stack**: `.agent-os/product/tech-stack.md` - **MANDATORY FIRST REFERENCE** for technology choices
+- **Product Mission**: `.agent-os/product/mission.md` - **MANDATORY FIRST** for project goals and constraints
+
+### Context7 Integration (Secondary Priority)
 - **Context7 Rules**: `.cursor/rules/context7-integration.mdc` - **MANDATORY** for all technology validation
 - **Context7 Priority**: **ALWAYS** use Context7 first for library documentation and best practices
 - **Context7 Fallback**: Only use Agent OS standards when Context7 doesn't cover specific requirements
@@ -99,11 +107,11 @@ node .agent-os/tools/compliance-checker.js --detailed
 6. **Context7 Compliance** - **MANDATORY** - All implementations must follow Context7 best practices
 
 ## 📋 Development Workflow
-1. **Before coding**: Check relevant standards files, **validate against Context7**, and run compliance checker
-2. **Feature Planning**: Score features using the 4-dimension framework, **research Context7 best practices**
-3. **During development**: Follow established patterns, **reference Context7 documentation**, and update tasks.md immediately
+1. **Before coding**: **FIRST** check `.agent-os/product/tech-stack.md` for technology constraints, **THEN** check relevant standards files, **validate against Context7**, and run compliance checker
+2. **Feature Planning**: **FIRST** review `.agent-os/product/mission.md` and `.agent-os/product/FEATURES.md` for project goals, **THEN** score features using the 4-dimension framework, **research Context7 best practices**
+3. **During development**: **FIRST** ensure compliance with product technology stack, **THEN** follow established patterns, **reference Context7 documentation**, and update tasks.md immediately
 4. **After changes**: Run compliance checker, **verify Context7 compliance**, and capture lessons learned
-5. **Before submission**: Validate all standards compliance, **Context7 pattern compliance**, and quality gates
+5. **Before submission**: **FIRST** validate product technology stack compliance, **THEN** validate all standards compliance, **Context7 pattern compliance**, and quality gates
 
 ## 🔧 Tools & Utilities Integration
 
@@ -267,7 +275,18 @@ node .agent-os/tools/validation-suite.js
 
 ## 🎯 AgentForge Development Focus
 
-### Current Phase Priority
+### 🚨 CRITICAL: Product Folder Priority
+**ALWAYS START HERE** before any development decisions:
+
+1. **`.agent-os/product/tech-stack.md`** - **MANDATORY FIRST REFERENCE** for all technology choices
+2. **`.agent-os/product/mission.md`** - **PROJECT GOALS AND CONSTRAINTS**
+3. **`.agent-os/product/FEATURES.md`** - **REQUIRED FUNCTIONALITY**
+4. **`.agent-os/product/decisions.md`** - **ARCHITECTURE DECISIONS**
+
+### 📋 Quick Reference Guide
+**See**: `PRODUCT-FOLDER-PRIORITY.md` for complete workflow and examples
+
+### Current Phase Priority (Based on Product Folder)
 1. **Database Integration** - PostgreSQL setup and entity models
 2. **Repository Layer** - Complete the Controller → Service → Repository pattern
 3. **API Integration** - Frontend-backend communication

@@ -1,6 +1,7 @@
 {
   "projectPaths": {
     "root": ".",
+    "productPriority": ".agent-os/product/",
     "cursorRules": ".cursor/rules/",
     "agentOS": ".agent-os/",
     "standards": ".agent-os/standards/",
@@ -17,6 +18,12 @@
       ".cursor/rules/context7-integration.mdc",
       ".cursor/rules/standards-compliance.mdc",
       ".cursor/rules/enforcement-compliance.mdc"
+    ],
+    "productPriority": [
+      ".agent-os/product/tech-stack.md",
+      ".agent-os/product/mission.md",
+      ".agent-os/product/FEATURES.md",
+      ".agent-os/product/decisions.md"
     ],
     "agentOSStandards": [
       ".agent-os/standards/tech-stack.md",
