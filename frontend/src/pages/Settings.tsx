@@ -1,11 +1,6 @@
 import React, { useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Switch } from '@/components/ui/switch'
-import { Separator } from '@/components/ui/separator'
-import { Badge } from '@/components/ui/badge'
+import { Button } from '../components/ui/Button'
+import { UserProfile } from '../components/auth/UserProfile'
 import { 
   Settings as SettingsIcon, 
   Database, 
@@ -13,7 +8,8 @@ import {
   Bell, 
   Palette,
   Save,
-  RotateCcw
+  RotateCcw,
+  User
 } from 'lucide-react'
 
 interface SettingsForm {
@@ -62,47 +58,65 @@ const Settings: React.FC = () => {
   }
 
   return (
-    <div className="container mx-auto p-6 space-y-6">
+    <div className="space-y-6">
       <div className="flex items-center space-x-2">
-        <SettingsIcon className="h-8 w-8 text-primary" />
+        <SettingsIcon className="h-8 w-8 text-blue-600" />
         <div>
           <h1 className="text-3xl font-bold">Settings</h1>
-          <p className="text-muted-foreground">
+          <p className="text-gray-600">
             Configure AgentForge preferences and system settings
           </p>
         </div>
       </div>
 
       <div className="grid gap-6">
+        {/* Profile Settings */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="p-6 border-b border-gray-200">
+            <div className="flex items-center space-x-2">
+              <User className="h-5 w-5" />
+              <h3 className="text-lg font-semibold">Profile Settings</h3>
+            </div>
+            <p className="text-gray-600 text-sm mt-1">
+              Manage your account information and preferences
+            </p>
+          </div>
+          <div className="p-6">
+            <UserProfile />
+          </div>
+        </div>
+
         {/* General Settings */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center space-x-2">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+          <div className="p-6 border-b border-gray-200">
+            <div className="flex items-center space-x-2">
               <SettingsIcon className="h-5 w-5" />
-              <span>General Settings</span>
-            </CardTitle>
-            <CardDescription>
+              <h3 className="text-lg font-semibold">General Settings</h3>
+            </div>
+            <p className="text-gray-600 text-sm mt-1">
               Basic configuration for your AgentForge instance
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
+            </p>
+          </div>
+          <div className="p-6 space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="projectName">Project Name</Label>
-                <Input
+                <label htmlFor="projectName" className="text-sm font-medium text-gray-700">Project Name</label>
+                <input
                   id="projectName"
+                  type="text"
                   value={settings.projectName}
                   onChange={(e) => setSettings({ ...settings, projectName: e.target.value })}
                   placeholder="Enter project name"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="logLevel">Log Level</Label>
+                <label htmlFor="logLevel" className="text-sm font-medium text-gray-700">Log Level</label>
                 <select
                   id="logLevel"
                   value={settings.logLevel}
                   onChange={(e) => setSettings({ ...settings, logLevel: e.target.value })}
-                  className="w-full px-3 py-2 border border-input rounded-md bg-background"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 >
                   <option value="DEBUG">DEBUG</option>
                   <option value="INFO">INFO</option>
@@ -111,8 +125,8 @@ const Settings: React.FC = () => {
                 </select>
               </div>
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
         {/* Database Settings */}
         <Card>
@@ -240,14 +254,14 @@ const Settings: React.FC = () => {
           onClick={handleReset}
           disabled={isSaving}
         >
-          <RotateCcw className="h-4 w-4 mr-2" />
           Reset to Defaults
         </Button>
         <Button
+          variant="primary"
           onClick={handleSave}
           disabled={isSaving}
+          size="md"
         >
-          <Save className="h-4 w-4 mr-2" />
           {isSaving ? 'Saving...' : 'Save Settings'}
         </Button>
       </div>

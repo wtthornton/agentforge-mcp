@@ -8,5 +8,10 @@ export { ErrorFallback } from './ErrorFallback';
 // UI components
 export { Button } from './ui/Button';
 
+// Auth components
+export { LoginForm } from './auth/LoginForm';
+export { ProtectedRoute } from './auth/ProtectedRoute';
+export { UserProfile } from './auth/UserProfile';
+
 // Re-export types for convenience
 export type { ButtonProps } from '@/types';

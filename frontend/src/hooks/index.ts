@@ -1,6 +1,14 @@
 // Central export file for all custom hooks
 // This file provides a single import point for all hooks
 
+// Authentication hooks
+export { 
+  AuthProvider, 
+  useAuth, 
+  useRequireAuth, 
+  useAuthenticatedFetch 
+} from './useAuth';
+
 // Custom hooks will be exported here as they are created
 // export { useLocalStorage } from './useLocalStorage';
 // export { useDebounce } from './useDebounce';
@@ -10,6 +18,3 @@
 // export { useSearch } from './useSearch';
 // export { useNotifications } from './useNotifications';
 // export { useTheme } from './useTheme';
-
-// Placeholder for future hooks
-export {};

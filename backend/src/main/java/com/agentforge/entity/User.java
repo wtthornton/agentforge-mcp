@@ -32,8 +32,8 @@ public class User {
     
     @NotBlank(message = "Password is required")
     @Size(min = 8, message = "Password must be at least 8 characters")
-    @Column(nullable = false)
-    private String password;
+    @Column(name = "password_hash", nullable = false)
+    private String passwordHash;
     
     @NotNull(message = "User role is required")
     @Enumerated(EnumType.STRING)
@@ -65,10 +65,10 @@ public class User {
     // Constructors
     public User() {}
     
-    public User(String username, String email, String password) {
+    public User(String username, String email, String passwordHash) {
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.passwordHash = passwordHash;
     }
     
     // Getters and Setters
@@ -96,12 +96,12 @@ public class User {
         this.email = email;
     }
     
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
     
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
     
     public UserRole getRole() {
@@ -128,12 +128,12 @@ public class User {
         this.lastLogin = lastLogin;
     }
     
-    public boolean isActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
     
-    public void setActive(boolean active) {
-        isActive = active;
+    public void setIsActive(Boolean active) {
+        this.isActive = active;
     }
     
     public LocalDateTime getCreatedAt() {

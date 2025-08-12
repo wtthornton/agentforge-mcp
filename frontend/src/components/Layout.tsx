@@ -6,9 +6,12 @@ import {
   Bot, 
   Settings, 
   Menu,
-  X
+  X,
+  LogOut,
+  User
 } from 'lucide-react';
 import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -17,13 +20,19 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const { user, logout } = useAuth();
 
   const navigation = [
     { name: 'Dashboard', href: '/', icon: LayoutDashboard },
     { name: 'Projects', href: '/projects', icon: FolderOpen },
-    { name: 'Agents', href: '/agents', icon: Bot },
+    ...(user?.role !== 'VIEWER' ? [{ name: 'Agents', href: '/agents', icon: Bot }] : []),
     { name: 'Settings', href: '/settings', icon: Settings },
   ];
+
+  const handleLogout = async () => {
+    await logout();
+    window.location.href = '/login';
+  };
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -107,7 +116,31 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
             <div className="flex flex-1"></div>
             <div className="flex items-center gap-x-4 lg:gap-x-6">
-              {/* Add user menu, notifications, etc. here */}
+              {user && (
+                <>
+                  <div className="flex items-center gap-x-3">
+                    <div className="flex items-center gap-x-2">
+                      <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center">
+                        <span className="text-sm font-medium text-white">
+                          {user.username.charAt(0).toUpperCase()}
+                        </span>
+                      </div>
+                      <div className="hidden sm:block">
+                        <div className="text-sm font-medium text-gray-900">{user.username}</div>
+                        <div className="text-xs text-gray-500">{user.role}</div>
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center gap-x-1 rounded-md bg-gray-100 px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors"
+                      title="Sign out"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      <span className="hidden sm:block">Sign Out</span>
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
