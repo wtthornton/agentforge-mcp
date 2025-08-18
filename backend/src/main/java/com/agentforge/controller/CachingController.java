@@ -1,6 +1,7 @@
 package com.agentforge.controller;
 
 import com.agentforge.service.CachingService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/cache")
+@ConditionalOnBean(CachingService.class)
 public class CachingController {
 
     private final CachingService cachingService;

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import java.lang.management.ManagementFactory;
 import java.lang.management.GarbageCollectorMXBean;
-import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.ThreadMXBean;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -116,11 +116,20 @@ public class PerformanceOptimizationService {
         Map<String, Object> metrics = new HashMap<>();
         
         // System metrics
-        OperatingSystemMXBean osBean = ManagementFactory.getOperatingSystemMXBean();
+        java.lang.management.OperatingSystemMXBean osBean = ManagementFactory.getOperatingSystemMXBean();
         metrics.put("systemLoad", osBean.getSystemLoadAverage());
         metrics.put("availableProcessors", osBean.getAvailableProcessors());
-        metrics.put("totalPhysicalMemory", osBean.getTotalPhysicalMemorySize());
-        metrics.put("freePhysicalMemory", osBean.getFreePhysicalMemorySize());
+        
+        // Get physical memory info using Sun-specific methods if available
+        if (osBean instanceof com.sun.management.OperatingSystemMXBean) {
+            com.sun.management.OperatingSystemMXBean sunOsBean = (com.sun.management.OperatingSystemMXBean) osBean;
+            metrics.put("totalPhysicalMemory", sunOsBean.getTotalPhysicalMemorySize());
+            metrics.put("freePhysicalMemory", sunOsBean.getFreePhysicalMemorySize());
+        } else {
+            // Fallback for non-Sun JVMs
+            metrics.put("totalPhysicalMemory", -1L);
+            metrics.put("freePhysicalMemory", -1L);
+        }
         
         // Memory analysis
         Map<String, Object> memoryAnalysis = analyzeMemoryUsage();
@@ -563,7 +572,7 @@ public class PerformanceOptimizationService {
             } else {
                 failedOptimizations.incrementAndGet();
                 loggingService.logError("PERFORMANCE_OPTIMIZATION", "OPTIMIZATION_FAILED", 
-                    "Failed to apply " + optimizationType + " optimization", parameters);
+                    "Failed to apply " + optimizationType + " optimization", parameters, null);
             }
             
         } catch (Exception e) {
@@ -571,7 +580,7 @@ public class PerformanceOptimizationService {
             result.put("success", false);
             result.put("error", e.getMessage());
             loggingService.logError("PERFORMANCE_OPTIMIZATION", "OPTIMIZATION_EXCEPTION", 
-                "Exception during optimization", Map.of("error", e.getMessage()));
+                "Exception during optimization", Map.of("error", e.getMessage()), e);
         }
         
         return result;
@@ -657,7 +666,7 @@ public class PerformanceOptimizationService {
             
         } catch (Exception e) {
             loggingService.logError("PERFORMANCE_OPTIMIZATION", "SCHEDULED_CHECK_FAILED", 
-                "Scheduled performance check failed", Map.of("error", e.getMessage()));
+                "Scheduled performance check failed", Map.of("error", e.getMessage()), e);
         }
     }
 

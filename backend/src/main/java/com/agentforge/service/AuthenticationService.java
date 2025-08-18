@@ -5,6 +5,7 @@ import com.agentforge.entity.UserRole;
 import com.agentforge.repository.UserRepository;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -64,7 +65,7 @@ public class AuthenticationService {
 
     public AuthenticationService(UserRepository userRepository, 
                                LoggingService loggingService,
-                               CachingService cachingService) {
+                               @Autowired(required = false) CachingService cachingService) {
         this.userRepository = userRepository;
         this.loggingService = loggingService;
         this.cachingService = cachingService;
@@ -132,7 +133,7 @@ public class AuthenticationService {
             
         } catch (Exception e) {
             loggingService.logError("AUTH", "AUTH_ERROR", 
-                "Authentication error", Map.of("user", usernameOrEmail, "error", e.getMessage()));
+                "Authentication error", Map.of("user", usernameOrEmail, "error", e.getMessage()), e);
             return AuthenticationResult.failure("Authentication failed");
         }
     }
@@ -178,7 +179,7 @@ public class AuthenticationService {
             
         } catch (Exception e) {
             loggingService.logError("AUTH", "REFRESH_ERROR", 
-                "Token refresh error", Map.of("error", e.getMessage()));
+                "Token refresh error", Map.of("error", e.getMessage()), e);
             return AuthenticationResult.failure("Token refresh failed");
         }
     }
@@ -204,7 +205,7 @@ public class AuthenticationService {
                 
         } catch (Exception e) {
             loggingService.logError("AUTH", "LOGOUT_ERROR", 
-                "Logout error", Map.of("error", e.getMessage()));
+                "Logout error", Map.of("error", e.getMessage()), e);
         }
     }
 
@@ -253,11 +254,11 @@ public class AuthenticationService {
                 return null;
             }
 
-            return Jwts.parserBuilder()
-                .setSigningKey(getJwtKey())
+            return Jwts.parser()
+                .verifyWith(getJwtKey())
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
+                .parseSignedClaims(token)
+                .getPayload();
                 
         } catch (JwtException | IllegalArgumentException e) {
             loggingService.logWarning("AUTH", "TOKEN_VALIDATION_FAILED", 
@@ -288,7 +289,9 @@ public class AuthenticationService {
         activeSessions.put(sessionId, session);
         
         // Cache session for quick access
-        cachingService.put("session:" + sessionId, session);
+        if (cachingService != null) {
+            cachingService.put("session:" + sessionId, session);
+        }
         
         return session;
     }
@@ -300,7 +303,9 @@ public class AuthenticationService {
         activeSessions.entrySet().removeIf(entry -> {
             SessionInfo session = entry.getValue();
             if (refreshToken.equals(session.getRefreshToken())) {
+                if (cachingService != null) {
                 cachingService.evict("session:" + entry.getKey());
+            }
                 return true;
             }
             return false;
@@ -384,7 +389,9 @@ public class AuthenticationService {
         for (SessionInfo session : userSessions) {
             blacklistedTokens.add(session.getRefreshToken());
             activeSessions.remove(session.getSessionId());
+            if (cachingService != null) {
             cachingService.evict("session:" + session.getSessionId());
+        }
         }
         
         loggingService.logInfo("AUTH", "SESSIONS_INVALIDATED", 

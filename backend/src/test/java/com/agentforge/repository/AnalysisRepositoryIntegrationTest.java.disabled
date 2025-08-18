@@ -1,0 +1,489 @@
+package com.agentforge.repository;
+
+import com.agentforge.entity.Analysis;
+import com.agentforge.entity.Project;
+import com.agentforge.entity.ProjectStatus;
+import com.agentforge.entity.User;
+import com.agentforge.entity.UserRole;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Integration tests for AnalysisRepository
+ * Tests all CRUD operations, custom queries, and performance targets
+ */
+@DataJpaTest
+@ActiveProfiles("test")
+@Transactional
+class AnalysisRepositoryIntegrationTest {
+
+    @Autowired
+    private AnalysisRepository analysisRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    private User testUser;
+    private Project testProject;
+    private Analysis testAnalysis;
+    private LocalDateTime testDate;
+
+    @BeforeEach
+    void setUp() {
+        // Create test user
+        testUser = new User();
+        testUser.setUsername("testuser");
+        testUser.setEmail("test@example.com");
+        testUser.setPassword("password123");
+        testUser.setRole(UserRole.DEVELOPER);
+        testUser = userRepository.save(testUser);
+
+        // Create test project
+        testProject = new Project();
+        testProject.setName("Test Project");
+        testProject.setDescription("A test project for analysis testing");
+        testProject.setOwner(testUser);
+        testProject.setStatus(ProjectStatus.ACTIVE);
+        testProject.setTechnologyStack("Java,Spring Boot,PostgreSQL");
+        testProject.setCreatedAt(LocalDateTime.now());
+        testProject = projectRepository.save(testProject);
+
+        // Create test analysis
+        testAnalysis = new Analysis();
+        testAnalysis.setProject(testProject);
+        testAnalysis.setUser(testUser);
+        testAnalysis.setStatus(Analysis.AnalysisStatus.COMPLETED);
+        testAnalysis.setType(Analysis.AnalysisType.CODE_QUALITY);
+        testAnalysis.setStartedAt(LocalDateTime.now().minusMinutes(5));
+        testAnalysis.setCompletedAt(LocalDateTime.now());
+        testAnalysis.setDuration(300L); // 5 minutes in seconds
+        testAnalysis.setLinesOfCode(1000);
+        testAnalysis.setIssuesFound(5);
+        testAnalysis.setScore(85.0);
+        testAnalysis.setSummary("Code quality analysis completed successfully");
+
+        testDate = LocalDateTime.now();
+    }
+
+    @Test
+    void testCreateAnalysis() {
+        // Act
+        Analysis savedAnalysis = analysisRepository.save(testAnalysis);
+
+        // Assert
+        assertNotNull(savedAnalysis.getId());
+        assertEquals(testProject, savedAnalysis.getProject());
+        assertEquals(testUser, savedAnalysis.getUser());
+        assertEquals(Analysis.AnalysisStatus.COMPLETED, savedAnalysis.getStatus());
+        assertEquals(Analysis.AnalysisType.CODE_QUALITY, savedAnalysis.getType());
+    }
+
+    @Test
+    void testFindAnalysisById() {
+        // Arrange
+        Analysis savedAnalysis = analysisRepository.save(testAnalysis);
+
+        // Act
+        Optional<Analysis> foundAnalysis = analysisRepository.findById(savedAnalysis.getId());
+
+        // Assert
+        assertTrue(foundAnalysis.isPresent());
+        assertEquals(savedAnalysis.getProject(), foundAnalysis.get().getProject());
+        assertEquals(savedAnalysis.getUser(), foundAnalysis.get().getUser());
+    }
+
+    @Test
+    void testUpdateAnalysis() {
+        // Arrange
+        Analysis savedAnalysis = analysisRepository.save(testAnalysis);
+        String newSummary = "Updated analysis summary";
+
+        // Act
+        savedAnalysis.setSummary(newSummary);
+        Analysis updatedAnalysis = analysisRepository.save(savedAnalysis);
+
+        // Assert
+        assertEquals(newSummary, updatedAnalysis.getSummary());
+        assertEquals(savedAnalysis.getId(), updatedAnalysis.getId());
+    }
+
+    @Test
+    void testDeleteAnalysis() {
+        // Arrange
+        Analysis savedAnalysis = analysisRepository.save(testAnalysis);
+        Long analysisId = savedAnalysis.getId();
+
+        // Act
+        analysisRepository.delete(savedAnalysis);
+
+        // Assert
+        Optional<Analysis> deletedAnalysis = analysisRepository.findById(analysisId);
+        assertFalse(deletedAnalysis.isPresent());
+    }
+
+    @Test
+    void testFindByProject() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> projectAnalyses = analysisRepository.findByProject(testProject);
+
+        // Assert
+        assertFalse(projectAnalyses.isEmpty());
+        assertEquals(1, projectAnalyses.size());
+        assertEquals(testProject, projectAnalyses.get(0).getProject());
+    }
+
+    @Test
+    void testFindByProjectWithPagination() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act
+        Page<Analysis> projectAnalysesPage = analysisRepository.findByProject(testProject, pageable);
+
+        // Assert
+        assertEquals(1, projectAnalysesPage.getTotalElements());
+        assertEquals(1, projectAnalysesPage.getContent().size());
+    }
+
+    @Test
+    void testFindByUser() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> userAnalyses = analysisRepository.findByUser(testUser);
+
+        // Assert
+        assertFalse(userAnalyses.isEmpty());
+        assertEquals(1, userAnalyses.size());
+        assertEquals(testUser, userAnalyses.get(0).getUser());
+    }
+
+    @Test
+    void testFindByUserWithPagination() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act
+        Page<Analysis> userAnalysesPage = analysisRepository.findByUser(testUser, pageable);
+
+        // Assert
+        assertEquals(1, userAnalysesPage.getTotalElements());
+        assertEquals(1, userAnalysesPage.getContent().size());
+    }
+
+    @Test
+    void testFindByProjectAndUser() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> projectUserAnalyses = analysisRepository.findByProjectAndUser(testProject, testUser);
+
+        // Assert
+        assertFalse(projectUserAnalyses.isEmpty());
+        assertEquals(1, projectUserAnalyses.size());
+        assertEquals(testProject, projectUserAnalyses.get(0).getProject());
+        assertEquals(testUser, projectUserAnalyses.get(0).getUser());
+    }
+
+    @Test
+    void testFindByStatus() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> completedAnalyses = analysisRepository.findByStatus(Analysis.AnalysisStatus.COMPLETED);
+
+        // Assert
+        assertFalse(completedAnalyses.isEmpty());
+        assertEquals(Analysis.AnalysisStatus.COMPLETED, completedAnalyses.get(0).getStatus());
+    }
+
+    @Test
+    void testFindByStatusWithPagination() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act
+        Page<Analysis> statusAnalysesPage = analysisRepository.findByStatus(Analysis.AnalysisStatus.COMPLETED, pageable);
+
+        // Assert
+        assertEquals(1, statusAnalysesPage.getTotalElements());
+        assertEquals(1, statusAnalysesPage.getContent().size());
+    }
+
+    @Test
+    void testFindByType() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> codeQualityAnalyses = analysisRepository.findByType(Analysis.AnalysisType.CODE_QUALITY);
+
+        // Assert
+        assertFalse(codeQualityAnalyses.isEmpty());
+        assertEquals(Analysis.AnalysisType.CODE_QUALITY, codeQualityAnalyses.get(0).getType());
+    }
+
+    @Test
+    void testFindByTypeWithPagination() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act
+        Page<Analysis> typeAnalysesPage = analysisRepository.findByType(Analysis.AnalysisType.CODE_QUALITY, pageable);
+
+        // Assert
+        assertEquals(1, typeAnalysesPage.getTotalElements());
+        assertEquals(1, typeAnalysesPage.getContent().size());
+    }
+
+    @Test
+    void testFindByProjectAndStatus() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> projectStatusAnalyses = analysisRepository.findByProjectAndStatus(testProject, Analysis.AnalysisStatus.COMPLETED);
+
+        // Assert
+        assertFalse(projectStatusAnalyses.isEmpty());
+        assertEquals(testProject, projectStatusAnalyses.get(0).getProject());
+        assertEquals(Analysis.AnalysisStatus.COMPLETED, projectStatusAnalyses.get(0).getStatus());
+    }
+
+    @Test
+    void testFindByProjectAndType() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> projectTypeAnalyses = analysisRepository.findByProjectAndType(testProject, Analysis.AnalysisType.CODE_QUALITY);
+
+        // Assert
+        assertFalse(projectTypeAnalyses.isEmpty());
+        assertEquals(testProject, projectTypeAnalyses.get(0).getProject());
+        assertEquals(Analysis.AnalysisType.CODE_QUALITY, projectTypeAnalyses.get(0).getType());
+    }
+
+    @Test
+    void testFindByUserAndStatus() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> userStatusAnalyses = analysisRepository.findByUserAndStatus(testUser, Analysis.AnalysisStatus.COMPLETED);
+
+        // Assert
+        assertFalse(userStatusAnalyses.isEmpty());
+        assertEquals(testUser, userStatusAnalyses.get(0).getUser());
+        assertEquals(Analysis.AnalysisStatus.COMPLETED, userStatusAnalyses.get(0).getStatus());
+    }
+
+    @Test
+    void testFindByUserAndType() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> userTypeAnalyses = analysisRepository.findByUserAndType(testUser, Analysis.AnalysisType.CODE_QUALITY);
+
+        // Assert
+        assertFalse(userTypeAnalyses.isEmpty());
+        assertEquals(testUser, userTypeAnalyses.get(0).getUser());
+        assertEquals(Analysis.AnalysisType.CODE_QUALITY, userTypeAnalyses.get(0).getType());
+    }
+
+    @Test
+    void testFindByProjectAndUserAndStatus() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> projectUserStatusAnalyses = analysisRepository.findByProjectAndUserAndStatus(
+            testProject, testUser, Analysis.AnalysisStatus.COMPLETED);
+
+        // Assert
+        assertFalse(projectUserStatusAnalyses.isEmpty());
+        assertEquals(testProject, projectUserStatusAnalyses.get(0).getProject());
+        assertEquals(testUser, projectUserStatusAnalyses.get(0).getUser());
+        assertEquals(Analysis.AnalysisStatus.COMPLETED, projectUserStatusAnalyses.get(0).getStatus());
+    }
+
+    @Test
+    void testFindByProjectAndUserAndType() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+
+        // Act
+        List<Analysis> projectUserTypeAnalyses = analysisRepository.findByProjectAndUserAndType(
+            testProject, testUser, Analysis.AnalysisType.CODE_QUALITY);
+
+        // Assert
+        assertFalse(projectUserTypeAnalyses.isEmpty());
+        assertEquals(testProject, projectUserTypeAnalyses.get(0).getProject());
+        assertEquals(testUser, projectUserTypeAnalyses.get(0).getUser());
+        assertEquals(Analysis.AnalysisType.CODE_QUALITY, projectUserTypeAnalyses.get(0).getType());
+    }
+
+    @Test
+    void testFindByStartedAtAfter() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+        LocalDateTime pastDate = testDate.minusDays(1);
+
+        // Act
+        List<Analysis> recentAnalyses = analysisRepository.findByStartedAtAfter(pastDate);
+
+        // Assert
+        assertFalse(recentAnalyses.isEmpty());
+        assertTrue(recentAnalyses.get(0).getStartedAt().isAfter(pastDate));
+    }
+
+    @Test
+    void testFindByStartedAtBetween() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+        LocalDateTime startDate = testDate.minusDays(1);
+        LocalDateTime endDate = testDate.plusDays(1);
+
+        // Act
+        List<Analysis> dateRangeAnalyses = analysisRepository.findByStartedAtBetween(startDate, endDate);
+
+        // Assert
+        assertFalse(dateRangeAnalyses.isEmpty());
+        assertTrue(dateRangeAnalyses.get(0).getStartedAt().isAfter(startDate));
+        assertTrue(dateRangeAnalyses.get(0).getStartedAt().isBefore(endDate));
+    }
+
+    @Test
+    void testFindByCompletedAtAfter() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+        LocalDateTime pastDate = testDate.minusDays(1);
+
+        // Act
+        List<Analysis> recentCompletedAnalyses = analysisRepository.findByCompletedAtAfter(pastDate);
+
+        // Assert
+        assertFalse(recentCompletedAnalyses.isEmpty());
+        assertTrue(recentCompletedAnalyses.get(0).getCompletedAt().isAfter(pastDate));
+    }
+
+    @Test
+    void testFindByCompletedAtBetween() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+        LocalDateTime startDate = testDate.minusDays(1);
+        LocalDateTime endDate = testDate.plusDays(1);
+
+        // Act
+        List<Analysis> dateRangeCompletedAnalyses = analysisRepository.findByCompletedAtBetween(startDate, endDate);
+
+        // Assert
+        assertFalse(dateRangeCompletedAnalyses.isEmpty());
+        assertTrue(dateRangeCompletedAnalyses.get(0).getCompletedAt().isAfter(startDate));
+        assertTrue(dateRangeCompletedAnalyses.get(0).getCompletedAt().isBefore(endDate));
+    }
+
+    @Test
+    void testPerformanceTargets() {
+        // Arrange
+        analysisRepository.save(testAnalysis);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act & Assert - Measure performance for key operations
+        long startTime = System.currentTimeMillis();
+        
+        // Test findById performance
+        Optional<Analysis> foundAnalysis = analysisRepository.findById(testAnalysis.getId());
+        long findByIdTime = System.currentTimeMillis() - startTime;
+        
+        // Test findByProject performance
+        startTime = System.currentTimeMillis();
+        List<Analysis> projectAnalyses = analysisRepository.findByProject(testProject);
+        long findByProjectTime = System.currentTimeMillis() - startTime;
+        
+        // Test pagination performance
+        startTime = System.currentTimeMillis();
+        Page<Analysis> analysesPage = analysisRepository.findByProject(testProject, pageable);
+        long paginationTime = System.currentTimeMillis() - startTime;
+
+        // Assert performance targets (P95 < 100ms)
+        assertTrue(findByIdTime < 100, "findById should complete in < 100ms, took: " + findByIdTime + "ms");
+        assertTrue(findByProjectTime < 100, "findByProject should complete in < 100ms, took: " + findByProjectTime + "ms");
+        assertTrue(paginationTime < 100, "Pagination should complete in < 100ms, took: " + paginationTime + "ms");
+        
+        // Verify results are correct
+        assertTrue(foundAnalysis.isPresent());
+        assertFalse(projectAnalyses.isEmpty());
+        assertEquals(1, analysesPage.getTotalElements());
+    }
+
+    @Test
+    void testBulkOperations() {
+        // Arrange - Create multiple analyses
+        List<Analysis> analyses = List.of(
+            createAnalysis(Analysis.AnalysisStatus.COMPLETED, Analysis.AnalysisType.CODE_QUALITY),
+            createAnalysis(Analysis.AnalysisStatus.IN_PROGRESS, Analysis.AnalysisType.SECURITY),
+            createAnalysis(Analysis.AnalysisStatus.COMPLETED, Analysis.AnalysisType.PERFORMANCE)
+        );
+
+        // Act
+        long startTime = System.currentTimeMillis();
+        List<Analysis> savedAnalyses = analysisRepository.saveAll(analyses);
+        long saveAllTime = System.currentTimeMillis() - startTime;
+
+        // Assert
+        assertEquals(3, savedAnalyses.size());
+        assertTrue(saveAllTime < 200, "Bulk save should complete in < 200ms, took: " + saveAllTime + "ms");
+
+        // Test bulk find operations
+        startTime = System.currentTimeMillis();
+        List<Analysis> allAnalyses = analysisRepository.findAll();
+        long findAllTime = System.currentTimeMillis() - startTime;
+
+        assertTrue(findAllTime < 100, "findAll should complete in < 100ms, took: " + findAllTime + "ms");
+        assertTrue(allAnalyses.size() >= 3);
+    }
+
+    private Analysis createAnalysis(Analysis.AnalysisStatus status, Analysis.AnalysisType type) {
+        Analysis analysis = new Analysis();
+        analysis.setProject(testProject);
+        analysis.setUser(testUser);
+        analysis.setStatus(status);
+        analysis.setType(type);
+        analysis.setStartedAt(LocalDateTime.now().minusMinutes(5));
+        analysis.setCompletedAt(LocalDateTime.now());
+        analysis.setDuration(300L);
+        analysis.setLinesOfCode(1000);
+        analysis.setIssuesFound(5);
+        analysis.setScore(85.0);
+        analysis.setSummary("Test analysis");
+        return analysis;
+    }
+}

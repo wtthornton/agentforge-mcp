@@ -2,6 +2,7 @@ package com.agentforge.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * @version 1.0.0
  */
 @Service
+@ConditionalOnBean(RedisTemplate.class)
 public class CachingService {
 
     private final RedisTemplate<String, Object> redisTemplate;
@@ -137,7 +139,7 @@ public class CachingService {
         } catch (Exception e) {
             totalCacheMisses.incrementAndGet();
             loggingService.logError("CACHING", "GET_ERROR", 
-                "Error retrieving from cache: " + key, Map.of("error", e.getMessage()));
+                "Error retrieving from cache: " + key, Map.of("error", e.getMessage()), e);
             return Optional.empty();
         }
     }
@@ -171,7 +173,7 @@ public class CachingService {
             
         } catch (Exception e) {
             loggingService.logError("CACHING", "PUT_ERROR", 
-                "Error putting value in cache: " + key, Map.of("error", e.getMessage()));
+                "Error putting value in cache: " + key, Map.of("error", e.getMessage()), e);
         }
     }
 
@@ -268,7 +270,7 @@ public class CachingService {
             
         } catch (Exception e) {
             loggingService.logError("CACHING", "EVICT_ERROR", 
-                "Error evicting key from cache: " + key, Map.of("error", e.getMessage()));
+                "Error evicting key from cache: " + key, Map.of("error", e.getMessage()), e);
         }
     }
 
@@ -295,7 +297,7 @@ public class CachingService {
             
         } catch (Exception e) {
             loggingService.logError("CACHING", "EVICT_PATTERN_ERROR", 
-                "Error evicting pattern from cache: " + pattern, Map.of("error", e.getMessage()));
+                "Error evicting pattern from cache: " + pattern, Map.of("error", e.getMessage()), e);
         }
     }
 
@@ -313,7 +315,7 @@ public class CachingService {
             
         } catch (Exception e) {
             loggingService.logError("CACHING", "CLEAR_ALL_ERROR", 
-                "Error clearing all cache data", Map.of("error", e.getMessage()));
+                "Error clearing all cache data", Map.of("error", e.getMessage()), e);
         }
     }
 
@@ -479,7 +481,7 @@ public class CachingService {
             
         } catch (Exception e) {
             loggingService.logError("CACHING", "WARM_ERROR", 
-                "Cache warming failed", Map.of("error", e.getMessage()));
+                "Cache warming failed", Map.of("error", e.getMessage()), e);
         }
     }
 
@@ -523,7 +525,7 @@ public class CachingService {
             return true;
         } catch (Exception e) {
             loggingService.logError("CACHING", "HEALTH_CHECK_FAILED", 
-                "Cache health check failed", Map.of("error", e.getMessage()));
+                "Cache health check failed", Map.of("error", e.getMessage()), e);
             return false;
         }
     }

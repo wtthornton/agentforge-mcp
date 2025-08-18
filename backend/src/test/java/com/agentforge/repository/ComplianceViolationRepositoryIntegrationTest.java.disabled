@@ -1,0 +1,524 @@
+package com.agentforge.repository;
+
+import com.agentforge.entity.Analysis;
+import com.agentforge.entity.ComplianceViolation;
+import com.agentforge.entity.Project;
+import com.agentforge.entity.ProjectStatus;
+import com.agentforge.entity.User;
+import com.agentforge.entity.UserRole;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Integration tests for ComplianceViolationRepository
+ * Tests all CRUD operations, custom queries, and performance targets
+ */
+@DataJpaTest
+@ActiveProfiles("test")
+@Transactional
+class ComplianceViolationRepositoryIntegrationTest {
+
+    @Autowired
+    private ComplianceViolationRepository complianceViolationRepository;
+
+    @Autowired
+    private AnalysisRepository analysisRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    private User testUser;
+    private Project testProject;
+    private Analysis testAnalysis;
+    private ComplianceViolation testViolation;
+    private LocalDateTime testDate;
+
+    @BeforeEach
+    void setUp() {
+        // Create test user
+        testUser = new User();
+        testUser.setUsername("testuser");
+        testUser.setEmail("test@example.com");
+        testUser.setPassword("password123");
+        testUser.setRole(UserRole.DEVELOPER);
+        testUser = userRepository.save(testUser);
+
+        // Create test project
+        testProject = new Project();
+        testProject.setName("Test Project");
+        testProject.setDescription("A test project for compliance testing");
+        testProject.setOwner(testUser);
+        testProject.setStatus(ProjectStatus.ACTIVE);
+        testProject.setTechnologyStack("Java,Spring Boot,PostgreSQL");
+        testProject.setCreatedAt(LocalDateTime.now());
+        testProject = projectRepository.save(testProject);
+
+        // Create test analysis
+        testAnalysis = new Analysis();
+        testAnalysis.setProject(testProject);
+        testAnalysis.setUser(testUser);
+        testAnalysis.setStatus(Analysis.AnalysisStatus.COMPLETED);
+        testAnalysis.setType(Analysis.AnalysisType.CODE_QUALITY);
+        testAnalysis.setStartedAt(LocalDateTime.now().minusMinutes(5));
+        testAnalysis.setCompletedAt(LocalDateTime.now());
+        testAnalysis.setDuration(300L);
+        testAnalysis.setLinesOfCode(1000);
+        testAnalysis.setIssuesFound(5);
+        testAnalysis.setScore(85.0);
+        testAnalysis.setSummary("Code quality analysis completed");
+        testAnalysis = analysisRepository.save(testAnalysis);
+
+        // Create test violation
+        testViolation = new ComplianceViolation();
+        testViolation.setProject(testProject);
+        testViolation.setAnalysis(testAnalysis);
+        testViolation.setSeverity(ComplianceViolation.ViolationSeverity.MEDIUM);
+        testViolation.setStatus(ComplianceViolation.ViolationStatus.OPEN);
+        testViolation.setRuleId("RULE-001");
+        testViolation.setRuleCategory("Code Style");
+        testViolation.setRuleName("Variable Naming Convention");
+        testViolation.setDescription("Variable names should follow camelCase convention");
+        testViolation.setLineNumber(42);
+        testViolation.setFilePath("src/main/java/TestClass.java");
+        testViolation.setCreatedAt(LocalDateTime.now());
+        testViolation.setResolvedAt(null);
+
+        testDate = LocalDateTime.now();
+    }
+
+    @Test
+    void testCreateComplianceViolation() {
+        // Act
+        ComplianceViolation savedViolation = complianceViolationRepository.save(testViolation);
+
+        // Assert
+        assertNotNull(savedViolation.getId());
+        assertEquals(testProject, savedViolation.getProject());
+        assertEquals(testAnalysis, savedViolation.getAnalysis());
+        assertEquals(ComplianceViolation.ViolationSeverity.MEDIUM, savedViolation.getSeverity());
+        assertEquals(ComplianceViolation.ViolationStatus.OPEN, savedViolation.getStatus());
+        assertEquals("RULE-001", savedViolation.getRuleId());
+    }
+
+    @Test
+    void testFindComplianceViolationById() {
+        // Arrange
+        ComplianceViolation savedViolation = complianceViolationRepository.save(testViolation);
+
+        // Act
+        Optional<ComplianceViolation> foundViolation = complianceViolationRepository.findById(savedViolation.getId());
+
+        // Assert
+        assertTrue(foundViolation.isPresent());
+        assertEquals(savedViolation.getProject(), foundViolation.get().getProject());
+        assertEquals(savedViolation.getAnalysis(), foundViolation.get().getAnalysis());
+    }
+
+    @Test
+    void testUpdateComplianceViolation() {
+        // Arrange
+        ComplianceViolation savedViolation = complianceViolationRepository.save(testViolation);
+        String newDescription = "Updated violation description";
+
+        // Act
+        savedViolation.setDescription(newDescription);
+        ComplianceViolation updatedViolation = complianceViolationRepository.save(savedViolation);
+
+        // Assert
+        assertEquals(newDescription, updatedViolation.getDescription());
+        assertEquals(savedViolation.getId(), updatedViolation.getId());
+    }
+
+    @Test
+    void testDeleteComplianceViolation() {
+        // Arrange
+        ComplianceViolation savedViolation = complianceViolationRepository.save(testViolation);
+        Long violationId = savedViolation.getId();
+
+        // Act
+        complianceViolationRepository.delete(savedViolation);
+
+        // Assert
+        Optional<ComplianceViolation> deletedViolation = complianceViolationRepository.findById(violationId);
+        assertFalse(deletedViolation.isPresent());
+    }
+
+    @Test
+    void testFindByProject() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> projectViolations = complianceViolationRepository.findByProject(testProject);
+
+        // Assert
+        assertFalse(projectViolations.isEmpty());
+        assertEquals(1, projectViolations.size());
+        assertEquals(testProject, projectViolations.get(0).getProject());
+    }
+
+    @Test
+    void testFindByProjectWithPagination() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act
+        Page<ComplianceViolation> projectViolationsPage = complianceViolationRepository.findByProject(testProject, pageable);
+
+        // Assert
+        assertEquals(1, projectViolationsPage.getTotalElements());
+        assertEquals(1, projectViolationsPage.getContent().size());
+    }
+
+    @Test
+    void testFindByAnalysis() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> analysisViolations = complianceViolationRepository.findByAnalysis(testAnalysis);
+
+        // Assert
+        assertFalse(analysisViolations.isEmpty());
+        assertEquals(1, analysisViolations.size());
+        assertEquals(testAnalysis, analysisViolations.get(0).getAnalysis());
+    }
+
+    @Test
+    void testFindByAnalysisWithPagination() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act
+        Page<ComplianceViolation> analysisViolationsPage = complianceViolationRepository.findByAnalysis(testAnalysis, pageable);
+
+        // Assert
+        assertEquals(1, analysisViolationsPage.getTotalElements());
+        assertEquals(1, analysisViolationsPage.getContent().size());
+    }
+
+    @Test
+    void testFindByProjectAndAnalysis() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> projectAnalysisViolations = complianceViolationRepository.findByProjectAndAnalysis(testProject, testAnalysis);
+
+        // Assert
+        assertFalse(projectAnalysisViolations.isEmpty());
+        assertEquals(1, projectAnalysisViolations.size());
+        assertEquals(testProject, projectAnalysisViolations.get(0).getProject());
+        assertEquals(testAnalysis, projectAnalysisViolations.get(0).getAnalysis());
+    }
+
+    @Test
+    void testFindBySeverity() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> mediumViolations = complianceViolationRepository.findBySeverity(ComplianceViolation.ViolationSeverity.MEDIUM);
+
+        // Assert
+        assertFalse(mediumViolations.isEmpty());
+        assertEquals(ComplianceViolation.ViolationSeverity.MEDIUM, mediumViolations.get(0).getSeverity());
+    }
+
+    @Test
+    void testFindBySeverityWithPagination() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act
+        Page<ComplianceViolation> severityViolationsPage = complianceViolationRepository.findBySeverity(ComplianceViolation.ViolationSeverity.MEDIUM, pageable);
+
+        // Assert
+        assertEquals(1, severityViolationsPage.getTotalElements());
+        assertEquals(1, severityViolationsPage.getContent().size());
+    }
+
+    @Test
+    void testFindByStatus() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> openViolations = complianceViolationRepository.findByStatus(ComplianceViolation.ViolationStatus.OPEN);
+
+        // Assert
+        assertFalse(openViolations.isEmpty());
+        assertEquals(ComplianceViolation.ViolationStatus.OPEN, openViolations.get(0).getStatus());
+    }
+
+    @Test
+    void testFindByStatusWithPagination() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act
+        Page<ComplianceViolation> statusViolationsPage = complianceViolationRepository.findByStatus(ComplianceViolation.ViolationStatus.OPEN, pageable);
+
+        // Assert
+        assertEquals(1, statusViolationsPage.getTotalElements());
+        assertEquals(1, statusViolationsPage.getContent().size());
+    }
+
+    @Test
+    void testFindByRuleId() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> ruleViolations = complianceViolationRepository.findByRuleId("RULE-001");
+
+        // Assert
+        assertFalse(ruleViolations.isEmpty());
+        assertEquals("RULE-001", ruleViolations.get(0).getRuleId());
+    }
+
+    @Test
+    void testFindByRuleCategory() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> categoryViolations = complianceViolationRepository.findByRuleCategory("Code Style");
+
+        // Assert
+        assertFalse(categoryViolations.isEmpty());
+        assertEquals("Code Style", categoryViolations.get(0).getRuleCategory());
+    }
+
+    @Test
+    void testFindByRuleCategoryWithPagination() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act
+        Page<ComplianceViolation> categoryViolationsPage = complianceViolationRepository.findByRuleCategory("Code Style", pageable);
+
+        // Assert
+        assertEquals(1, categoryViolationsPage.getTotalElements());
+        assertEquals(1, categoryViolationsPage.getContent().size());
+    }
+
+    @Test
+    void testFindByProjectAndSeverity() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> projectSeverityViolations = complianceViolationRepository.findByProjectAndSeverity(
+            testProject, ComplianceViolation.ViolationSeverity.MEDIUM);
+
+        // Assert
+        assertFalse(projectSeverityViolations.isEmpty());
+        assertEquals(testProject, projectSeverityViolations.get(0).getProject());
+        assertEquals(ComplianceViolation.ViolationSeverity.MEDIUM, projectSeverityViolations.get(0).getSeverity());
+    }
+
+    @Test
+    void testFindByProjectAndStatus() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> projectStatusViolations = complianceViolationRepository.findByProjectAndStatus(
+            testProject, ComplianceViolation.ViolationStatus.OPEN);
+
+        // Assert
+        assertFalse(projectStatusViolations.isEmpty());
+        assertEquals(testProject, projectStatusViolations.get(0).getProject());
+        assertEquals(ComplianceViolation.ViolationStatus.OPEN, projectStatusViolations.get(0).getStatus());
+    }
+
+    @Test
+    void testFindByProjectAndRuleCategory() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> projectCategoryViolations = complianceViolationRepository.findByProjectAndRuleCategory(
+            testProject, "Code Style");
+
+        // Assert
+        assertFalse(projectCategoryViolations.isEmpty());
+        assertEquals(testProject, projectCategoryViolations.get(0).getProject());
+        assertEquals("Code Style", projectCategoryViolations.get(0).getRuleCategory());
+    }
+
+    @Test
+    void testFindByAnalysisAndSeverity() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> analysisSeverityViolations = complianceViolationRepository.findByAnalysisAndSeverity(
+            testAnalysis, ComplianceViolation.ViolationSeverity.MEDIUM);
+
+        // Assert
+        assertFalse(analysisSeverityViolations.isEmpty());
+        assertEquals(testAnalysis, analysisSeverityViolations.get(0).getAnalysis());
+        assertEquals(ComplianceViolation.ViolationSeverity.MEDIUM, analysisSeverityViolations.get(0).getSeverity());
+    }
+
+    @Test
+    void testFindByAnalysisAndStatus() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> analysisStatusViolations = complianceViolationRepository.findByAnalysisAndStatus(
+            testAnalysis, ComplianceViolation.ViolationStatus.OPEN);
+
+        // Assert
+        assertFalse(analysisStatusViolations.isEmpty());
+        assertEquals(testAnalysis, analysisStatusViolations.get(0).getAnalysis());
+        assertEquals(ComplianceViolation.ViolationStatus.OPEN, analysisStatusViolations.get(0).getStatus());
+    }
+
+    @Test
+    void testFindByAnalysisAndRuleCategory() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+
+        // Act
+        List<ComplianceViolation> analysisCategoryViolations = complianceViolationRepository.findByAnalysisAndRuleCategory(
+            testAnalysis, "Code Style");
+
+        // Assert
+        assertFalse(analysisCategoryViolations.isEmpty());
+        assertEquals(testAnalysis, analysisCategoryViolations.get(0).getAnalysis());
+        assertEquals("Code Style", analysisCategoryViolations.get(0).getRuleCategory());
+    }
+
+    @Test
+    void testFindByCreatedAtAfter() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+        LocalDateTime pastDate = testDate.minusDays(1);
+
+        // Act
+        List<ComplianceViolation> recentViolations = complianceViolationRepository.findByCreatedAtAfter(pastDate);
+
+        // Assert
+        assertFalse(recentViolations.isEmpty());
+        assertTrue(recentViolations.get(0).getCreatedAt().isAfter(pastDate));
+    }
+
+    @Test
+    void testFindByCreatedAtBetween() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+        LocalDateTime startDate = testDate.minusDays(1);
+        LocalDateTime endDate = testDate.plusDays(1);
+
+        // Act
+        List<ComplianceViolation> dateRangeViolations = complianceViolationRepository.findByCreatedAtBetween(startDate, endDate);
+
+        // Assert
+        assertFalse(dateRangeViolations.isEmpty());
+        assertTrue(dateRangeViolations.get(0).getCreatedAt().isAfter(startDate));
+        assertTrue(dateRangeViolations.get(0).getCreatedAt().isBefore(endDate));
+    }
+
+    @Test
+    void testPerformanceTargets() {
+        // Arrange
+        complianceViolationRepository.save(testViolation);
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Act & Assert - Measure performance for key operations
+        long startTime = System.currentTimeMillis();
+        
+        // Test findById performance
+        Optional<ComplianceViolation> foundViolation = complianceViolationRepository.findById(testViolation.getId());
+        long findByIdTime = System.currentTimeMillis() - startTime;
+        
+        // Test findByProject performance
+        startTime = System.currentTimeMillis();
+        List<ComplianceViolation> projectViolations = complianceViolationRepository.findByProject(testProject);
+        long findByProjectTime = System.currentTimeMillis() - startTime;
+        
+        // Test pagination performance
+        startTime = System.currentTimeMillis();
+        Page<ComplianceViolation> violationsPage = complianceViolationRepository.findByProject(testProject, pageable);
+        long paginationTime = System.currentTimeMillis() - startTime;
+
+        // Assert performance targets (P95 < 100ms)
+        assertTrue(findByIdTime < 100, "findById should complete in < 100ms, took: " + findByIdTime + "ms");
+        assertTrue(findByProjectTime < 100, "findByProject should complete in < 100ms, took: " + findByProjectTime + "ms");
+        assertTrue(paginationTime < 100, "Pagination should complete in < 100ms, took: " + paginationTime + "ms");
+        
+        // Verify results are correct
+        assertTrue(foundViolation.isPresent());
+        assertFalse(projectViolations.isEmpty());
+        assertEquals(1, violationsPage.getTotalElements());
+    }
+
+    @Test
+    void testBulkOperations() {
+        // Arrange - Create multiple violations
+        List<ComplianceViolation> violations = List.of(
+            createViolation(ComplianceViolation.ViolationSeverity.LOW, ComplianceViolation.ViolationStatus.OPEN),
+            createViolation(ComplianceViolation.ViolationSeverity.MEDIUM, ComplianceViolation.ViolationStatus.OPEN),
+            createViolation(ComplianceViolation.ViolationSeverity.HIGH, ComplianceViolation.ViolationStatus.OPEN)
+        );
+
+        // Act
+        long startTime = System.currentTimeMillis();
+        List<ComplianceViolation> savedViolations = complianceViolationRepository.saveAll(violations);
+        long saveAllTime = System.currentTimeMillis() - startTime;
+
+        // Assert
+        assertEquals(3, savedViolations.size());
+        assertTrue(saveAllTime < 200, "Bulk save should complete in < 200ms, took: " + saveAllTime + "ms");
+
+        // Test bulk find operations
+        startTime = System.currentTimeMillis();
+        List<ComplianceViolation> allViolations = complianceViolationRepository.findAll();
+        long findAllTime = System.currentTimeMillis() - startTime;
+
+        assertTrue(findAllTime < 100, "findAll should complete in < 100ms, took: " + findAllTime + "ms");
+        assertTrue(allViolations.size() >= 3);
+    }
+
+    private ComplianceViolation createViolation(ComplianceViolation.ViolationSeverity severity, ComplianceViolation.ViolationStatus status) {
+        ComplianceViolation violation = new ComplianceViolation();
+        violation.setProject(testProject);
+        violation.setAnalysis(testAnalysis);
+        violation.setSeverity(severity);
+        violation.setStatus(status);
+        violation.setRuleId("RULE-" + System.currentTimeMillis());
+        violation.setRuleCategory("Code Style");
+        violation.setRuleName("Test Rule");
+        violation.setDescription("Test violation description");
+        violation.setLineNumber(42);
+        violation.setFilePath("src/main/java/TestClass.java");
+        violation.setCreatedAt(LocalDateTime.now());
+        violation.setResolvedAt(null);
+        return violation;
+    }
+}

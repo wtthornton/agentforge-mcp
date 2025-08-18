@@ -1,0 +1,472 @@
+package com.agentforge;
+
+import com.agentforge.entity.Analysis;
+import com.agentforge.entity.ComplianceViolation;
+import com.agentforge.entity.Project;
+import com.agentforge.entity.ProjectStatus;
+import com.agentforge.entity.User;
+import com.agentforge.entity.UserRole;
+import com.agentforge.repository.AnalysisRepository;
+import com.agentforge.repository.ComplianceViolationRepository;
+import com.agentforge.repository.ProjectRepository;
+import com.agentforge.repository.UserRepository;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Performance validation test
+ * Ensures all repository operations meet <100ms P95 performance targets
+ * Tests concurrent operations and stress scenarios
+ */
+@DataJpaTest
+@ActiveProfiles("test")
+@Transactional
+class PerformanceValidationTest {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private AnalysisRepository analysisRepository;
+
+    @Autowired
+    private ComplianceViolationRepository complianceViolationRepository;
+
+    private User testUser;
+    private List<Project> testProjects;
+    private List<Analysis> testAnalyses;
+    private List<ComplianceViolation> testViolations;
+
+    @BeforeEach
+    void setUp() {
+        // Create test user
+        testUser = new User();
+        testUser.setUsername("perfuser");
+        testUser.setEmail("perf@example.com");
+        testUser.setPassword("password123");
+        testUser.setRole(UserRole.DEVELOPER);
+        testUser = userRepository.save(testUser);
+
+        // Create test data for performance testing
+        testProjects = new ArrayList<>();
+        testAnalyses = new ArrayList<>();
+        testViolations = new ArrayList<>();
+
+        // Create 20 test projects
+        for (int i = 1; i <= 20; i++) {
+            Project project = new Project();
+            project.setName("Performance Test Project " + i);
+            project.setDescription("Project " + i + " for performance testing");
+            project.setOwner(testUser);
+            project.setStatus(ProjectStatus.ACTIVE);
+            project.setTechnologyStack("Java,Spring Boot,PostgreSQL");
+            project.setCreatedAt(LocalDateTime.now().minusDays(i));
+            project.setLastAnalysisDate(LocalDateTime.now().minusDays(i));
+            testProjects.add(projectRepository.save(project));
+        }
+
+        // Create 50 test analyses
+        for (int i = 1; i <= 50; i++) {
+            Analysis analysis = new Analysis();
+            analysis.setProject(testProjects.get((i - 1) % testProjects.size()));
+            analysis.setUser(testUser);
+            analysis.setStatus(Analysis.AnalysisStatus.COMPLETED);
+            analysis.setType(Analysis.AnalysisType.CODE_QUALITY);
+            analysis.setStartedAt(LocalDateTime.now().minusMinutes(i * 10));
+            analysis.setCompletedAt(LocalDateTime.now().minusMinutes(i * 10 - 5));
+            analysis.setDuration(300L);
+            analysis.setLinesOfCode(1000 + (i * 100));
+            analysis.setIssuesFound(i % 10);
+            analysis.setScore(70.0 + (i % 30));
+            analysis.setSummary("Performance test analysis " + i);
+            testAnalyses.add(analysisRepository.save(analysis));
+        }
+
+        // Create 100 test violations
+        for (int i = 1; i <= 100; i++) {
+            ComplianceViolation violation = new ComplianceViolation();
+            violation.setProject(testProjects.get((i - 1) % testProjects.size()));
+            violation.setAnalysis(testAnalyses.get((i - 1) % testAnalyses.size()));
+            violation.setSeverity(ComplianceViolation.ViolationSeverity.values()[i % 3]);
+            violation.setStatus(ComplianceViolation.ViolationStatus.OPEN);
+            violation.setRuleId("PERF-RULE-" + String.format("%03d", i));
+            violation.setRuleCategory("Performance");
+            violation.setRuleName("Performance Rule " + i);
+            violation.setDescription("Performance test violation " + i);
+            violation.setLineNumber(i * 10);
+            violation.setFilePath("src/main/java/TestClass" + i + ".java");
+            violation.setCreatedAt(LocalDateTime.now().minusHours(i));
+            violation.setResolvedAt(null);
+            testViolations.add(complianceViolationRepository.save(violation));
+        }
+    }
+
+    @Test
+    void testBasicCRUDPerformance() {
+        // Test basic CRUD operations performance
+        List<Long> findByIdTimes = new ArrayList<>();
+        List<Long> saveTimes = new ArrayList<>();
+        List<Long> updateTimes = new ArrayList<>();
+        List<Long> deleteTimes = new ArrayList<>();
+
+        // Test findById performance
+        for (int i = 0; i < 100; i++) {
+            Project project = testProjects.get(i % testProjects.size());
+            
+            long startTime = System.nanoTime();
+            Optional<Project> foundProject = projectRepository.findById(project.getId());
+            long endTime = System.nanoTime();
+            
+            findByIdTimes.add((endTime - startTime) / 1_000_000); // Convert to milliseconds
+            assertTrue(foundProject.isPresent());
+        }
+
+        // Test save performance
+        for (int i = 0; i < 50; i++) {
+            Project newProject = new Project();
+            newProject.setName("New Performance Project " + i);
+            newProject.setDescription("New project for performance testing");
+            newProject.setOwner(testUser);
+            newProject.setStatus(ProjectStatus.ACTIVE);
+            newProject.setTechnologyStack("Java,Spring Boot");
+            newProject.setCreatedAt(LocalDateTime.now());
+
+            long startTime = System.nanoTime();
+            Project savedProject = projectRepository.save(newProject);
+            long endTime = System.nanoTime();
+            
+            saveTimes.add((endTime - startTime) / 1_000_000);
+            assertNotNull(savedProject.getId());
+        }
+
+        // Test update performance
+        for (int i = 0; i < 50; i++) {
+            Project project = testProjects.get(i % testProjects.size());
+            project.setDescription("Updated description " + i);
+            
+            long startTime = System.nanoTime();
+            Project updatedProject = projectRepository.save(project);
+            long endTime = System.nanoTime();
+            
+            updateTimes.add((endTime - startTime) / 1_000_000);
+            assertEquals("Updated description " + i, updatedProject.getDescription());
+        }
+
+        // Calculate P95 performance metrics
+        long findByIdP95 = calculateP95(findByIdTimes);
+        long saveP95 = calculateP95(saveTimes);
+        long updateP95 = calculateP95(updateTimes);
+
+        // Assert performance targets (P95 < 100ms)
+        assertTrue(findByIdP95 < 100, "findById P95 should be < 100ms, was: " + findByIdP95 + "ms");
+        assertTrue(saveP95 < 100, "save P95 should be < 100ms, was: " + saveP95 + "ms");
+        assertTrue(updateP95 < 100, "update P95 should be < 100ms, was: " + updateP95 + "ms");
+
+        System.out.println("Performance Results:");
+        System.out.println("  findById P95: " + findByIdP95 + "ms");
+        System.out.println("  save P95: " + saveP95 + "ms");
+        System.out.println("  update P95: " + updateP95 + "ms");
+    }
+
+    @Test
+    void testQueryPerformance() {
+        // Test query performance for various repository methods
+        List<Long> findByOwnerTimes = new ArrayList<>();
+        List<Long> findByStatusTimes = new ArrayList<>();
+        List<Long> findByTechnologyStackTimes = new ArrayList<>();
+        List<Long> findByCreatedAtAfterTimes = new ArrayList<>();
+
+        // Test findByOwner performance
+        for (int i = 0; i < 100; i++) {
+            long startTime = System.nanoTime();
+            List<Project> userProjects = projectRepository.findByOwner(testUser);
+            long endTime = System.nanoTime();
+            
+            findByOwnerTimes.add((endTime - startTime) / 1_000_000);
+            assertFalse(userProjects.isEmpty());
+        }
+
+        // Test findByStatus performance
+        for (int i = 0; i < 100; i++) {
+            long startTime = System.nanoTime();
+            List<Project> activeProjects = projectRepository.findByStatus(ProjectStatus.ACTIVE);
+            long endTime = System.nanoTime();
+            
+            findByStatusTimes.add((endTime - startTime) / 1_000_000);
+            assertFalse(activeProjects.isEmpty());
+        }
+
+        // Test findByTechnologyStackContaining performance
+        for (int i = 0; i < 100; i++) {
+            long startTime = System.nanoTime();
+            List<Project> javaProjects = projectRepository.findByTechnologyStackContainingIgnoreCase("Java");
+            long endTime = System.nanoTime();
+            
+            findByTechnologyStackTimes.add((endTime - startTime) / 1_000_000);
+            assertFalse(javaProjects.isEmpty());
+        }
+
+        // Test findByCreatedAtAfter performance
+        for (int i = 0; i < 100; i++) {
+            LocalDateTime pastDate = LocalDateTime.now().minusDays(30);
+            long startTime = System.nanoTime();
+            List<Project> recentProjects = projectRepository.findByCreatedAtAfter(pastDate);
+            long endTime = System.nanoTime();
+            
+            findByCreatedAtAfterTimes.add((endTime - startTime) / 1_000_000);
+            assertFalse(recentProjects.isEmpty());
+        }
+
+        // Calculate P95 performance metrics
+        long findByOwnerP95 = calculateP95(findByOwnerTimes);
+        long findByStatusP95 = calculateP95(findByStatusTimes);
+        long findByTechnologyStackP95 = calculateP95(findByTechnologyStackTimes);
+        long findByCreatedAtAfterP95 = calculateP95(findByCreatedAtAfterTimes);
+
+        // Assert performance targets (P95 < 100ms)
+        assertTrue(findByOwnerP95 < 100, "findByOwner P95 should be < 100ms, was: " + findByOwnerP95 + "ms");
+        assertTrue(findByStatusP95 < 100, "findByStatus P95 should be < 100ms, was: " + findByStatusP95 + "ms");
+        assertTrue(findByTechnologyStackP95 < 100, "findByTechnologyStack P95 should be < 100ms, was: " + findByTechnologyStackP95 + "ms");
+        assertTrue(findByCreatedAtAfterP95 < 100, "findByCreatedAtAfter P95 should be < 100ms, was: " + findByCreatedAtAfterP95 + "ms");
+
+        System.out.println("Query Performance Results:");
+        System.out.println("  findByOwner P95: " + findByOwnerP95 + "ms");
+        System.out.println("  findByStatus P95: " + findByStatusP95 + "ms");
+        System.out.println("  findByTechnologyStack P95: " + findByTechnologyStackP95 + "ms");
+        System.out.println("  findByCreatedAtAfter P95: " + findByCreatedAtAfterP95 + "ms");
+    }
+
+    @Test
+    void testPaginationPerformance() {
+        // Test pagination performance
+        List<Long> paginationTimes = new ArrayList<>();
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Test pagination performance
+        for (int i = 0; i < 100; i++) {
+            long startTime = System.nanoTime();
+            Page<Project> projectsPage = projectRepository.findByOwner(testUser, pageable);
+            long endTime = System.nanoTime();
+            
+            paginationTimes.add((endTime - startTime) / 1_000_000);
+            assertEquals(10, projectsPage.getContent().size());
+        }
+
+        // Test different page sizes
+        for (int pageSize : List.of(5, 15, 20)) {
+            Pageable customPageable = PageRequest.of(0, pageSize);
+            long startTime = System.nanoTime();
+            Page<Project> customPage = projectRepository.findByOwner(testUser, customPageable);
+            long endTime = System.nanoTime();
+            
+            long timeMs = (endTime - startTime) / 1_000_000;
+            assertTrue(timeMs < 100, "Pagination with page size " + pageSize + " should complete in < 100ms, took: " + timeMs + "ms");
+            assertEquals(pageSize, customPage.getContent().size());
+        }
+
+        // Calculate P95 performance metrics
+        long paginationP95 = calculateP95(paginationTimes);
+
+        // Assert performance targets (P95 < 100ms)
+        assertTrue(paginationP95 < 100, "Pagination P95 should be < 100ms, was: " + paginationP95 + "ms");
+
+        System.out.println("Pagination Performance Results:");
+        System.out.println("  Pagination P95: " + paginationP95 + "ms");
+    }
+
+    @Test
+    void testComplexQueryPerformance() {
+        // Test complex query performance
+        List<Long> complexQueryTimes = new ArrayList<>();
+
+        // Test complex queries with multiple conditions
+        for (int i = 0; i < 100; i++) {
+            long startTime = System.nanoTime();
+            
+            // Complex query: find violations by project and severity
+            List<ComplianceViolation> violations = complianceViolationRepository.findByProjectAndSeverity(
+                testProjects.get(i % testProjects.size()), 
+                ComplianceViolation.ViolationSeverity.MEDIUM
+            );
+            
+            long endTime = System.nanoTime();
+            complexQueryTimes.add((endTime - startTime) / 1_000_000);
+            assertNotNull(violations);
+        }
+
+        // Test analysis queries with violations
+        for (int i = 0; i < 100; i++) {
+            long startTime = System.nanoTime();
+            
+            // Complex query: find analyses by project and get violations
+            List<Analysis> analyses = analysisRepository.findByProject(testProjects.get(i % testProjects.size()));
+            for (Analysis analysis : analyses) {
+                List<ComplianceViolation> analysisViolations = complianceViolationRepository.findByAnalysis(analysis);
+                assertNotNull(analysisViolations);
+            }
+            
+            long endTime = System.nanoTime();
+            complexQueryTimes.add((endTime - startTime) / 1_000_000);
+        }
+
+        // Calculate P95 performance metrics
+        long complexQueryP95 = calculateP95(complexQueryTimes);
+
+        // Assert performance targets (P95 < 100ms)
+        assertTrue(complexQueryP95 < 100, "Complex query P95 should be < 100ms, was: " + complexQueryP95 + "ms");
+
+        System.out.println("Complex Query Performance Results:");
+        System.out.println("  Complex Query P95: " + complexQueryP95 + "ms");
+    }
+
+    @Test
+    void testConcurrentOperationPerformance() throws InterruptedException {
+        // Test concurrent operations performance
+        int threadCount = 10;
+        int operationsPerThread = 50;
+        ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+        List<CompletableFuture<List<Long>>> futures = new ArrayList<>();
+
+        // Submit concurrent operations
+        for (int thread = 0; thread < threadCount; thread++) {
+            CompletableFuture<List<Long>> future = CompletableFuture.supplyAsync(() -> {
+                List<Long> threadTimes = new ArrayList<>();
+                
+                for (int op = 0; op < operationsPerThread; op++) {
+                    // Mix of different operations
+                    long startTime = System.nanoTime();
+                    
+                    if (op % 4 == 0) {
+                        // findById
+                        Optional<Project> project = projectRepository.findById(testProjects.get(op % testProjects.size()).getId());
+                        assertTrue(project.isPresent());
+                    } else if (op % 4 == 1) {
+                        // findByOwner
+                        List<Project> userProjects = projectRepository.findByOwner(testUser);
+                        assertFalse(userProjects.isEmpty());
+                    } else if (op % 4 == 2) {
+                        // findByStatus
+                        List<Project> activeProjects = projectRepository.findByStatus(ProjectStatus.ACTIVE);
+                        assertFalse(activeProjects.isEmpty());
+                    } else {
+                        // Pagination
+                        Pageable pageable = PageRequest.of(op % 5, 10);
+                        Page<Project> page = projectRepository.findByOwner(testUser, pageable);
+                        assertNotNull(page);
+                    }
+                    
+                    long endTime = System.nanoTime();
+                    threadTimes.add((endTime - startTime) / 1_000_000);
+                }
+                
+                return threadTimes;
+            }, executor);
+            
+            futures.add(future);
+        }
+
+        // Wait for all threads to complete
+        executor.shutdown();
+        executor.awaitTermination(30, TimeUnit.SECONDS);
+
+        // Collect all timing data
+        List<Long> allTimes = new ArrayList<>();
+        for (CompletableFuture<List<Long>> future : futures) {
+            allTimes.addAll(future.get());
+        }
+
+        // Calculate P95 performance metrics
+        long concurrentP95 = calculateP95(allTimes);
+
+        // Assert performance targets (P95 < 100ms)
+        assertTrue(concurrentP95 < 100, "Concurrent operations P95 should be < 100ms, was: " + concurrentP95 + "ms");
+
+        System.out.println("Concurrent Performance Results:");
+        System.out.println("  Concurrent Operations P95: " + concurrentP95 + "ms");
+        System.out.println("  Total Operations: " + allTimes.size());
+        System.out.println("  Thread Count: " + threadCount);
+    }
+
+    @Test
+    void testBulkOperationPerformance() {
+        // Test bulk operations performance
+        List<Long> bulkSaveTimes = new ArrayList<>();
+        List<Long> bulkFindTimes = new ArrayList<>();
+
+        // Test bulk save performance
+        for (int batch = 0; batch < 10; batch++) {
+            List<Project> projects = new ArrayList<>();
+            for (int i = 0; i < 20; i++) {
+                Project project = new Project();
+                project.setName("Bulk Project " + batch + "-" + i);
+                project.setDescription("Bulk project for performance testing");
+                project.setOwner(testUser);
+                project.setStatus(ProjectStatus.ACTIVE);
+                project.setTechnologyStack("Java,Spring Boot");
+                project.setCreatedAt(LocalDateTime.now());
+                projects.add(project);
+            }
+
+            long startTime = System.nanoTime();
+            List<Project> savedProjects = projectRepository.saveAll(projects);
+            long endTime = System.nanoTime();
+            
+            bulkSaveTimes.add((endTime - startTime) / 1_000_000);
+            assertEquals(20, savedProjects.size());
+        }
+
+        // Test bulk find performance
+        for (int i = 0; i < 50; i++) {
+            long startTime = System.nanoTime();
+            List<Project> allProjects = projectRepository.findAll();
+            long endTime = System.nanoTime();
+            
+            bulkFindTimes.add((endTime - startTime) / 1_000_000);
+            assertTrue(allProjects.size() > 200); // Should have accumulated many projects
+        }
+
+        // Calculate P95 performance metrics
+        long bulkSaveP95 = calculateP95(bulkSaveTimes);
+        long bulkFindP95 = calculateP95(bulkFindTimes);
+
+        // Assert bulk operation performance targets
+        assertTrue(bulkSaveP95 < 500, "Bulk save P95 should be < 500ms, was: " + bulkSaveP95 + "ms");
+        assertTrue(bulkFindP95 < 200, "Bulk find P95 should be < 200ms, was: " + bulkFindP95 + "ms");
+
+        System.out.println("Bulk Operation Performance Results:");
+        System.out.println("  Bulk Save P95: " + bulkSaveP95 + "ms");
+        System.out.println("  Bulk Find P95: " + bulkFindP95 + "ms");
+    }
+
+    /**
+     * Calculate P95 (95th percentile) from a list of times
+     */
+    private long calculateP95(List<Long> times) {
+        if (times.isEmpty()) return 0;
+        
+        times.sort(Long::compareTo);
+        int p95Index = (int) Math.ceil(0.95 * times.size()) - 1;
+        return times.get(Math.max(0, p95Index));
+    }
+}

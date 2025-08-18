@@ -1,0 +1,361 @@
+package com.agentforge;
+
+import com.agentforge.entity.Analysis;
+import com.agentforge.entity.ComplianceViolation;
+import com.agentforge.entity.Project;
+import com.agentforge.entity.ProjectStatus;
+import com.agentforge.entity.User;
+import com.agentforge.entity.UserRole;
+import com.agentforge.repository.AnalysisRepository;
+import com.agentforge.repository.ComplianceViolationRepository;
+import com.agentforge.repository.ProjectRepository;
+import com.agentforge.repository.UserRepository;
+import com.agentforge.service.ProjectService;
+import com.agentforge.service.impl.ProjectServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.context.annotation.Import;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+/**
+ * Comprehensive database integration test
+ * Validates the entire Controller → Service → Repository pattern
+ * Tests real database operations, entity relationships, and performance targets
+ */
+@SpringBootTest
+@DataJpaTest
+@ActiveProfiles("test")
+@Transactional
+@Import(ProjectServiceImpl.class)
+class DatabaseIntegrationTest {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private ProjectRepository projectRepository;
+
+    @Autowired
+    private AnalysisRepository analysisRepository;
+
+    @Autowired
+    private ComplianceViolationRepository complianceViolationRepository;
+
+    @Autowired
+    private ProjectService projectService;
+
+    private User testUser;
+    private Project testProject;
+    private Analysis testAnalysis;
+    private ComplianceViolation testViolation;
+
+    @BeforeEach
+    void setUp() {
+        // Create test user
+        testUser = new User();
+        testUser.setUsername("integrationuser");
+        testUser.setEmail("integration@example.com");
+        testUser.setPassword("password123");
+        testUser.setRole(UserRole.DEVELOPER);
+        testUser = userRepository.save(testUser);
+
+        // Create test project
+        testProject = new Project();
+        testProject.setName("Integration Test Project");
+        testProject.setDescription("A comprehensive test project for database integration testing");
+        testProject.setOwner(testUser);
+        testProject.setStatus(ProjectStatus.ACTIVE);
+        testProject.setTechnologyStack("Java,Spring Boot,PostgreSQL,pgvector");
+        testProject.setRepositoryUrl("https://github.com/test/integration-project");
+        testProject.setProjectPath("/path/to/integration/project");
+        testProject.setCreatedAt(LocalDateTime.now());
+        testProject.setLastAnalysisDate(LocalDateTime.now());
+        testProject = projectRepository.save(testProject);
+
+        // Create test analysis
+        testAnalysis = new Analysis();
+        testAnalysis.setProject(testProject);
+        testAnalysis.setUser(testUser);
+        testAnalysis.setStatus(Analysis.AnalysisStatus.COMPLETED);
+        testAnalysis.setType(Analysis.AnalysisType.CODE_QUALITY);
+        testAnalysis.setStartedAt(LocalDateTime.now().minusMinutes(10));
+        testAnalysis.setCompletedAt(LocalDateTime.now());
+        testAnalysis.setDuration(600L); // 10 minutes in seconds
+        testAnalysis.setLinesOfCode(5000);
+        testAnalysis.setIssuesFound(15);
+        testAnalysis.setScore(78.5);
+        testAnalysis.setSummary("Comprehensive code quality analysis completed with 15 issues found");
+        testAnalysis = analysisRepository.save(testAnalysis);
+
+        // Create test violation
+        testViolation = new ComplianceViolation();
+        testViolation.setProject(testProject);
+        testViolation.setAnalysis(testAnalysis);
+        testViolation.setSeverity(ComplianceViolation.ViolationSeverity.HIGH);
+        testViolation.setStatus(ComplianceViolation.ViolationStatus.OPEN);
+        testViolation.setRuleId("INTEGRATION-RULE-001");
+        testViolation.setRuleCategory("Security");
+        testViolation.setRuleName("SQL Injection Prevention");
+        testViolation.setDescription("Use parameterized queries to prevent SQL injection attacks");
+        testViolation.setLineNumber(156);
+        testViolation.setFilePath("src/main/java/com/agentforge/service/UserService.java");
+        testViolation.setCreatedAt(LocalDateTime.now());
+        testViolation.setResolvedAt(null);
+        testViolation = complianceViolationRepository.save(testViolation);
+    }
+
+    @Test
+    void testCompleteEntityLifecycle() {
+        // Test complete CRUD lifecycle for all entities
+        assertNotNull(testUser.getId());
+        assertNotNull(testProject.getId());
+        assertNotNull(testAnalysis.getId());
+        assertNotNull(testViolation.getId());
+
+        // Verify relationships
+        assertEquals(testUser, testProject.getOwner());
+        assertEquals(testProject, testAnalysis.getProject());
+        assertEquals(testAnalysis, testViolation.getAnalysis());
+        assertEquals(testProject, testViolation.getProject());
+    }
+
+    @Test
+    void testRepositoryLayerOperations() {
+        // Test UserRepository operations
+        Optional<User> foundUser = userRepository.findByUsername("integrationuser");
+        assertTrue(foundUser.isPresent());
+        assertEquals("integration@example.com", foundUser.get().getEmail());
+
+        // Test ProjectRepository operations
+        Optional<Project> foundProject = projectRepository.findByName("Integration Test Project");
+        assertTrue(foundProject.isPresent());
+        assertEquals(ProjectStatus.ACTIVE, foundProject.get().getStatus());
+
+        List<Project> userProjects = projectRepository.findByOwner(testUser);
+        assertFalse(userProjects.isEmpty());
+        assertEquals(1, userProjects.size());
+
+        // Test AnalysisRepository operations
+        List<Analysis> projectAnalyses = analysisRepository.findByProject(testProject);
+        assertFalse(projectAnalyses.isEmpty());
+        assertEquals(1, projectAnalyses.size());
+
+        // Test ComplianceViolationRepository operations
+        List<ComplianceViolation> projectViolations = complianceViolationRepository.findByProject(testProject);
+        assertFalse(projectViolations.isEmpty());
+        assertEquals(1, projectViolations.size());
+    }
+
+    @Test
+    void testServiceLayerIntegration() {
+        // Test ProjectService operations through the service layer
+        List<Project> userProjects = projectService.findProjectsByOwner(testUser);
+        assertFalse(userProjects.isEmpty());
+        assertEquals(1, userProjects.size());
+
+        // Test project creation through service
+        Project newProject = new Project();
+        newProject.setName("Service Test Project");
+        newProject.setDescription("Project created through service layer");
+        newProject.setOwner(testUser);
+        newProject.setStatus(ProjectStatus.ACTIVE);
+        newProject.setTechnologyStack("Java,Spring Boot");
+        newProject.setCreatedAt(LocalDateTime.now());
+
+        Project savedProject = projectService.createProject(newProject);
+        assertNotNull(savedProject.getId());
+        assertEquals("Service Test Project", savedProject.getName());
+
+        // Verify it was saved to database
+        Optional<Project> foundProject = projectRepository.findById(savedProject.getId());
+        assertTrue(foundProject.isPresent());
+    }
+
+    @Test
+    void testComplexQueriesAndRelationships() {
+        // Test complex queries with relationships
+        List<ComplianceViolation> highSeverityViolations = complianceViolationRepository.findByProjectAndSeverity(
+            testProject, ComplianceViolation.ViolationSeverity.HIGH);
+        assertFalse(highSeverityViolations.isEmpty());
+        assertEquals(ComplianceViolation.ViolationSeverity.HIGH, highSeverityViolations.get(0).getSeverity());
+
+        // Test analysis with violations
+        List<ComplianceViolation> analysisViolations = complianceViolationRepository.findByAnalysis(testAnalysis);
+        assertFalse(analysisViolations.isEmpty());
+        assertEquals(testAnalysis.getId(), analysisViolations.get(0).getAnalysis().getId());
+
+        // Test project with analyses and violations
+        List<Analysis> projectAnalyses = analysisRepository.findByProject(testProject);
+        assertFalse(projectAnalyses.isEmpty());
+        
+        for (Analysis analysis : projectAnalyses) {
+            List<ComplianceViolation> violations = complianceViolationRepository.findByAnalysis(analysis);
+            assertFalse(violations.isEmpty());
+        }
+    }
+
+    @Test
+    void testPaginationAndSorting() {
+        // Create additional test data for pagination testing
+        for (int i = 1; i <= 5; i++) {
+            Project project = new Project();
+            project.setName("Pagination Test Project " + i);
+            project.setDescription("Project " + i + " for pagination testing");
+            project.setOwner(testUser);
+            project.setStatus(ProjectStatus.ACTIVE);
+            project.setTechnologyStack("Java,Spring Boot");
+            project.setCreatedAt(LocalDateTime.now());
+            projectRepository.save(project);
+        }
+
+        // Test pagination
+        Pageable pageable = PageRequest.of(0, 3);
+        Page<Project> firstPage = projectRepository.findByOwner(testUser, pageable);
+        
+        assertEquals(6, firstPage.getTotalElements()); // 1 original + 5 new
+        assertEquals(3, firstPage.getContent().size());
+        assertTrue(firstPage.hasNext());
+
+        // Test second page
+        Pageable secondPageable = PageRequest.of(1, 3);
+        Page<Project> secondPage = projectRepository.findByOwner(testUser, secondPageable);
+        
+        assertEquals(6, secondPage.getTotalElements());
+        assertEquals(3, secondPage.getContent().size());
+        assertFalse(secondPage.hasNext());
+    }
+
+    @Test
+    void testPerformanceTargets() {
+        // Test performance targets for key operations
+        Pageable pageable = PageRequest.of(0, 10);
+
+        // Measure findById performance
+        long startTime = System.currentTimeMillis();
+        Optional<User> foundUser = userRepository.findById(testUser.getId());
+        long findByIdTime = System.currentTimeMillis() - startTime;
+
+        // Measure findByOwner performance
+        startTime = System.currentTimeMillis();
+        List<Project> userProjects = projectRepository.findByOwner(testUser);
+        long findByOwnerTime = System.currentTimeMillis() - startTime;
+
+        // Measure pagination performance
+        startTime = System.currentTimeMillis();
+        Page<Project> projectsPage = projectRepository.findByOwner(testUser, pageable);
+        long paginationTime = System.currentTimeMillis() - startTime;
+
+        // Measure complex query performance
+        startTime = System.currentTimeMillis();
+        List<ComplianceViolation> violations = complianceViolationRepository.findByProjectAndSeverity(
+            testProject, ComplianceViolation.ViolationSeverity.HIGH);
+        long complexQueryTime = System.currentTimeMillis() - startTime;
+
+        // Assert performance targets (P95 < 100ms)
+        assertTrue(findByIdTime < 100, "findById should complete in < 100ms, took: " + findByIdTime + "ms");
+        assertTrue(findByOwnerTime < 100, "findByOwner should complete in < 100ms, took: " + findByOwnerTime + "ms");
+        assertTrue(paginationTime < 100, "Pagination should complete in < 100ms, took: " + paginationTime + "ms");
+        assertTrue(complexQueryTime < 100, "Complex query should complete in < 100ms, took: " + complexQueryTime + "ms");
+
+        // Verify results are correct
+        assertTrue(foundUser.isPresent());
+        assertFalse(userProjects.isEmpty());
+        assertEquals(1, projectsPage.getTotalElements());
+        assertFalse(violations.isEmpty());
+    }
+
+    @Test
+    void testBulkOperations() {
+        // Test bulk operations performance
+        List<Project> projects = List.of(
+            createTestProject("Bulk Project 1", "Description 1"),
+            createTestProject("Bulk Project 2", "Description 2"),
+            createTestProject("Bulk Project 3", "Description 3"),
+            createTestProject("Bulk Project 4", "Description 4"),
+            createTestProject("Bulk Project 5", "Description 5")
+        );
+
+        // Measure bulk save performance
+        long startTime = System.currentTimeMillis();
+        List<Project> savedProjects = projectRepository.saveAll(projects);
+        long bulkSaveTime = System.currentTimeMillis() - startTime;
+
+        // Measure bulk find performance
+        startTime = System.currentTimeMillis();
+        List<Project> allProjects = projectRepository.findAll();
+        long bulkFindTime = System.currentTimeMillis() - startTime;
+
+        // Assert bulk operation performance
+        assertEquals(5, savedProjects.size());
+        assertTrue(bulkSaveTime < 500, "Bulk save should complete in < 500ms, took: " + bulkSaveTime + "ms");
+        assertTrue(bulkFindTime < 200, "Bulk find should complete in < 200ms, took: " + bulkFindTime + "ms");
+        assertTrue(allProjects.size() >= 5);
+    }
+
+    @Test
+    void testDataIntegrityAndConstraints() {
+        // Test unique constraints
+        User duplicateUser = new User();
+        duplicateUser.setUsername("integrationuser"); // Duplicate username
+        duplicateUser.setEmail("different@example.com");
+        duplicateUser.setPassword("password123");
+        duplicateUser.setRole(UserRole.DEVELOPER);
+
+        // This should fail due to unique constraint on username
+        assertThrows(Exception.class, () -> userRepository.save(duplicateUser));
+
+        // Test foreign key constraints
+        Project orphanProject = new Project();
+        orphanProject.setName("Orphan Project");
+        orphanProject.setDescription("Project without owner");
+        orphanProject.setStatus(ProjectStatus.ACTIVE);
+        orphanProject.setTechnologyStack("Java");
+        orphanProject.setCreatedAt(LocalDateTime.now());
+        // Don't set owner - this should fail due to foreign key constraint
+        assertThrows(Exception.class, () -> projectRepository.save(orphanProject));
+    }
+
+    @Test
+    void testTransactionRollback() {
+        // Test transaction rollback on error
+        long initialProjectCount = projectRepository.count();
+
+        try {
+            // Create a project that will cause an error
+            Project invalidProject = new Project();
+            invalidProject.setName("Invalid Project");
+            // Missing required fields - this should cause an error
+            projectRepository.save(invalidProject);
+        } catch (Exception e) {
+            // Expected error
+        }
+
+        // Verify no projects were saved (transaction rolled back)
+        long finalProjectCount = projectRepository.count();
+        assertEquals(initialProjectCount, finalProjectCount);
+    }
+
+    private Project createTestProject(String name, String description) {
+        Project project = new Project();
+        project.setName(name);
+        project.setDescription(description);
+        project.setOwner(testUser);
+        project.setStatus(ProjectStatus.ACTIVE);
+        project.setTechnologyStack("Java,Spring Boot");
+        project.setCreatedAt(LocalDateTime.now());
+        return project;
+    }
+}

@@ -3,6 +3,7 @@ package com.agentforge.config;
 import com.agentforge.security.JwtAuthenticationEntryPoint;
 import com.agentforge.security.JwtAuthenticationFilter;
 import com.agentforge.service.AuthenticationService;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

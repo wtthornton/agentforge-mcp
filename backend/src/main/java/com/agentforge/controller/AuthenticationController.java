@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -234,12 +235,14 @@ public class AuthenticationController {
         List<SessionInfo> sessions = authenticationService.getActiveSessionsForUser(userId);
         
         List<Map<String, Object>> sessionData = sessions.stream()
-            .map(session -> Map.of(
-                "sessionId", session.getSessionId(),
-                "createdAt", session.getCreatedAt(),
-                "ipAddress", session.getIpAddress(),
-                "userAgent", session.getUserAgent() != null ? session.getUserAgent() : "Unknown"
-            ))
+            .map(session -> {
+                Map<String, Object> sessionMap = new HashMap<>();
+                sessionMap.put("sessionId", session.getSessionId());
+                sessionMap.put("createdAt", session.getCreatedAt());
+                sessionMap.put("ipAddress", session.getIpAddress());
+                sessionMap.put("userAgent", session.getUserAgent() != null ? session.getUserAgent() : "Unknown");
+                return sessionMap;
+            })
             .toList();
         
         Map<String, Object> response = Map.of(

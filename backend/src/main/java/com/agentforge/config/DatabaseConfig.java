@@ -163,15 +163,11 @@ public class DatabaseConfig {
         properties.setProperty("hibernate.batch_versioned_data", "true");
         properties.setProperty("hibernate.connection.provider_disables_autocommit", "true");
         
-        // Second-level cache configuration
-        properties.setProperty("hibernate.cache.use_second_level_cache", "true");
-        properties.setProperty("hibernate.cache.use_query_cache", "true");
-        properties.setProperty("hibernate.cache.region.factory_class", 
-            "org.hibernate.cache.jcache.JCacheRegionFactory");
+        // Second-level cache configuration - Disabled for now to focus on database connectivity
+        properties.setProperty("hibernate.cache.use_second_level_cache", "false");
+        properties.setProperty("hibernate.cache.use_query_cache", "false");
         
-        // Connection pool validation
-        properties.setProperty("hibernate.connection.provider_class", 
-            "org.hibernate.hikari.internal.HikariConnectionProvider");
+        // Connection pool validation - Let Spring Boot handle this automatically
         
         // SQL logging (controlled via application.yml)
         properties.setProperty("hibernate.format_sql", "true");

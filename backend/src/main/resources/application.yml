@@ -74,28 +74,26 @@ spring:
           autocommit: false
         # Cache configuration
         cache:
-          use_second_level_cache: true
-          use_query_cache: true
-          region:
-            factory_class: org.hibernate.cache.jcache.JCacheRegionFactory
+          use_second_level_cache: false
+          use_query_cache: false
         # Statement processing optimization
         generate_statistics: ${HIBERNATE_STATS:false}
         session_factory_name_is_jndi: false
   
-  # Redis Configuration
-  data:
-    redis:
-      host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
-      password: ${REDIS_PASSWORD:redis}
-      database: 0
-      timeout: 2000ms
-      lettuce:
-        pool:
-          max-active: 20
-          max-idle: 10
-          min-idle: 5
-          max-wait: 1000ms
+  # Redis Configuration - Disabled for now to focus on database connectivity
+  # data:
+  #   redis:
+  #     host: ${REDIS_HOST:localhost}
+  #     port: ${REDIS_PORT:6379}
+  #     password: ${REDIS_PASSWORD:redis}
+  #     database: 0
+  #     timeout: 2000ms
+  #     lettuce:
+  #       pool:
+  #         max-active: 20
+  #         max-idle: 10
+  #         min-idle: 5
+  #         max-wait: 1000ms
   
   # Security Configuration
   security:
@@ -116,10 +114,7 @@ spring:
   
   # Cache Configuration
   cache:
-    type: redis
-    redis:
-      time-to-live: 3600000 # 1 hour
-      cache-null-values: false
+    type: simple
 
 # Server Configuration
 server:

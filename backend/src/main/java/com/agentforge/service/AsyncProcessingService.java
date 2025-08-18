@@ -202,7 +202,7 @@ public class AsyncProcessingService {
                     totalTasksFailed.incrementAndGet();
                     
                     loggingService.logError("ASYNC_PROCESSING", "TASK_FAILED", 
-                        "Task failed", Map.of("taskId", taskId, "taskType", taskType, "error", e.getMessage()));
+                        "Task failed", Map.of("taskId", taskId, "taskType", taskType, "error", e.getMessage()), e);
                     
                     throw new CompletionException(e);
                 } finally {
@@ -216,7 +216,7 @@ public class AsyncProcessingService {
         } catch (Exception e) {
             totalTasksFailed.incrementAndGet();
             loggingService.logError("ASYNC_PROCESSING", "TASK_SUBMISSION_FAILED", 
-                "Failed to submit task", Map.of("taskId", taskId, "taskType", taskType, "error", e.getMessage()));
+                "Failed to submit task", Map.of("taskId", taskId, "taskType", taskType, "error", e.getMessage()), e);
             
             CompletableFuture<Map<String, Object>> failedFuture = new CompletableFuture<>();
             failedFuture.completeExceptionally(e);
@@ -464,7 +464,7 @@ public class AsyncProcessingService {
             
         } catch (Exception e) {
             loggingService.logError("ASYNC_PROCESSING", "THREAD_POOL_OPTIMIZATION_FAILED", 
-                "Thread pool optimization failed", Map.of("error", e.getMessage()));
+                "Thread pool optimization failed", Map.of("error", e.getMessage()), e);
             optimization.put("error", e.getMessage());
         }
         
@@ -537,7 +537,7 @@ public class AsyncProcessingService {
             
         } catch (Exception e) {
             loggingService.logError("ASYNC_PROCESSING", "SHUTDOWN_ERROR", 
-                "Error during shutdown", Map.of("error", e.getMessage()));
+                "Error during shutdown", Map.of("error", e.getMessage()), e);
         }
     }
 
@@ -572,7 +572,7 @@ public class AsyncProcessingService {
             
         } catch (Exception e) {
             loggingService.logError("ASYNC_PROCESSING", "SCHEDULED_OPTIMIZATION_FAILED", 
-                "Scheduled thread pool optimization failed", Map.of("error", e.getMessage()));
+                "Scheduled thread pool optimization failed", Map.of("error", e.getMessage()), e);
         }
     }
 
